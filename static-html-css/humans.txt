@@ -1,0 +1,16 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Tim Wray -- Designer -- @timwray87
+
+# THANKS
+
+    Anders Sundnes Løvlie for for his valuable effort and time in providing
+    feedback for the framework.
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5
+    Apache Server Configs, jQuery, Modernizr, Normalize.css

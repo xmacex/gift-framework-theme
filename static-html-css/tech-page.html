@@ -1,0 +1,143 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>GIFT - Meaningful Personalised Museum Experiences</title>
+  <meta name="description" content="A framework to support museums develop meaningful and personalised experiences for their visitors.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- Site Content Goes Here -->
+  <header class="menu-container wrap-container">
+    <figure class="gift-logo">
+    </figure>
+    <nav class="navigation menu">
+      <ul>
+        <li>
+          <a href="#">Ideas & Theory</a>
+        </li>
+        <li>
+          <a href="#">Tools & How To</a>
+        </li>
+        <li>
+          <a href="#">Case Studies</a>
+        </li>
+        <li class="special">
+          <a href="#">The GIFT Project</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <article class="article-content wrap-container">
+    <!-- Post Content Begins Here -->
+    <div class="column-container">
+      <div class="column-container-inner">
+        <nav class="navigation breadcrumbs">
+          <ul>
+            <li>
+              <a href="#">Gift Platform //</a>
+            </li>
+            <li>
+              <a href="#">API //</a>
+            </li>
+            <li>
+              <a href="#">Free Gifts</a>
+            </li>
+          </ul>
+        </nav>
+        <h1>
+          Clients can use this route to retrieve a list of “free gifts” provided by a particular venue.
+        </h1>
+        <p>
+          These gifts can be used to introduce a venue (or as an example of a gift) to the user. A specification for the API request is as follows:
+        </p>
+      </div>
+    </div>
+    <div class="full-width dark code">
+      <div class="full-width-inner">
+        <pre>
+{
+   "/gift/v3/gifts/free/<venue>": {
+   "endpoints": [
+      {
+         "methods": [
+            "0": "GET"
+         ],
+         "args": {
+            "venue": {
+               "required": true
+            }
+         }
+      }
+   ]}
+}
+        </pre>
+      </div>
+    </div>
+    <div class="column-container">
+      <h2>Request Parameters</h2>
+      <p>
+        <span class="code">venue</span> should match the ID of an existing venue in the GIFT CMS.
+      </p>
+      <h2>Response</h2>
+      <p>
+        If a matching venue exists, the response will include an array of any published gifts tagged as ‘free gifts’ with wraps relating to that venue.
+      </p>
+      <h3>
+        Example
+      </h3>
+      <p class="code">
+        curl -X GET -H "Authorization: GiftToken xxxxxx" <br />https://gifting.digital/wp-json/gift/v3/gifts/free/2
+      </p>
+    </div>
+  </article>
+  <footer class="wrap-container">
+      <div class="footer-container">
+        <div class="footer-container-inner">
+          <p>
+            We &hearts; open source. Learn more about how we used it in GIFT.
+          </p>
+          <img class="eu-flag-footer" src="img/eu-flag-footer.png" alt="European Union Flag" />
+          <p>
+            This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 727040.
+          </p>
+        </div>
+      </div>
+  </footer>
+
+
+  <!-- JS Libraries, Plugins, etc. -->
+  <script src="js/vendor/modernizr-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+</body>
+
+</html>
