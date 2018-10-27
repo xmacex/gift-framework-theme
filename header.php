@@ -23,3 +23,9 @@
     <!--[if lte IE 9]>
 	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
+    <header class="menu-container wrap-container">
+	<figure class="gift-logo">
+	</figure>
+	<?php wp_nav_menu(array('container' => 'nav',
+	    'container_class' => 'navigation menu')); ?>
+    </header>
