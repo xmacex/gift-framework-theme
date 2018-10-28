@@ -36,7 +36,7 @@ function decorate_article_with_container($content)
     $colcontainerinner_e = '</div>';
 
     $cta = call_to_action();
-    $bc = breadcrumbs();
+    $bc = get_breadcrumb();
 
     return $article_b . $colcontainer_b . $cta . $colcontainerinner_b . $bc . $content . $colcontainerinner_e . $colcontainer_e . $article_e;
 }
@@ -53,10 +53,12 @@ function call_to_action()
     return $html;
 }
 
-function breadcrumbs()
+function get_breadcrumb()
 {
-    $html = '<nav class="navigation breadcrumbs"><ul><li><a href="#">Gift Exchange App</a></li></ul></nav>';
-    return $html;
+    $bc_b = '<nav class="navigation breadcrumbs"><ul><li><a href="#">';
+    $bc_e = '</a></li></ul></nav>';
+    $title = get_the_title();
+    return $bc_b . $title . $bc_e;
 }
 
 /* This should maybe be merged with get_started_now_button() */
