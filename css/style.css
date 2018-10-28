@@ -180,6 +180,25 @@ a:hover {
   color: #BA4942;
 }
 
+/* Begin folding menu */
+.navigation .sub-menu {
+    display: none;
+}
+
+.navigation .menu-item:hover * {
+    display: flex;
+}
+
+.navigation .sub-menu > .menu-item {
+    background-color: #333333;
+    color: white;
+    font-size: 14px;
+    height: inherit;
+    line-height: 19px;
+    padding: 20px 25px;
+}
+/* End folding menu */
+
 @media screen and (max-width: 1260px) {
 
   .navigation ul li {
