@@ -45,6 +45,61 @@ function decorate_article_with_container($content)
 add_filter('the_content', 'decorate_article_with_container');
 add_filter('the_content', 'prepend_cover_to_article');
 
+/* Shortcodes. There might be better, more sustainable, cooler ways to achieve these things */
+function leading_content($atts, $content = null)
+{
+    $a = shortcode_atts(array('byline' => ''), $atts);
+    $heading = '<h1>' . $a['byline'] . '</h1>';
+    $blurb = '<p>' . $content . '</p>';
+    return $heading . $blurb;
+}
+
+function the_three_questions($atts, $content = null)
+{
+    $a = shortcode_atts(array(
+        'question' => '',
+        'links' => ''), $atts);
+
+    $container_b = '<div class=full-width-inner-col>';
+    $container_e = '</div>';
+
+    $heading = '<h3>' . $a['question'] . '</h3>';
+    $text = '<p>' . $content . '</p>';
+    $links_b = '<ul class="list-of-links">';
+    $links_e = '</ul>';
+    if($a['links'])
+    {
+        foreach(explode(",", $a['links']) as $pid) {
+            $post = get_post($pid);
+            $link = '<a href=">' . '#' . '">'. $post->post_title . '</a>';
+            $listitem = '<li>' . $link . '</li>';
+            $links .= $listitem;
+        }
+    }
+    $content = $heading . $text . $links_b . $links . $links_e;
+    return $container_b . $content . $container_e;
+}
+
+function what_question($atts, $content = null)
+{
+    return the_three_questions($atts, $content);
+}
+
+function how_question($atts, $content = null)
+{
+    return the_three_questions($atts, $content);
+}
+
+function why_question($atts, $content = null)
+{
+    return the_three_questions($atts, $content);
+}
+
+add_shortcode('leading_content', 'leading_content');
+add_shortcode('what', 'what_question');
+add_shortcode('how', 'how_question');
+add_shortcode('why', 'why_question');
+
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
 function call_to_action()
