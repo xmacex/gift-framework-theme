@@ -26,6 +26,8 @@
     <header class="menu-container wrap-container">
 	<figure class="gift-logo">
 	</figure>
-	<?php wp_nav_menu(array('container' => 'nav',
-	    'container_class' => 'navigation menu')); ?>
+	<?php wp_nav_menu(array(
+	    'container' => 'nav',
+	    'container_class' => 'navigation menu main-navigation',
+	    'theme_location' => 'primary-menu')); ?>
     </header>
