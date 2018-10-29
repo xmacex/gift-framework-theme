@@ -61,9 +61,14 @@ function container_column_inner($content, $classes=null)
     return container($content, "column-container-inner" . $classes);
 }
 
-function container_inner_fw_has_col_layout($content, $classes=null)
+function container_fw_inner($content, $classes=null)
 {
-    return container($content, "full-width-inner has-column-layout" . $classes);
+    return container($content, $classes . " full-width-inner");
+}
+
+function container_fw_inner_has_col_layout($content, $classes=null)
+{
+    return container_fw_inner($content, $classes . " has-column-layout");
 }
 
 function container_fw_inner_col($content, $classes=null)
@@ -89,7 +94,7 @@ function questions($atts, $content=null)
 {
     return do_shortcode(
         container_fw(
-            container_inner_fw_has_col_layout($content)));
+            container_fw_inner_has_col_layout($content)));
 }
 
 function question($atts, $content=null)
@@ -156,7 +161,7 @@ function testimonials($atts, $content=null)
 {
     return do_shortcode(
         container_fw(
-            container_inner_fw_has_col_layout($content)));
+            container_fw_inner_has_col_layout($content)));
 }
 
 function testimonial($atts, $content=null)
@@ -173,6 +178,38 @@ function testimonial($atts, $content=null)
     return container_fw_inner_col($content);
 }
 
+function how_to($atts, $content=null)
+{
+    $a = shortcode_atts(array(
+        'question' => '',
+        'comfort' => '',
+        'readmore' => '',
+        'readmoredesc' => ''), $atts);
+
+    $header = '<h2>' . $a['question'] . '</h2>';
+    $blurb = '<p>' . $a['comfort'] . '</p>';
+    $readmore = '<a href="' . get_post($a['readmore'])->guid . '">' . $a['readmoredesc'] . '</a>';
+
+    return do_shortcode(
+        container_fw(
+            container_fw_inner(
+                container_column(container_column_inner($header . $blurb)) . '<div class="has-column-layout">' . $content . '</div>' . container_column(container_column_inner($readmore))), " how-to"));
+}
+
+function how_to_step($atts, $content=null)
+{
+    $a = shortcode_atts(array(
+        'icon' => ''), $atts);
+    $attachment = get_post($a['icon']);
+    $fig_b = '<figure class="step">';
+    $fig_e = '</figure>';
+    $url = $attachment->guid;
+    $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
+    $caption = '<figcaption>' . $alt . '</figcaption>';
+    $figure = $fig_b . '<img src="' . $url . '" alt="' . $alt . '">' . $caption . $fig_e;
+    return container_fw_inner_col($figure);
+}
+
 add_shortcode('leading_content', 'leading_content');
 
 add_shortcode('questions', 'questions');
@@ -185,6 +222,9 @@ add_shortcode('feature', 'feature');
 
 add_shortcode('testimonials', 'testimonials');
 add_shortcode('testimonial', 'testimonial');
+
+add_shortcode('how_to', 'how_to');
+add_shortcode('step', 'how_to_step');
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
