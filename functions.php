@@ -38,7 +38,7 @@ function decorate_article_with_container($content)
     $cta = call_to_action();
     $bc = get_breadcrumb();
 
-    return $article_b . $colcontainer_b . $cta . $colcontainerinner_b . $bc . $content . $colcontainerinner_e . $colcontainer_e . $article_e;
+    return $article_b . container_column($cta . container_column_container_inner($bc . $content)) . $article_e;
 }
 
 /* Add the content filters */
@@ -46,7 +46,7 @@ add_filter('the_content', 'decorate_article_with_container');
 add_filter('the_content', 'prepend_cover_to_article');
 
 /* Shortcodes. There might be better, more sustainable, cooler ways to achieve these things */
-function leading_content($atts, $content = null)
+function leading_content($atts, $content=null)
 {
     $a = shortcode_atts(array('byline' => ''), $atts);
     $heading = '<h1>' . $a['byline'] . '</h1>';
@@ -54,14 +54,48 @@ function leading_content($atts, $content = null)
     return $heading . $blurb;
 }
 
-function the_three_questions($atts, $content = null)
+function container($content, $classes=null)
+{
+    return '<div class="' . $classes . '">' . $content . '</div>';
+}
+
+function container_fw($content)
+{
+    return container($content, "full-width");
+}
+
+function container_column($content)
+{
+    return container($content, "column-container");
+}
+
+function container_column_container_inner($content)
+{
+    return container($content, "column-container-inner");
+}
+
+function container_inner_fw_has_col_layout($content)
+{
+    return container($content, "full-width-inner has-column-layout");
+}
+
+function container_fw_inner_col($content)
+{
+    return container($content, "full-width-inner-col");
+}
+
+function questions($atts, $content=null)
+{
+    return do_shortcode(
+        container_fw(
+            container_inner_fw_has_col_layout($content)));
+}
+
+function question($atts, $content=null)
 {
     $a = shortcode_atts(array(
         'question' => '',
         'links' => ''), $atts);
-
-    $container_b = '<div class=full-width-inner-col>';
-    $container_e = '</div>';
 
     $heading = '<h3>' . $a['question'] . '</h3>';
     $text = '<p>' . $content . '</p>';
@@ -77,25 +111,27 @@ function the_three_questions($atts, $content = null)
         }
     }
     $content = $heading . $text . $links_b . $links . $links_e;
-    return $container_b . $content . $container_e;
+    return container_fw_inner_col($content);
 }
 
-function what_question($atts, $content = null)
+function what_question($atts, $content=null)
 {
-    return the_three_questions($atts, $content);
+    return question($atts, $content);
 }
 
-function how_question($atts, $content = null)
+function how_question($atts, $content=null)
 {
-    return the_three_questions($atts, $content);
+    return question($atts, $content);
 }
 
-function why_question($atts, $content = null)
+function why_question($atts, $content=null)
 {
-    return the_three_questions($atts, $content);
+    return question($atts, $content);
 }
 
 add_shortcode('leading_content', 'leading_content');
+
+add_shortcode('questions', 'questions');
 add_shortcode('what', 'what_question');
 add_shortcode('how', 'how_question');
 add_shortcode('why', 'why_question');
