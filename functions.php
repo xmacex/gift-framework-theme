@@ -40,15 +40,7 @@ function prepend_cover_to_article($content)
 add_filter('the_content', 'decorate_article_with_container');
 add_filter('the_content', 'prepend_cover_to_article');
 
-/* Shortcodes. There might be better, more sustainable, cooler ways to achieve these things */
-function leading_content($atts, $content=null)
-{
-    $a = shortcode_atts(array('byline' => ''), $atts);
-    $heading = '<h1>' . $a['byline'] . '</h1>';
-    $blurb = '<p>' . $content . '</p>';
-    return $heading . $blurb;
-}
-
+/* Decorator Pattern inspired wrapper functions */
 function container($content, $classes=null)
 {
     return '<div class="' . $classes . '">' . $content . '</div>';
@@ -82,6 +74,15 @@ function container_fw_inner_col($content, $classes=null)
 function container_fw_img($content, $classes=null)
 {
     return container($content, "full-width-image-container");
+}
+
+/* Shortcodes. There might be better, more sustainable, cooler ways to achieve these things */
+function leading_content($atts, $content=null)
+{
+    $a = shortcode_atts(array('byline' => ''), $atts);
+    $heading = '<h1>' . $a['byline'] . '</h1>';
+    $blurb = '<p>' . $content . '</p>';
+    return $heading . $blurb;
 }
 
 function questions($atts, $content=null)
