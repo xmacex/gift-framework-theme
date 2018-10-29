@@ -156,6 +156,27 @@ function feature($atts, $content=null)
         container_fw_img($img_b . 'src="' . $url . '" alt="' . $alt . '"' . $img_e), " dark");
 }
 
+function testimonials($atts, $content=null)
+{
+    return do_shortcode(
+        container_fw(
+            container_inner_fw_has_col_layout($content)));
+}
+
+function testimonial($atts, $content=null)
+{
+    $a = shortcode_atts(array(
+        'role' => '',
+        'location' => ''), $atts);
+
+    $quote = '<blockquote>' . '<p>' . $content . '</p>' . '</blockquote>';
+    $address_b = '<address class="quote-source">';
+    $address_e = '</address>';
+    $address = $address_b . $a['role'] . ', ' . $a['location'] . $address_e;
+    $content = $quote . $address;
+    return container_fw_inner_col($content);
+}
+
 add_shortcode('leading_content', 'leading_content');
 
 add_shortcode('questions', 'questions');
@@ -165,6 +186,9 @@ add_shortcode('why', 'why_question');
 
 add_shortcode('results', 'results');
 add_shortcode('feature', 'feature');
+
+add_shortcode('testimonials', 'testimonials');
+add_shortcode('testimonial', 'testimonial');
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
