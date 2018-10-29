@@ -96,28 +96,6 @@ function questions($atts, $content=null)
             container_inner_fw_has_col_layout($content)));
 }
 
-function results($atts, $content=null)
-{
-    return container_column(
-        container_column_inner('<p>' . $content . '</p>'));
-}
-
-function feature($atts, $content=null)
-{
-    $a = shortcode_atts(array(
-        'media' => ''), $atts);
-
-    $attachment = get_post($a['media']);
-    $img_b = '<img class="full-width-image"';
-    $img_e = '"></img>';
-    // $url = wp_get_attachment_image_src($a['media'], 'full-size')[0];
-    $url = $attachment->guid;
-    $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
-
-    return container_fw(
-        container_fw_img($img_b . 'src="' . $url . '" alt="' . $alt . '"' . $img_e), " dark");
-}
-
 function question($atts, $content=null)
 {
     $a = shortcode_atts(array(
@@ -154,6 +132,28 @@ function how_question($atts, $content=null)
 function why_question($atts, $content=null)
 {
     return question($atts, $content);
+}
+
+function results($atts, $content=null)
+{
+    return container_column(
+        container_column_inner('<p>' . $content . '</p>'));
+}
+
+function feature($atts, $content=null)
+{
+    $a = shortcode_atts(array(
+        'media' => ''), $atts);
+
+    $attachment = get_post($a['media']);
+    $img_b = '<img class="full-width-image"';
+    $img_e = '"></img>';
+    // $url = wp_get_attachment_image_src($a['media'], 'full-size')[0];
+    $url = $attachment->guid;
+    $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
+
+    return container_fw(
+        container_fw_img($img_b . 'src="' . $url . '" alt="' . $alt . '"' . $img_e), " dark");
 }
 
 add_shortcode('leading_content', 'leading_content');
