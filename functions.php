@@ -9,7 +9,17 @@ add_action('init', 'register_primary_menu');
 add_theme_support('post-thumbnails');
 add_image_size('cover-image', 1440, 500);
 
-/* Define filters. These could go to a separate file actually */
+/* Define content filters. These could go to a separate file actually */
+function decorate_article_with_container($content)
+{
+    $article_b = '<article class="article-content wrap-container">';
+    $article_e = '</article>';
+
+    $cta = call_to_action();
+    $bc = get_breadcrumb();
+
+    return $article_b . container_column($cta . container_column_inner($bc . $content)) . $article_e;
+}
 
 function prepend_cover_to_article($content)
 {
@@ -24,21 +34,6 @@ function prepend_cover_to_article($content)
     } else {
         return $content;
     }
-}
-
-function decorate_article_with_container($content)
-{
-    $article_b = '<article class="article-content wrap-container">';
-    $article_e = '</article>';
-    $colcontainer_b = '<div class="column-container">';
-    $colcontainer_e = '</div>';
-    $colcontainerinner_b = '<div class="column-container-inner">';
-    $colcontainerinner_e = '</div>';
-
-    $cta = call_to_action();
-    $bc = get_breadcrumb();
-
-    return $article_b . container_column($cta . container_column_inner($bc . $content)) . $article_e;
 }
 
 /* Add the content filters */
