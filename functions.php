@@ -38,7 +38,7 @@ function decorate_article_with_container($content)
     $cta = call_to_action();
     $bc = get_breadcrumb();
 
-    return $article_b . container_column($cta . container_column_container_inner($bc . $content)) . $article_e;
+    return $article_b . container_column($cta . container_column_inner($bc . $content)) . $article_e;
 }
 
 /* Add the content filters */
@@ -59,29 +59,34 @@ function container($content, $classes=null)
     return '<div class="' . $classes . '">' . $content . '</div>';
 }
 
-function container_fw($content)
+function container_fw($content, $classes=null)
 {
-    return container($content, "full-width");
+    return container($content, "full-width" . $classes);
 }
 
-function container_column($content)
+function container_column($content, $classes=null)
 {
-    return container($content, "column-container");
+    return container($content, "column-container" . $classes);
 }
 
-function container_column_container_inner($content)
+function container_column_inner($content, $classes=null)
 {
-    return container($content, "column-container-inner");
+    return container($content, "column-container-inner" . $classes);
 }
 
-function container_inner_fw_has_col_layout($content)
+function container_inner_fw_has_col_layout($content, $classes=null)
 {
-    return container($content, "full-width-inner has-column-layout");
+    return container($content, "full-width-inner has-column-layout" . $classes);
 }
 
-function container_fw_inner_col($content)
+function container_fw_inner_col($content, $classes=null)
 {
-    return container($content, "full-width-inner-col");
+    return container($content, "full-width-inner-col" . $classes);
+}
+
+function container_fw_img($content, $classes=null)
+{
+    return container($content, "full-width-image-container");
 }
 
 function questions($atts, $content=null)
@@ -89,6 +94,28 @@ function questions($atts, $content=null)
     return do_shortcode(
         container_fw(
             container_inner_fw_has_col_layout($content)));
+}
+
+function results($atts, $content=null)
+{
+    return container_column(
+        container_column_inner('<p>' . $content . '</p>'));
+}
+
+function feature($atts, $content=null)
+{
+    $a = shortcode_atts(array(
+        'media' => ''), $atts);
+
+    $attachment = get_post($a['media']);
+    $img_b = '<img class="full-width-image"';
+    $img_e = '"></img>';
+    // $url = wp_get_attachment_image_src($a['media'], 'full-size')[0];
+    $url = $attachment->guid;
+    $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
+
+    return container_fw(
+        container_fw_img($img_b . 'src="' . $url . '" alt="' . $alt . '"' . $img_e), " dark");
 }
 
 function question($atts, $content=null)
@@ -135,6 +162,9 @@ add_shortcode('questions', 'questions');
 add_shortcode('what', 'what_question');
 add_shortcode('how', 'how_question');
 add_shortcode('why', 'why_question');
+
+add_shortcode('results', 'results');
+add_shortcode('feature', 'feature');
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
