@@ -115,7 +115,7 @@ function question($atts, $content=null)
     {
         foreach(explode(",", $a['links']) as $pid) {
             $post = get_post($pid);
-            $link = '<a href=">' . '#' . '">'. $post->post_title . '</a>';
+            $link = '<a href="' . '#' . '">'. $post->post_title . '</a>';
             $listitem = '<li>' . $link . '</li>';
             $links .= $listitem;
         }
@@ -152,7 +152,7 @@ function feature($atts, $content=null)
 
     $attachment = get_post($a['media']);
     $img_b = '<img class="full-width-image" ';
-    $img_e = '></img>';
+    $img_e = '/>';
     // $url = wp_get_attachment_image_src($a['media'], 'full-size')[0];
     $url = $attachment->guid;
     $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
