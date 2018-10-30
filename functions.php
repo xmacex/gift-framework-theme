@@ -91,7 +91,7 @@ function leading_content($atts, $content=null)
     $a = shortcode_atts(array('byline' => ''), $atts);
     $heading = '<h1>' . $a['byline'] . '</h1>';
     $blurb = '<p>' . $content . '</p>';
-    return container_column($cta . container_column_inner($bc . $heading . $blurb));
+    return do_shortcode(container_column($cta . container_column_inner($bc . $heading . $blurb)));
 }
 
 function questions($atts, $content=null)
