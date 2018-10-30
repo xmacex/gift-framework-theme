@@ -174,7 +174,7 @@ function testimonial($atts, $content=null)
         'role' => '',
         'location' => ''), $atts);
 
-    $quote = '<blockquote>' . '<p>' . $content . '</p>' . '</blockquote>';
+    $quote = '<blockquote>' . $content . '</blockquote>';
     $address_b = '<address class="quote-source">';
     $address_e = '</address>';
     $address = $address_b . $a['role'] . ', ' . $a['location'] . $address_e;
@@ -185,8 +185,8 @@ function testimonial($atts, $content=null)
 function how_to($atts, $content=null)
 {
     $a = shortcode_atts(array(
-        'question' => '',
-        'comfort' => '',
+        'prompt' => '',
+        'motivation' => '',
         'readmore' => '',
         'readmoredesc' => ''), $atts);
 
