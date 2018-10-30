@@ -15,10 +15,12 @@ function decorate_article_with_container($content)
     $article_b = '<article class="article-content wrap-container">';
     $article_e = '</article>';
 
-    $cta = call_to_action();
-    $bc = get_breadcrumb();
+    // $cta = call_to_action();
+    // $bc = get_breadcrumb();
 
-    return $article_b . container_column($cta . container_column_inner($bc . $content)) . $article_e;
+    return $article_b . $content . $article_e;
+
+    // return $article_b . container_column($cta . container_column_inner($bc)) . $content . $article_e;
 }
 
 function prepend_cover_to_article($content)
@@ -84,10 +86,12 @@ function container_fw_img($content, $classes=null)
 /* Shortcodes. There might be better, more sustainable, cooler ways to achieve these things */
 function leading_content($atts, $content=null)
 {
+    $cta = call_to_action();
+    $bc = get_breadcrumb();
     $a = shortcode_atts(array('byline' => ''), $atts);
     $heading = '<h1>' . $a['byline'] . '</h1>';
     $blurb = '<p>' . $content . '</p>';
-    return $heading . $blurb;
+    return container_column($cta . container_column_inner($bc . $heading . $blurb));
 }
 
 function questions($atts, $content=null)
@@ -147,7 +151,7 @@ function feature($atts, $content=null)
         'media' => ''), $atts);
 
     $attachment = get_post($a['media']);
-    $img_b = '<img class="full-width-image"';
+    $img_b = '<img class="full-width-image" ';
     $img_e = '"></img>';
     // $url = wp_get_attachment_image_src($a['media'], 'full-size')[0];
     $url = $attachment->guid;
