@@ -152,7 +152,7 @@ function feature($atts, $content=null)
 
     $attachment = get_post($a['media']);
     $img_b = '<img class="full-width-image" ';
-    $img_e = '"></img>';
+    $img_e = '></img>';
     // $url = wp_get_attachment_image_src($a['media'], 'full-size')[0];
     $url = $attachment->guid;
     $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
@@ -214,6 +214,18 @@ function how_to_step($atts, $content=null)
     return container_fw_inner_col($figure);
 }
 
+function implement($atts, $content=null)
+{
+    // $cta = get_started_now_button(); // alternatively just run the shortcode like do_shortcode("[get_started_now_button]")
+    return do_shortcode(
+        container_column(container_column_inner($content . $cta)));
+}
+
+function call_to_action_shortcode($atts, $content=null)
+{
+    return get_started_now_button();
+}
+
 add_shortcode('leading_content', 'leading_content');
 
 add_shortcode('questions', 'questions');
@@ -229,6 +241,9 @@ add_shortcode('testimonial', 'testimonial');
 
 add_shortcode('how_to', 'how_to');
 add_shortcode('step', 'how_to_step');
+
+add_shortcode('implement', 'implement');
+add_shortcode('call_to_action', 'get_started_now_button');
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
