@@ -190,8 +190,8 @@ function how_to($atts, $content=null)
         'readmore' => '',
         'readmoredesc' => ''), $atts);
 
-    $header = '<h2>' . $a['question'] . '</h2>';
-    $blurb = '<p>' . $a['comfort'] . '</p>';
+    $header = '<h2>' . $a['prompt'] . '</h2>';
+    $blurb = '<p>' . $a['motivation'] . '</p>';
     $readmore = '<a href="' . get_post($a['readmore'])->guid . '">' . $a['readmoredesc'] . '</a>';
 
     return do_shortcode(
