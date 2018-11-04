@@ -2,22 +2,17 @@
 <html class="no-js" lang="en">
 
 <head>
+  <?php wp_head(); ?>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title><?php echo get_bloginfo('name'); ?> – <?php echo get_bloginfo('description'); ?></title>
   <meta name="description" content="A framework to support museums develop meaningful and personalised experiences for their visitors.">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="<?php echo get_stylesheet_directory_uri(); ?>/icon.png">
-  <!-- Place favicon.ico in the root directory -->
+  <link rel="manifest" href="<?php echo get_theme_file_uri('site.webmanifest'); ?>">
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/normalize.css">
-  <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/main.css">
-  <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/style.css">
+  <link rel="shortcut icon" type="image/png" href="<?php echo get_theme_file_uri('favicon.ico'); ?>">
+  <link rel="apple-touch-icon" href="<?php echo get_theme_file_uri('icon.png') ; ?>">
 </head>
 <body>
     <!--[if lte IE 9]>

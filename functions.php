@@ -1,4 +1,27 @@
 <?php
+/* Define functions for enqueuing styles and Javascript stuff, and add
+   them to the appropriate action which is evoked by wp_head(); */
+function enqueue_styles()
+{
+    wp_enqueue_style("normalize", get_stylesheet_directory_uri() . "/css/normalize.css");
+    wp_enqueue_style("main", get_stylesheet_directory_uri() . "/css/main.css", array("normalize"));
+    wp_enqueue_style("bootstrap", "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css");
+    wp_enqueue_style("style", get_stylesheet_directory_uri() . "/css/style.css", array("main"));
+}
+
+function enqueue_scripts()
+{
+    wp_enqueue_script('modernizr', get_theme_file_uri('js/vendor/modernizr-3.6.0.min.js'));
+    wp_enqueue_script('popper', get_theme_file_uri('js/vendor/popper-1.12.9.min.js'));
+    wp_enqueue_script('bootstrap', get_theme_file_uri('js/vendor/bootstrap-4.0.0.min.js'), array('jquery'));
+
+    wp_enqueue_script('plugins', get_theme_file_uri('js/plugins.js'));
+    wp_enqueue_script('main', get_theme_file_uri('js/main.js'));
+}
+
+add_action('wp_enqueue_scripts', 'enqueue_styles');
+add_action('wp_enqueue_scripts', 'enqueue_scripts');
+
 function register_primary_menu()
 {
     register_nav_menu('primary-menu', __('Primary Menu'));
@@ -27,7 +50,6 @@ function prepend_cover_to_article($content)
 {
     if(has_post_thumbnail()) {
         $imgurl = get_the_post_thumbnail_url();
-	
         $cover_b = '<section class="cover" style="background-image: url(\'';
         $cover_e = '\')"></section>';
         $cover = $cover_b . $imgurl . $cover_e;
@@ -204,6 +226,7 @@ function how_to_step($atts, $content=null)
 {
     $a = shortcode_atts(array(
         'icon' => ''), $atts);
+
     $attachment = get_post($a['icon']);
     $fig_b = '<figure class="step">';
     $fig_e = '</figure>';
