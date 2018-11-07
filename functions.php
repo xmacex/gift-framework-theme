@@ -46,23 +46,17 @@ function decorate_article_with_container($content)
     // return $article_b . container_column($cta . container_column_inner($bc)) . $content . $article_e;
 }
 
-function prepend_cover_to_article($content)
+function prepend_cover_to_article()
 {
-    if(has_post_thumbnail()) {
+    if(has_post_thumbnail())
+    {
         $imgurl = get_the_post_thumbnail_url();
         $cover_b = '<section class="cover" style="background-image: url(\'';
         $cover_e = '\')"></section>';
         $cover = $cover_b . $imgurl . $cover_e;
-
-        return $cover . $content;
-    } else {
-        return $content;
+        return $cover;
     }
 }
-
-/* Add the content filters */
-add_filter('the_content', 'decorate_article_with_container');
-add_filter('the_content', 'prepend_cover_to_article');
 
 /* Decorator Pattern inspired wrapper functions */
 function container($content, $classes=null)
