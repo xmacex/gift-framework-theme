@@ -2,9 +2,8 @@
 
 <!-- Site Content Goes Here -->
 <?php while (have_posts()): the_post(); ?>
-    <?php echo prepend_cover_to_article(); ?>
-    <article class="article-content wrap-container">
+    <section class="grid-page wrap-container">
 	<?php the_content(); ?>
-    </article>
+    </section>
 <?php endwhile; ?>
 <?php get_footer(); ?>

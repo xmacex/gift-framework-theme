@@ -46,23 +46,17 @@ function decorate_article_with_container($content)
     // return $article_b . container_column($cta . container_column_inner($bc)) . $content . $article_e;
 }
 
-function prepend_cover_to_article($content)
+function prepend_cover_to_article()
 {
-    if(has_post_thumbnail()) {
+    if(has_post_thumbnail())
+    {
         $imgurl = get_the_post_thumbnail_url();
         $cover_b = '<section class="cover" style="background-image: url(\'';
         $cover_e = '\')"></section>';
         $cover = $cover_b . $imgurl . $cover_e;
-
-        return $cover . $content;
-    } else {
-        return $content;
+        return $cover;
     }
 }
-
-/* Add the content filters */
-add_filter('the_content', 'decorate_article_with_container');
-add_filter('the_content', 'prepend_cover_to_article');
 
 /* Decorator Pattern inspired wrapper functions */
 function container($content, $classes=null)
@@ -103,6 +97,31 @@ function container_fw_inner_col($content, $classes=null)
 function container_fw_img($content, $classes=null)
 {
     return container($content, "full-width-image-container");
+}
+
+function container_grid($content, $classes=null)
+{
+    return container_column($content, $classes . " grid-container");
+}
+
+function container_grid_section($content, $classes=null)
+{
+    return container($content, $classes . " grid-section");
+}
+
+function container_grid_tile($content, $classes=null)
+{
+    return container($content, $classes . " tile");
+}
+
+function container_grid_tile_title($content, $classes=null)
+{
+    return container_grid_tile($content, $classes . " title");
+}
+
+function container_grid_tile_description($content, $classes=null)
+{
+    return container_grid_tile($content, $classes . " description");
 }
 
 /* Shortcodes. There might be better, more sustainable, cooler ways to achieve these things */
@@ -249,6 +268,35 @@ function call_to_action_shortcode($atts, $content=null)
     return get_started_now_button();
 }
 
+function title_grid($atts, $content=null)
+{
+    $a = shortcode_atts(array(
+	'title' => NULL,
+	'bg' => NULL,
+	'img' => NULL), $atts);
+
+    $bg = get_post($a['bg']);
+    $attachment = get_post($a['img']);
+
+    $bgurl = $bg->guid;
+    $url = $attachment->guid;
+
+    $bgimage = '<div class="layers-image-container" style="background-image:url(\'' . $bgurl . '\');"></div>';
+
+    $header_tile = container_grid_tile_title('<h1>' . $a['title'] . '</h1>');
+    $desc_tile = container_grid_tile_description($content . $bgimage);
+    $image_tile = '<div class="image tile" style="background-image:url(\'' . $url . '\');"></div>';
+    $grid = $header_tile . $desc_tile . $image_tile;
+
+    return container_grid(container_grid_section($grid, " title"));
+}
+
+/* Not exposed */
+function grid_section($atts, $content=null)
+{
+    return container_grid_section($content);
+}
+
 add_shortcode('leading_content', 'leading_content');
 
 add_shortcode('questions', 'questions');
@@ -267,6 +315,9 @@ add_shortcode('step', 'how_to_step');
 
 add_shortcode('implement', 'implement');
 add_shortcode('call_to_action', 'get_started_now_button');
+
+add_shortcode('title_grid', 'title_grid');
+// add_shortcode('grid_section', 'grid_section'); // maybe not expose this one?
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
