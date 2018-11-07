@@ -154,6 +154,7 @@ function question($atts, $content=null)
     $links_e = '</ul>';
     if($a['links'])
     {
+	$links = "";
         foreach(explode(",", $a['links']) as $pid) {
             $post = get_post($pid);
             $link = '<a href="' . '#' . '">'. $post->post_title . '</a>';
@@ -260,7 +261,7 @@ function implement($atts, $content=null)
 {
     // $cta = get_started_now_button(); // alternatively just run the shortcode like do_shortcode("[get_started_now_button]")
     return do_shortcode(
-        container_column(container_column_inner($content . $cta)));
+        container_column(container_column_inner($content))); //. $cta)));
 }
 
 function call_to_action_shortcode($atts, $content=null)
