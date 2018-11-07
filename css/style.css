@@ -124,7 +124,20 @@ a:hover {
   overflow: visible;
 }
 
-.menu > .menu-item:not(:hover) .sub-menu {
+.menu > .menu-item > .sub-menu::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  position: absolute;
+  top: -10px;
+  left: 25px;
+  transform: rotate(45deg);
+  background-color: #333333;
+}
+
+.menu > .menu-item:not(:hover) > .sub-menu {
   display: none;
 }
 
@@ -148,12 +161,37 @@ a:hover {
   font-weight: normal;
 }
 
+.menu-item .sub-menu > .menu-item:hover a {
+  color: #CCCCCC;
+}
+
 .menu-item-is-tabular > .sub-menu {
   flex-direction: row;
 }
 
 .menu-item-is-tabular > .sub-menu .menu-item-has-children {
   font-size: 18px;
+}
+
+.menu-item-is-tabular > .sub-menu > .menu-item-has-children > a {
+  cursor: default;
+}
+
+.menu-item-is-tabular > .sub-menu > .menu-item-has-children:hover a {
+  color: inherit;
+}
+
+.menu-item-is-tabular > .sub-menu > .menu-item-has-children .sub-menu {
+  margin-top: 5px;
+  padding-bottom: 0;
+}
+
+.menu-item-is-tabular > .sub-menu > .menu-item-has-children .sub-menu > .menu-item:hover a {
+  color: #CCCCCC;
+}
+
+.menu-item-is-tabular > .sub-menu > .menu-item:hover a {
+  color: inherit;
 }
 
 .menu-item-is-tabular > .sub-menu .menu-item-has-children .sub-menu {
@@ -163,10 +201,6 @@ a:hover {
 .menu-item-is-tabular > .sub-menu .menu-item-has-children .sub-menu > .menu-item {
   padding-left: 0;
   padding-right: 0;
-}
-
-.menu-item .sub-menu > .menu-item:hover a {
-  color: #EEEEEE;
 }
 
 @media screen and (max-width: 1260px) {
