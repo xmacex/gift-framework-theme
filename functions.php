@@ -124,6 +124,11 @@ function container_grid_tile_description($content, $classes=null)
     return container_grid_tile($content, $classes . " description");
 }
 
+function container_text_section($content, $classes=null)
+{
+    return container($content, "text-section");
+}
+
 /* Shortcodes. There might be better, more sustainable, cooler ways to achieve these things */
 function leading_content($atts, $content=null)
 {
@@ -320,6 +325,11 @@ function feature_grid_item($atts, $content=null)
     return $img . $text;
 }
 
+function text_section($atts, $content=null)
+{
+    return container_text_section($content);
+}
+
 add_shortcode('leading_content', 'leading_content');
 
 add_shortcode('questions', 'questions');
@@ -343,6 +353,8 @@ add_shortcode('title_grid', 'title_grid');
 // add_shortcode('grid_section', 'grid_section'); // maybe not expose this one?
 add_shortcode('feature_grid', 'feature_grid');
 add_shortcode('fp_feature', 'feature_grid_item');
+
+add_shortcode('text', 'text_section');
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
