@@ -119,6 +119,10 @@ a:hover {
   color: #FFFFFF;
 }
 
+.menu-container.white .navigation ul li a:hover {
+  color: #DDDDDD;
+}
+
 .menu-item {
   position: relative;
   overflow: visible;
