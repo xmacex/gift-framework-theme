@@ -306,12 +306,17 @@ function feature_grid($atts, $content=null)
 function feature_grid_item($atts, $content=null)
 {
     $a = shortcode_atts(array(
-	'img' => NULL), $atts);
+	'img' => NULL,
+	'highlight' => NULL), $atts);
 
     $attachment = get_post($a['img']);
     $url = $attachment->guid;
     $img = '<div class="faded image tile" style="background-image:url(\'' . $url . '\');"></div>';
-    $text = container_grid_tile($content);
+    $highlight = $a['highlight'];
+    if ($a['highlight']) {
+	$highlight .= " coloured";
+    }
+    $text = container_grid_tile($content, $highlight);
     return $img . $text;
 }
 
