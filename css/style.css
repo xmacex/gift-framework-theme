@@ -141,7 +141,7 @@ a:hover {
   background-color: #333333;
 }
 
-.menu > .menu-item:not(:hover) > .sub-menu {
+.menu > .menu-item:not(.active) > .sub-menu {
   display: none;
 }
 
