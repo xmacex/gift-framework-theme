@@ -119,6 +119,94 @@ a:hover {
   color: #FFFFFF;
 }
 
+.menu-container.white .navigation ul li a:hover {
+  color: #DDDDDD;
+}
+
+.menu-item {
+  position: relative;
+  overflow: visible;
+}
+
+.menu > .menu-item > .sub-menu::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  position: absolute;
+  top: -10px;
+  left: 25px;
+  transform: rotate(45deg);
+  background-color: #333333;
+}
+
+.menu > .menu-item:not(.active) > .sub-menu {
+  display: none;
+}
+
+.menu-item > .sub-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  white-space: nowrap;
+  background-color: #333333;
+  padding: 12.5px 0;
+}
+
+.menu-item .sub-menu .menu-item {
+  color: #FFFFFF;
+  font-size: 14px;
+  height: inherit;
+  line-height: 1em;
+  padding: 12.5px 25px;
+  font-weight: normal;
+}
+
+.menu-item .sub-menu > .menu-item:hover a {
+  color: #CCCCCC;
+}
+
+.menu-item-is-tabular > .sub-menu {
+  flex-direction: row;
+}
+
+.menu-item-is-tabular > .sub-menu .menu-item-has-children {
+  font-size: 18px;
+}
+
+.menu-item-is-tabular > .sub-menu > .menu-item-has-children > a {
+  cursor: default;
+}
+
+.menu-item-is-tabular > .sub-menu > .menu-item-has-children:hover a {
+  color: inherit;
+}
+
+.menu-item-is-tabular > .sub-menu > .menu-item-has-children .sub-menu {
+  margin-top: 5px;
+  padding-bottom: 0;
+}
+
+.menu-item-is-tabular > .sub-menu > .menu-item-has-children .sub-menu > .menu-item:hover a {
+  color: #CCCCCC;
+}
+
+.menu-item-is-tabular > .sub-menu > .menu-item:hover a {
+  color: inherit;
+}
+
+.menu-item-is-tabular > .sub-menu .menu-item-has-children .sub-menu {
+  position: static;
+}
+
+.menu-item-is-tabular > .sub-menu .menu-item-has-children .sub-menu > .menu-item {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 @media screen and (max-width: 1260px) {
 
   .menu-container .gift-logo {
@@ -179,25 +267,6 @@ a:hover {
 .navigation ul li.call-to-action:hover {
   color: #BA4942;
 }
-
-/* Begin folding menu */
-.navigation .sub-menu {
-    display: none;
-}
-
-.navigation .menu-item:hover * {
-    display: flex;
-}
-
-.navigation .sub-menu > .menu-item {
-    background-color: #333333;
-    color: white;
-    font-size: 14px;
-    height: inherit;
-    line-height: 19px;
-    padding: 20px 25px;
-}
-/* End folding menu */
 
 @media screen and (max-width: 1260px) {
 
