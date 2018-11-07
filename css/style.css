@@ -119,21 +119,54 @@ a:hover {
   color: #FFFFFF;
 }
 
-.menu .sub-menu {
-    display: none;
+.menu-item {
+  position: relative;
+  overflow: visible;
 }
 
-.menu .menu-item:hover * {
-    display: flex;
+.menu > .menu-item:not(:hover) .sub-menu {
+  display: none;
 }
 
-.menu .sub-menu > .menu-item {
-    background-color: #333333;
-    color: white;
-    font-size: 14px;
-    height: inherit;
-    line-height: 19px;
-    padding: 20px 25px;
+.menu-item > .sub-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  white-space: nowrap;
+  background-color: #333333;
+  padding: 12.5px 0;
+}
+
+.menu-item .sub-menu .menu-item {
+  color: #FFFFFF;
+  font-size: 14px;
+  height: inherit;
+  line-height: 1em;
+  padding: 12.5px 25px;
+  font-weight: normal;
+}
+
+.menu-item-is-tabular > .sub-menu {
+  flex-direction: row;
+}
+
+.menu-item-is-tabular > .sub-menu .menu-item-has-children {
+  font-size: 18px;
+}
+
+.menu-item-is-tabular > .sub-menu .menu-item-has-children .sub-menu {
+  position: static;
+}
+
+.menu-item-is-tabular > .sub-menu .menu-item-has-children .sub-menu > .menu-item {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.menu-item .sub-menu > .menu-item:hover a {
+  color: #EEEEEE;
 }
 
 @media screen and (max-width: 1260px) {
