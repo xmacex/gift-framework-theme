@@ -274,6 +274,11 @@ function call_to_action_shortcode($atts, $content=null)
     return get_started_now_button();
 }
 
+function grid($atts, $content=null)
+{
+    return do_shortcode(container_grid($content));
+}
+
 /* Not exposed, and also maybe not used. Remove. */
 function grid_section($atts, $content=null)
 {
@@ -300,7 +305,8 @@ function title_grid($atts, $content=null)
     $image_tile = '<div class="image tile" style="background-image:url(\'' . $url . '\');"></div>';
     $grid = $header_tile . $desc_tile . $image_tile;
 
-    return container_grid(container_grid_section($grid, " title"));
+    // return container_grid(container_grid_section($grid, " title"));
+    return container_grid_section($grid, " title");
 }
 
 function feature_grid($atts, $content=null)
@@ -349,6 +355,7 @@ add_shortcode('step', 'how_to_step');
 add_shortcode('implement', 'implement');
 add_shortcode('call_to_action', 'get_started_now_button');
 
+add_shortcode('grid', 'grid');
 add_shortcode('title_grid', 'title_grid');
 // add_shortcode('grid_section', 'grid_section'); // maybe not expose this one?
 add_shortcode('feature_grid', 'feature_grid');
