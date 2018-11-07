@@ -268,6 +268,12 @@ function call_to_action_shortcode($atts, $content=null)
     return get_started_now_button();
 }
 
+/* Not exposed, and also maybe not used. Remove. */
+function grid_section($atts, $content=null)
+{
+    return container_grid_section($content);
+}
+
 function title_grid($atts, $content=null)
 {
     $a = shortcode_atts(array(
@@ -291,10 +297,21 @@ function title_grid($atts, $content=null)
     return container_grid(container_grid_section($grid, " title"));
 }
 
-/* Not exposed */
-function grid_section($atts, $content=null)
+function feature_grid($atts, $content=null)
 {
-    return container_grid_section($content);
+    return do_shortcode(container_grid_section($content, "feature"));
+}
+
+function feature_grid_item($atts, $content=null)
+{
+    $a = shortcode_atts(array(
+	'img' => NULL), $atts);
+
+    $attachment = get_post($a['img']);
+    $url = $attachment->guid;
+    $img = '<div class="faded image tile" style="background-image:url(\'' . $url . '\');"></div>';
+    $text = container_grid_tile($content);
+    return $img . $text;
 }
 
 add_shortcode('leading_content', 'leading_content');
@@ -318,6 +335,8 @@ add_shortcode('call_to_action', 'get_started_now_button');
 
 add_shortcode('title_grid', 'title_grid');
 // add_shortcode('grid_section', 'grid_section'); // maybe not expose this one?
+add_shortcode('feature_grid', 'feature_grid');
+add_shortcode('fp_feature', 'feature_grid_item');
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
