@@ -501,7 +501,7 @@ br + br, br:last-child {
   flex: 1;
 }
 
-.full-width .full-width-inner .full-width-inner-col:not(:last-child) {
+.full-width .full-width-inner .full-width-inner-col:not(:last-of-type) {
   margin-right: 5%;
 }
 
