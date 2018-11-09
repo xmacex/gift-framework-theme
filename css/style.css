@@ -13,7 +13,7 @@
  * @media screen and (max-width: 1200px)
  */
 
-/* Base Body, HTML Styles */
+/* Base Body, HTML Styles and other Generic Styles */
 
 body, html {
   margin: 0;
@@ -36,6 +36,10 @@ a {
 
 a:hover {
   color: inherit;
+}
+
+p:empty {
+  display: none;
 }
 
 
