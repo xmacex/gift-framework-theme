@@ -462,12 +462,8 @@ p:empty {
   line-height: 1.5em;
 }
 
-.grid-page p, .grid-page br {
+.grid-page br {
   display: none;
-}
-
-.grid-page .tile p {
-  display: block;
 }
 
 .grid-page .tile br {
