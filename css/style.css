@@ -462,6 +462,18 @@ p:empty {
   line-height: 1.5em;
 }
 
+.grid-page p, .grid-page br {
+  display: none;
+}
+
+.grid-page .tile p {
+  display: block;
+}
+
+.grid-page .tile br {
+  display: inline;
+}
+
 .grid-page .text-section {
   width: 65%;
   margin: 100px 0 30px 0;
