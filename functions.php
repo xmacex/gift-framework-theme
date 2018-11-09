@@ -257,7 +257,7 @@ function how_to_step($atts, $content=null)
     $fig_e = '</figure>';
     $url = $attachment->guid;
     $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
-    $caption = '<figcaption>' . $alt . '</figcaption>';
+    $caption = '<figcaption>' . $content . '</figcaption>';
     $figure = $fig_b . '<img src="' . $url . '" alt="' . $alt . '">' . $caption . $fig_e;
     return container_fw_inner_col($figure);
 }
