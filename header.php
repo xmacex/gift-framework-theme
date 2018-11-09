@@ -19,10 +19,12 @@
 	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
     <header class="menu-container wrap-container <?php echo has_post_thumbnail() ? 'white' : '' ?>">
-	<figure class="gift-logo">
-	</figure>
-	<?php wp_nav_menu(array(
-	    'container' => 'nav',
-	    'container_class' => 'navigation menu main-navigation',
-	    'theme_location' => 'primary-menu')); ?>
+      <a class="home-link" href="<?php echo get_home_url(); ?>">
+        <figure class="gift-logo">
+      	</figure>
+      </a>
+    	<?php wp_nav_menu(array(
+    	    'container' => 'nav',
+    	    'container_class' => 'navigation menu main-navigation',
+    	    'theme_location' => 'primary-menu')); ?>
     </header>
