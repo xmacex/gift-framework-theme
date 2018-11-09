@@ -38,7 +38,14 @@ a:hover {
   color: inherit;
 }
 
+
+/* WordPress Content Editor Fixes */
+
 p:empty {
+  display: none;
+}
+
+br + br, br:last-child {
   display: none;
 }
 
@@ -385,7 +392,8 @@ p:empty {
   color: #FFFFFF;
 }
 
-.full-width h3 {
+.full-width .full-width-inner h3 {
+  font-family: 'Karla', Helvetica, Arial, san-serif; 
   color: #444444;
   font-size: 22px;
   font-weight: bold;
@@ -393,13 +401,13 @@ p:empty {
   margin: 0 0 20px 0;
 }
 
-.full-width .list-of-links {
+.full-width .full-width-inner .list-of-links {
   padding-left: 30px;
   list-style-type: none;
   padding: 0;
 }
 
-.full-width .list-of-links  li {
+.full-width .full-width-inner .list-of-links  li {
   margin-bottom: 5px;
 }
 
