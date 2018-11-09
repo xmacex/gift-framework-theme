@@ -51,7 +51,7 @@ function prepend_cover_to_article()
     if(has_post_thumbnail())
     {
         $imgurl = get_the_post_thumbnail_url();
-        $cover_b = '<section class="cover" style="background-image: url(\'';
+        $cover_b = '<section class="cover stripes-slope-left" style="background-image: url(\'';
         $cover_e = '\')"></section>';
         $cover = $cover_b . $imgurl . $cover_e;
         return $cover;
@@ -302,7 +302,7 @@ function title_grid($atts, $content=null)
 
     $header_tile = container_grid_tile_title('<h1>' . $a['title'] . '</h1>');
     $desc_tile = container_grid_tile_description($content . $bgimage);
-    $image_tile = '<div class="image tile" style="background-image:url(\'' . $url . '\');"></div>';
+    $image_tile = '<div class="extra stripes-slope-left faded image tile" style="background-image:url(\'' . $url . '\');"></div>';
     $grid = $header_tile . $desc_tile . $image_tile;
 
     // return container_grid(container_grid_section($grid, " title"));
@@ -322,7 +322,7 @@ function feature_grid_item($atts, $content=null)
 
     $attachment = get_post($a['img']);
     $url = $attachment->guid;
-    $img = '<div class="faded image tile" style="background-image:url(\'' . $url . '\');"></div>';
+    $img = '<div class="faded image tile stripes-slope-right" style="background-image:url(\'' . $url . '\');"></div>';
     $highlight = $a['highlight'];
     if ($a['highlight']) {
 	$highlight .= " coloured";

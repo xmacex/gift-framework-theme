@@ -332,6 +332,42 @@ br + br, br:last-child {
   background-color: #EEA61A;
 }
 
+.stripes-slope-left, .stripes-slope-right {
+  position: relative;
+}
+
+.stripes-slope-left::after, .stripes-slope-right::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-size: 100px 100px;
+  opacity: 0.075;
+}
+
+.stripes-slope-left::after {
+  background-image: repeating-linear-gradient(
+    315deg,
+    black,
+    rgba(0, 0, 0, 0) 1%,
+    rgba(255, 255, 255, 1) 1%,
+    rgba(255, 255, 255, 1) 2%,
+    rgba(0, 0, 0, 0) 2%
+  );
+}
+
+.stripes-slope-right::after {
+  background-image: repeating-linear-gradient(
+    45deg,
+    black,
+    rgba(0, 0, 0, 0) 1%,
+    rgba(255, 255, 255, 1) 1%,
+    rgba(255, 255, 255, 1) 2%,
+    rgba(0, 0, 0, 0) 2%
+  );
+}
 
 /* Cover */
 
@@ -393,7 +429,7 @@ br + br, br:last-child {
 }
 
 .full-width .full-width-inner h3 {
-  font-family: 'Karla', Helvetica, Arial, san-serif; 
+  font-family: 'Karla', Helvetica, Arial, san-serif;
   color: #444444;
   font-size: 22px;
   font-weight: bold;
@@ -664,8 +700,12 @@ br + br, br:last-child {
 
 .grid-section .faded.image.tile {
   opacity: 0.85;
+  filter: brightness(1.1) contrast(1.1);
 }
 
+.grid-section .extra.faded.image.tile {
+  filter: brightness(1.2) contrast(1.0);
+}
 
 /* Article Content */
 
