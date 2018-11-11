@@ -129,6 +129,11 @@ function container_text_section($content, $classes=null)
     return container($content, "text-section");
 }
 
+function container_reference_list($content, $classes=null)
+{
+    return container($content, "reference-list");
+}
+
 /* Shortcodes. There might be better, more sustainable, cooler ways to achieve these things */
 function leading_content($atts, $content=null)
 {
@@ -361,6 +366,11 @@ function text_section($atts, $content=null)
     return container_text_section($content);
 }
 
+function references($atts, $content=null)
+{
+    return container_reference_list($content);
+}
+
 add_shortcode('call_to_action_area', 'call_to_action_area');
 add_shortcode('leading_content', 'leading_content');
 
@@ -388,6 +398,8 @@ add_shortcode('feature_grid', 'feature_grid');
 add_shortcode('fp_feature', 'feature_grid_item');
 
 add_shortcode('text', 'text_section');
+
+add_shortcode('references', 'references');
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
