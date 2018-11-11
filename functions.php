@@ -147,7 +147,12 @@ function leading_content($atts, $content=null)
 	$url = $a['cta_item'];
     }
 
-    $cta = call_to_action($a['cta_label'], $url, $a['cta_text']);
+    if($a['cta_label'])
+    {
+	$cta = call_to_action($a['cta_label'], $url, $a['cta_text']);
+    } else {
+	$cta = null;
+    }
     $bc = get_breadcrumb();
     $heading = '<h1>' . $a['byline'] . '</h1>';
     $blurb = '<p>' . $content . '</p>';
