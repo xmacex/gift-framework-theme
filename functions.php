@@ -132,12 +132,38 @@ function container_text_section($content, $classes=null)
 /* Shortcodes. There might be better, more sustainable, cooler ways to achieve these things */
 function leading_content($atts, $content=null)
 {
-    $cta = call_to_action();
+    $a = shortcode_atts(array(
+        'byline' => '',
+	'cta_label' => null,
+	'cta_item' => null,
+	'cta_text' => null,
+    ), $atts);
+
+    if (is_numeric($a['cta_item']))
+    {
+	$attachment = get_post($a['cta_item']);
+	$url = $attachment->guid;
+    } else {
+	$url = $a['cta_item'];
+    }
+
+    $cta = call_to_action($a['cta_label'], $url, $a['cta_text']);
     $bc = get_breadcrumb();
-    $a = shortcode_atts(array('byline' => ''), $atts);
     $heading = '<h1>' . $a['byline'] . '</h1>';
     $blurb = '<p>' . $content . '</p>';
-    return do_shortcode(container_column($cta . container_column_inner($bc . $heading . $blurb)));
+    return do_shortcode(
+        container_column(
+            $cta . container_column_inner(
+                $bc . $heading . $blurb)));
+}
+
+function call_to_action_area($atts, $content=null)
+{
+    $a = shortcode_atts(array(
+        'label' => null,
+        'item' => null), $atts);
+    
+    return call_to_action($a['label'], $a['item'], $content);
 }
 
 function questions($atts, $content=null)
@@ -264,14 +290,8 @@ function how_to_step($atts, $content=null)
 
 function implement($atts, $content=null)
 {
-    // $cta = get_started_now_button(); // alternatively just run the shortcode like do_shortcode("[get_started_now_button]")
     return do_shortcode(
         container_column(container_column_inner($content))); //. $cta)));
-}
-
-function call_to_action_shortcode($atts, $content=null)
-{
-    return get_started_now_button();
 }
 
 function grid($atts, $content=null)
@@ -336,6 +356,7 @@ function text_section($atts, $content=null)
     return container_text_section($content);
 }
 
+add_shortcode('call_to_action_area', 'call_to_action_area');
 add_shortcode('leading_content', 'leading_content');
 
 add_shortcode('questions', 'questions');
@@ -365,10 +386,33 @@ add_shortcode('text', 'text_section');
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
-function call_to_action()
+
+/**
+ * Generator for call-to-action divs.
+ *
+ * Expected to be called by shortcode
+
+ * @param string $button_label Button label
+ * @param string $url Item to link to. Currently only an URL
+ * @param string $text. A little blurb of text to show below the button
+ *
+ * @return string HTML div for the call-to-action area
+ */
+function call_to_action($button_text, $url, $text)
 {
-    $html = '<div class="call-to-action-area"><a id="call-to-action-link" class="button" href="#">Get Started Now</a><label for="call-to-action-link" class="description">Interested? Register with us now and a member of the Gift Project Team will contact you and guide you through the process.</label></div>';
-    return $html;
+    $div_b = '<div class="call-to-action-area">';
+    $div_e = '</div>';
+    $a_b = '<a id="call-to-action-link" class="button" href="';
+    $a_m = '">';
+    $a_e = '</a>';
+    $label_b = '<label for="call-to-action-link" class="description">';
+    $label_e = '</label>';
+
+    $a = $a_b . $url . $a_m . $button_text . $a_e;
+    $label = $label_b . $text . $label_e;
+    $div = $div_b . $a . $label . $div_e;
+    
+    return $div;
 }
 
 function get_breadcrumb()
@@ -377,12 +421,6 @@ function get_breadcrumb()
     $bc_e = '</a></li></ul></nav>';
     $title = get_the_title();
     return $bc_b . $title . $bc_e;
-}
-
-/* This should maybe be merged with get_started_now_button() */
-function get_started_now_link()
-{
-    return '<a id="call-to-action-link" class="button" href="#">Get Started Now</a>';
 }
 
 function get_started_now_button()
