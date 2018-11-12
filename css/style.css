@@ -181,8 +181,12 @@ br + br, br:last-child {
   font-size: 14px;
   height: inherit;
   line-height: 1em;
-  padding: 12.5px 25px;
+  padding: 0;
   font-weight: normal;
+}
+
+.menu-item .sub-menu .menu-item a {
+  padding: 12.5px 25px;
 }
 
 .menu-item .sub-menu > .menu-item:hover a {
@@ -207,6 +211,7 @@ br + br, br:last-child {
 
 .menu-item-is-tabular > .sub-menu > .menu-item-has-children .sub-menu {
   margin-top: 5px;
+  padding-top: 0;
   padding-bottom: 0;
 }
 
