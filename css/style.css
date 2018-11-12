@@ -781,22 +781,27 @@ br + br, br:last-child {
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
 }
 
-.article-content .article-figure {
+.article-content .article-figure, .article-content .wp-caption {
   margin: 40px 0;
+  width: 100% !important;   /* Override pesky WordPress inline styling */
 }
 
-.article-content .article-figure img {
+.article-content .article-figure img, .article-content .wp-caption img {
   display: block;
   width: 100%;
+  height: auto;
 }
 
-.article-content .article-figure figcaption {
+.article-content .article-figure figcaption, .article-content .wp-caption .wp-caption-text {
   color: #999999;
   font-size: 18px;
   line-height: 1.5em;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0 !important; /* It's not my fault. WordPress decides to use <p> to describe <figcaptions>. Go <figure>. */
 }
 
-.article-content .article-figure img + figcaption {
+.article-content .article-figure img + figcaption, .article-content .wp-caption img + .wp-caption-text {
   margin-top: 20px;
 }
 
