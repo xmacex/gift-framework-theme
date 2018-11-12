@@ -435,45 +435,6 @@ function question($atts, $content=null)
 }
 
 /**
- * Wrapper for a "what" question shortcode.
- *
- * @param array  $atts    Shortcode attributes
- * @param string $content Content from the database
- * 
- * @return string HTML representation
- */
-function what_question($atts, $content=null)
-{
-    return question($atts, $content);
-}
-
-/**
- * Wrapper for a "how" question shortcode.
- *
- * @param array  $atts    Shortcode attributes
- * @param string $content Content from the database
- * 
- * @return string HTML representation
- */
-function how_question($atts, $content=null)
-{
-    return question($atts, $content);
-}
-
-/**
- * Wrapper for a "why" question shortcode.
- *
- * @param array  $atts    Shortcode attributes
- * @param string $content Content from the database
- * 
- * @return string HTML representation
- */
-function why_question($atts, $content=null)
-{
-    return question($atts, $content);
-}
-
-/**
  * Wrapper for results section shortcode.
  *
  * @param array  $atts    Shortcode attributes
@@ -770,9 +731,9 @@ add_shortcode('call_to_action_area', 'call_to_action_area');
 add_shortcode('leading_content', 'leading_content');
 
 add_shortcode('questions', 'questions');
-add_shortcode('what', 'what_question');
-add_shortcode('how', 'how_question');
-add_shortcode('why', 'why_question');
+add_shortcode('what', 'question');
+add_shortcode('how', 'question');
+add_shortcode('why', 'question');
 
 add_shortcode('results', 'results');
 add_shortcode('feature', 'feature');
@@ -834,10 +795,24 @@ function call_to_action($button_label, $url, $text)
  */
 function get_breadcrumb()
 {
-    $bc_b = '<nav class="navigation breadcrumbs"><ul><li><a href="#">';
-    $bc_e = '</a></li></ul></nav>';
-    $title = get_the_title();
-    return $bc_b . $title . $bc_e;
+    $nav_b = '<nav class="navigation breadcrumbs"><ul>';
+    $nav_e = '</ul></nav>';
+    global $post;
+    if ($post->post_parent) {
+        $ppost = get_post($post->post_parent);
+        $parent_b = '<li><a href="';
+        $parent_m = '">';
+        $parent_e = '</a></li>';
+        $ptitle = $ppost->post_title;
+        $parent = $parent_b . $ppost->guid . $parent_m . $ptitle . ' //' . $parent_e;
+    } else {
+        $parent = null;
+    }
+    $current_b = '<li><a href="#">';
+    $current_e = '</a></li>';
+    $current = $current_b . get_the_title() . $current_e;;
+    // return $bc_b . $title . $bc_e;
+    return $nav_b . $parent . $current . $nav_e;
 }
 
 /**
