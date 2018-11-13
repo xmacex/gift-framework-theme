@@ -510,7 +510,7 @@ function feature($atts, $content=null)
 
     return container_fw(
         $feature_content,
-        " dark"
+        " dark edge-to-edge"
     );
 }
 

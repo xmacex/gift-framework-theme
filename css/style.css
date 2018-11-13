@@ -64,6 +64,9 @@ br + br, br:last-child {
 .wrap-container .full-width {
   margin-left: -90px;
   margin-right: -90px;
+}
+
+.wrap-container .full-width:not(.edge-to-edge) {
   padding: 0 90px;
 }
 
