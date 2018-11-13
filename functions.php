@@ -116,7 +116,7 @@ function prepend_cover_to_article()
     }
 }
 
-/** 
+/**
  * Decorator Pattern inspired wrapper functions
  */
 
@@ -370,7 +370,7 @@ function leading_content($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function call_to_action_area($atts, $content=null)
@@ -380,7 +380,7 @@ function call_to_action_area($atts, $content=null)
             'label' => null,
             'item' => null), $atts
     );
-    
+
     return call_to_action($a['label'], $a['item'], $content);
 }
 
@@ -389,7 +389,7 @@ function call_to_action_area($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function questions($atts, $content=null)
@@ -406,7 +406,7 @@ function questions($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function question($atts, $content=null)
@@ -439,7 +439,7 @@ function question($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function results($atts, $content=null)
@@ -454,7 +454,7 @@ function results($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function feature($atts, $content=null)
@@ -474,7 +474,8 @@ function feature($atts, $content=null)
     $img = $img_b . 'src="' . $url . '" alt="' . $alt . '"' . $img_e;
 
     return container_fw(
-        container_fw_img($img, " dark")
+        container_fw_img($img),
+        " dark"
     );
 }
 
@@ -483,7 +484,7 @@ function feature($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function testimonials($atts, $content=null)
@@ -500,7 +501,7 @@ function testimonials($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function testimonial($atts, $content=null)
@@ -524,7 +525,7 @@ function testimonial($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function how_to($atts, $content=null)
@@ -561,7 +562,7 @@ function how_to($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function how_to_step($atts, $content=null)
@@ -587,7 +588,7 @@ function how_to_step($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function implement($atts, $content=null)
@@ -602,7 +603,7 @@ function implement($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function grid($atts, $content=null)
@@ -617,7 +618,7 @@ function grid($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function grid_section($atts, $content=null)
@@ -630,7 +631,7 @@ function grid_section($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function title_grid($atts, $content=null)
@@ -663,7 +664,7 @@ function title_grid($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function feature_grid($atts, $content=null)
@@ -676,7 +677,7 @@ function feature_grid($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function feature_grid_item($atts, $content=null)
@@ -703,7 +704,7 @@ function feature_grid_item($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function text_section($atts, $content=null)
@@ -716,7 +717,7 @@ function text_section($atts, $content=null)
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
- * 
+ *
  * @return string HTML representation
  */
 function references($atts, $content=null)
@@ -784,14 +785,14 @@ function call_to_action($button_label, $url, $text)
     $a = $a_b . $url . $a_m . $button_label . $a_e;
     $label = $label_b . $text . $label_e;
     $div = $div_b . $a . $label . $div_e;
-    
+
     return $div;
 }
 
 /**
  * Generator for a navigation breadcrumb for the current post.
  *
- * @return string HTML representation 
+ * @return string HTML representation
  */
 function get_breadcrumb()
 {
@@ -818,7 +819,7 @@ function get_breadcrumb()
 /**
  * Generator for a a generic get started now button.
  *
- * @return string HTML representation 
+ * @return string HTML representation
  */
 function get_started_now_button()
 {
