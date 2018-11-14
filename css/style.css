@@ -430,6 +430,7 @@ br + br, br:last-child {
 
 .full-width.code pre {
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
+  font-size: 100%;  
   margin: 0;
   color: #FFFFFF;
 }
@@ -799,8 +800,9 @@ br + br, br:last-child {
   color: #555555;
 }
 
-.article-content .code {
+.article-content .code, .article-content pre {
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
+  font-size: 100%;
 }
 
 .article-content .article-figure, .article-content .wp-caption {
