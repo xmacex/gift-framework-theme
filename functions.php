@@ -626,7 +626,7 @@ function how_to_step($atts, $content=null)
  *
  * @return string HTML representation
  */
-function implement($atts, $content=null)
+function text_in_column($atts, $content=null)
 {
     return do_shortcode(
         container_column(container_column_inner($content))
@@ -780,7 +780,8 @@ add_shortcode('testimonial', 'testimonial');
 add_shortcode('how_to', 'how_to');
 add_shortcode('step', 'how_to_step');
 
-add_shortcode('implement', 'implement');
+add_shortcode('content', 'text_in_column');
+add_shortcode('implement', 'text_in_column');
 add_shortcode('call_to_action', 'get_started_now_button');
 
 add_shortcode('grid', 'grid');
