@@ -441,7 +441,7 @@ function question($atts, $content=null)
         $links = "";
         foreach (explode(",", $a['links']) as $pid) {
             $post = get_post($pid);
-            $link = '<a href="' . '#' . '">'. $post->post_title . '</a>';
+            $link = '<a href="' . $post->guid . '">'. $post->post_title . '</a>';
             $listitem = '<li>' . $link . '</li>';
             $links .= $listitem;
         }
