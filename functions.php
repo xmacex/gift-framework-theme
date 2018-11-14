@@ -437,8 +437,8 @@ function question($atts, $content=null)
     $text = '<p>' . $content . '</p>';
     $links_b = '<ul class="list-of-links">';
     $links_e = '</ul>';
+    $links = "";
     if ($a['links']) {
-        $links = "";
         foreach (explode(",", $a['links']) as $pid) {
             $post = get_post($pid);
             $link = '<a href="' . $post->guid . '">'. $post->post_title . '</a>';
