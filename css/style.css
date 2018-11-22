@@ -889,7 +889,10 @@ br + br, br:last-child {
 
 .article-content .how-to .step img {
   display: block;
-  margin: 30px auto;
+  margin: 0 auto 30px auto;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }
 
 .article-content .button, .article-content button, .article-content input[type="button"] {
