@@ -100,10 +100,8 @@ br + br, br:last-child {
 /* Menu */
 
 .menu-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  display: block;
+  position: relative;
   height: 90px;
   z-index: 2;
 }
@@ -144,6 +142,10 @@ br + br, br:last-child {
 
 .menu-container.white .navigation ul li a:hover {
   color: #DDDDDD;
+}
+
+.menu-container + .cover {
+  top: -90px;
 }
 
 .menu-item {
@@ -273,6 +275,7 @@ br + br, br:last-child {
   height: inherit;
   display: block;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .navigation ul li a:hover {
@@ -532,7 +535,6 @@ br + br, br:last-child {
 /* Grid Page */
 
 .grid-page {
-  margin-top: 90px;
   font-family: 'Karla', Helvetica, Arial, san-serif;
   color: #666666;
   font-size: 18px;
