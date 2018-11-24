@@ -18,7 +18,7 @@
     <!--[if lte IE 9]>
 	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
-    <header class="menu-container wrap-container <?php echo has_post_thumbnail() && is_singular() ? 'white' : '' ?>">
+    <header class="menu-container <?php echo has_post_thumbnail() && is_singular() ? 'white' : '' ?>">
       <a class="home-link" href="<?php echo get_home_url(); ?>">
         <figure class="gift-logo">
       	</figure>
