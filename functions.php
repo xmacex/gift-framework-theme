@@ -864,8 +864,8 @@ function get_breadcrumb()
     } else {
         $parent = null;
     }
-    $current_b = '<li><a href="#">';
-    $current_e = '</a></li>';
+    $current_b = '<li>';
+    $current_e = '</li>';
     $current = $current_b . get_the_title() . $current_e;;
     // return $bc_b . $title . $bc_e;
     return $nav_b . $parent . $current . $nav_e;
