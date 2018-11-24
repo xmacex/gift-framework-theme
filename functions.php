@@ -350,12 +350,27 @@ function leading_content($atts, $content=null)
         $cta = null;
     }
     $bc = get_breadcrumb();
+
+    $author_citation = '';
+    if (!empty(get_the_author_meta('user_firstname')) && !empty(get_the_author_meta('user_lastname'))) {
+      $author_name = get_the_author_meta('user_firstname') . ' ' . get_the_author_meta('user_lastname');
+      $author_citation = $author_name ? '<p class="author">by <em>' . $author_name . '</em>' : '';
+
+      if (!empty(get_the_author_meta('description'))) {
+        $author_citation .= '<br /><span class="author-description">' . get_the_author_meta('description') . '</span>';
+      }
+
+      $author_citation .= '</p>';
+
+    }
+
     $heading = '<h1>' . $a['byline'] . '</h1>';
     $blurb = '<p>' . $content . '</p>';
+
     return do_shortcode(
         container_column(
             $cta . container_column_inner(
-                $bc . $heading . $blurb
+                $bc . $heading . $author_citation . $blurb
             )
         )
     );

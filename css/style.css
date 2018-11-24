@@ -969,6 +969,22 @@ br + br, br:last-child {
   color: #555555;
 }
 
+.article-content .author {
+  font-size: 13pt;
+}
+
+.article-content .author em {
+  font-style: normal;
+  font-weight: bold;
+}
+
+.article-content .author-description {
+  color: #999999;
+  font-style: oblique;
+  font-size: 12pt;
+}
+
+
 .article-content .code, .article-content pre {
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
   font-size: 100%;
