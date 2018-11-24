@@ -917,7 +917,7 @@ br + br, br:last-child {
 /* Article Content */
 
 .article-content {
-  margin-top: 334px;
+  margin-top: 200px;
   color: #666666;
   position: relative;
 }
@@ -1122,7 +1122,7 @@ br + br, br:last-child {
 }
 
 .cover + .article-content {
-  margin-top: -360px;
+  margin-top: -404px;
 }
 
 .cover + .article-content > .column-container:first-child {
