@@ -454,7 +454,7 @@ br + br, br:last-child {
 
 .full-width.code pre {
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
-  font-size: 100%;  
+  font-size: 100%;
   margin: 0;
   color: #FFFFFF;
 }
@@ -620,7 +620,7 @@ br + br, br:last-child {
   max-width: none;
 }
 
-.grid-row + .grid-row {
+.grid-row ~ .grid-row {
   margin-top: 10px;
 }
 
@@ -639,7 +639,7 @@ br + br, br:last-child {
   box-sizing: border-box;
 }
 
-.tile + .tile  {
+.tile ~ .tile  {
   border-left: 10px solid white;
 }
 
@@ -657,6 +657,7 @@ br + br, br:last-child {
 
 .tile h3 {
   font-size: 36pt;
+  line-height: 1.3em;
   font-family: 'Karla', Arial, sans-serif;
   font-weight: bold;
   letter-spacing: -1px;
@@ -696,6 +697,10 @@ br + br, br:last-child {
 
 .coloured.tile.purple {
   background-color: #866BA9;
+}
+
+.coloured.tile.green {
+  background-color: #47C481;
 }
 
 .transparent.tile {
@@ -771,8 +776,7 @@ br + br, br:last-child {
   }
 
   .wrap-container > .grid-break {
-    height: 10px;
-    padding: 0;
+    display: none;
   }
 
   .text-section {
@@ -812,23 +816,9 @@ br + br, br:last-child {
 
 @media screen and (max-width: 680px) {
 
-  .text-section {
-    margin-top: 25px;
-  }
-
-  .grid-page, .tile {
-    font-size: 15px;
-    line-height: 1.6em;
-  }
-
-  .tile.feature {
-    padding-left: 35px;
-    padding-right: 35px;
-    height: auto;
-  }
-
-  .grid-row {
+  .grid-row, .tile {
     min-height: 300px;
+    flex-direction: column;
   }
 
   .grid-row.feature {
@@ -840,12 +830,36 @@ br + br, br:last-child {
     padding-top: 80px;
   }
 
+  .grid-page, .tile {
+    font-size: 15px;
+    line-height: 1.6em;
+  }
+
+  .tile, .tile.col-2-width {
+    width: auto;
+  }
+
+  .tile.feature {
+    padding-left: 35px;
+    padding-right: 35px;
+    height: auto;
+  }
+
+  .tile ~ .tile  {
+    border-left: none;
+    border-top: 10px solid white;
+  }
+
   .tile.hide-on-mobile-screens {
     display: none;
   }
 
-  .tile.hide-on-mobile-screens + .tile {
-    border-left: none;
+  .tile.hide-on-mobile-screens ~ .tile {
+    border-top: none;
+  }
+
+  .text-section {
+    margin-top: 25px;
   }
 
 }
@@ -858,7 +872,7 @@ br + br, br:last-child {
 
   .grid-page h1, .grid-page h2, .grid-page h3 {
     font-size: 22px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
 }

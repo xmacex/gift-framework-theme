@@ -241,29 +241,16 @@ function container_fw_video($content, $classes=null)
 }
 
 /**
- * A grid container.
+ * A grid row container.
  *
  * @param string $content Content from the database
  * @param string $classes A string to append to classes
  *
  * @return string HTML representation
  */
-function container_grid($content, $classes=null)
+function container_grid_row($content, $classes=null)
 {
-    return container_column($content, $classes . " grid-container");
-}
-
-/**
- * A container for a grid section.
- *
- * @param string $content Content from the database
- * @param string $classes A string to append to classes
- *
- * @return string HTML representation
- */
-function container_grid_section($content, $classes=null)
-{
-    return container($content, $classes . " grid-section");
+    return container($content, $classes . " grid-row");
 }
 
 /**
@@ -271,38 +258,31 @@ function container_grid_section($content, $classes=null)
  *
  * @param string $content Content from the database
  * @param string $classes A string to append to classes
+ * @param string $background_image_url A background image URL
  *
  * @return string HTML representation
  */
-function container_grid_tile($content, $classes=null)
+function container_grid_tile($content, $classes=null, $background_image_url=null)
 {
-    return container($content, $classes . " tile");
+    $style_attribute = '';
+    if (!empty($background_image_url)) {
+      $style_attribute = 'style=" background-image: url(\'' . $background_image_url . '\')"';
+    }
+
+    return '<div class="tile ' . $classes . '"' . $style_attribute . '>' . $content . '</div>';
 }
 
 /**
- * A grid tile container for a title.
+ * A grid break container.
  *
  * @param string $content Content from the database
  * @param string $classes A string to append to classes
  *
  * @return string HTML representation
  */
-function container_grid_tile_title($content, $classes=null)
+function container_grid_break($content, $classes=null)
 {
-    return container_grid_tile($content, $classes . " title");
-}
-
-/**
- * A grid tile container for a description.
- *
- * @param string $content Content from the database
- * @param string $classes A string to append to classes
- *
- * @return string HTML representation
- */
-function container_grid_tile_description($content, $classes=null)
-{
-    return container_grid_tile($content, $classes . " description");
+    return container($content, $classes . " grid-break");
 }
 
 /**
@@ -634,107 +614,6 @@ function text_in_column($atts, $content=null)
 }
 
 /**
- * Wrapper for a grid shortcode.
- *
- * @param array  $atts    Shortcode attributes
- * @param string $content Content from the database
- *
- * @return string HTML representation
- */
-function grid($atts, $content=null)
-{
-    return do_shortcode(container_grid($content));
-}
-
-/**
- * Wrapper for a grid shortcode.
- *
- * Not exposed, and also maybe not used. Remove.
- *
- * @param array  $atts    Shortcode attributes
- * @param string $content Content from the database
- *
- * @return string HTML representation
- */
-function grid_section($atts, $content=null)
-{
-    return container_grid_section($content);
-}
-
-/**
- * A title grid shortcode.
- *
- * @param array  $atts    Shortcode attributes
- * @param string $content Content from the database
- *
- * @return string HTML representation
- */
-function title_grid($atts, $content=null)
-{
-    $a = shortcode_atts(
-        array(
-            'title' => null,
-            'bg' => null,
-            'img' => null), $atts
-    );
-
-    $bg = get_post($a['bg']);
-    $attachment = get_post($a['img']);
-
-    $bgurl = $bg->guid;
-    $url = $attachment->guid;
-
-    $bgimage = '<div class="layers-image-container" style="background-image:url(\'' . $bgurl . '\');"></div>';
-
-    $header_tile = container_grid_tile_title('<h1>' . $a['title'] . '</h1>');
-    $desc_tile = container_grid_tile_description($content . $bgimage);
-    $image_tile = '<div class="extra stripes-slope-left faded image tile" style="background-image:url(\'' . $url . '\');"></div>';
-    $grid = $header_tile . $desc_tile . $image_tile;
-
-    return container_grid_section($grid, " title");
-}
-
-/**
- * A feature grid shortcode.
- *
- * @param array  $atts    Shortcode attributes
- * @param string $content Content from the database
- *
- * @return string HTML representation
- */
-function feature_grid($atts, $content=null)
-{
-    return do_shortcode(container_grid_section($content, "feature"));
-}
-
-/**
- * A feature grid item shortcode.
- *
- * @param array  $atts    Shortcode attributes
- * @param string $content Content from the database
- *
- * @return string HTML representation
- */
-function feature_grid_item($atts, $content=null)
-{
-    $a = shortcode_atts(
-        array(
-            'img' => null,
-            'highlight' => null), $atts
-    );
-
-    $attachment = get_post($a['img']);
-    $url = $attachment->guid;
-    $img = '<div class="faded image tile stripes-slope-right" style="background-image:url(\'' . $url . '\');"></div>';
-    $highlight = $a['highlight'];
-    if ($a['highlight']) {
-        $highlight .= " coloured";
-    }
-    $text = container_grid_tile($content, $highlight);
-    return $img . $text;
-}
-
-/**
  * A text section shortcode.
  *
  * @param array  $atts    Shortcode attributes
@@ -744,7 +623,9 @@ function feature_grid_item($atts, $content=null)
  */
 function text_section($atts, $content=null)
 {
-    return container_text_section($content);
+    return container_column(
+            container_text_section($content)
+           );
 }
 
 /**
@@ -799,6 +680,107 @@ function call_to_action_button($atts, $content=null)
 }
 
 /**
+ * A grid row
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function grid_row($atts, $content=null)
+{
+
+  $a = shortcode_atts(
+      array(
+          'is_featured' => false), $atts
+  );
+
+  $classes = array();
+
+  if ($a['is_featured'] === 'true') {
+    $classes[] = 'feature';
+  }
+
+  return do_shortcode(
+          container_grid_row($content, implode($classes, ' '))
+         );
+}
+
+/**
+ * A grid tile
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function grid_tile($atts, $content=null)
+{
+
+  $a = shortcode_atts(
+      array(
+          'is_larger' => false,
+          'hide_on' => null,
+          'media' => null,
+          'highlight' => null), $atts
+  );
+
+  $classes = array();
+  $url = '';
+
+  if ($a['is_larger'] === 'true') {
+    $classes[] = 'col-2-width';
+  }
+
+  if (!is_null($a['hide_on'])) {
+    if ($a['hide_on'] === 'tablet') {
+      $classes[] = 'hide-on-tablet-screens';
+    } else if ($a['hide_on'] === 'mobile') {
+      $classes[] = 'hide-on-mobile-screens';
+    }
+  }
+
+  if (!is_null($a['media'])) {
+
+    if (is_numeric($a['media'])) {
+      $attachment = get_post($a['media']);
+      if ($attachment) {
+        $url = $attachment->guid;
+      }
+    } else if (esc_url_raw($a['media']) === $a['media']) {
+      $url = $a['media'];
+    }
+
+    if (!empty($url)) {
+      $classes[] = 'faded';
+      $classes[] = 'image';
+      $classes[] = 'stripes-slope-left';
+    }
+
+  }
+
+  if (!is_null($a['highlight'])) {
+    $classes[] = 'coloured';
+    $classes[] = $a['highlight'];
+  }
+
+  return container_grid_tile($content, implode($classes, ' '), $url);
+}
+
+/**
+ * A grid break
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function grid_break($atts, $content=null)
+{
+  return container_grid_break($content);
+}
+
+/**
  * Add the shortcodes.
  */
 add_shortcode('call_to_action_area', 'call_to_action_area');
@@ -822,14 +804,12 @@ add_shortcode('content', 'text_in_column');
 add_shortcode('implement', 'text_in_column');
 add_shortcode('call_to_action', 'call_to_action_button'); // 'get_started_now_button');
 
-add_shortcode('grid', 'grid');
-add_shortcode('title_grid', 'title_grid');
-// add_shortcode('grid_section', 'grid_section'); // maybe not expose this one?
-add_shortcode('feature_grid', 'feature_grid');
-add_shortcode('fp_feature', 'feature_grid_item');
-
 add_shortcode('text', 'text_section');
 add_shortcode('code', 'code');
+
+add_shortcode('grid_row', 'grid_row');
+add_shortcode('grid_tile', 'grid_tile');
+add_shortcode('grid_break', 'grid_break');
 
 add_shortcode('references', 'references');
 
