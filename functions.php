@@ -437,11 +437,11 @@ function question($atts, $content=null)
     $text = '<p>' . $content . '</p>';
     $links_b = '<ul class="list-of-links">';
     $links_e = '</ul>';
+    $links = "";
     if ($a['links']) {
-        $links = "";
         foreach (explode(",", $a['links']) as $pid) {
             $post = get_post($pid);
-            $link = '<a href="' . '#' . '">'. $post->post_title . '</a>';
+            $link = '<a href="' . $post->guid . '">'. $post->post_title . '</a>';
             $listitem = '<li>' . $link . '</li>';
             $links .= $listitem;
         }
@@ -626,7 +626,7 @@ function how_to_step($atts, $content=null)
  *
  * @return string HTML representation
  */
-function implement($atts, $content=null)
+function text_in_column($atts, $content=null)
 {
     return do_shortcode(
         container_column(container_column_inner($content))
@@ -761,6 +761,44 @@ function references($atts, $content=null)
 }
 
 /**
+ * A full-width section for code example shortcode.
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function code($atts, $content=null)
+{
+    return container_fw(container_fw_inner($content), " dark code");
+}
+
+/**
+ * A call-to-action button at the bottom of a page.
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function call_to_action_button($atts, $content=null)
+{
+    $a = shortcode_atts(
+        array(
+            'label' => null,
+            'item' => null), $atts
+    );
+
+    if (is_numeric($a['item'])) {
+        $url = get_post($a['item'])->guid;
+    } else {
+        $url = $a['item'];
+    }
+
+    return '<a class="button" href="' . $url . '">' . $a['label'] . '</a>';
+}
+
+/**
  * Add the shortcodes.
  */
 add_shortcode('call_to_action_area', 'call_to_action_area');
@@ -780,8 +818,9 @@ add_shortcode('testimonial', 'testimonial');
 add_shortcode('how_to', 'how_to');
 add_shortcode('step', 'how_to_step');
 
-add_shortcode('implement', 'implement');
-add_shortcode('call_to_action', 'get_started_now_button');
+add_shortcode('content', 'text_in_column');
+add_shortcode('implement', 'text_in_column');
+add_shortcode('call_to_action', 'call_to_action_button'); // 'get_started_now_button');
 
 add_shortcode('grid', 'grid');
 add_shortcode('title_grid', 'title_grid');
@@ -790,6 +829,7 @@ add_shortcode('feature_grid', 'feature_grid');
 add_shortcode('fp_feature', 'feature_grid_item');
 
 add_shortcode('text', 'text_section');
+add_shortcode('code', 'code');
 
 add_shortcode('references', 'references');
 

@@ -454,6 +454,7 @@ br + br, br:last-child {
 
 .full-width.code pre {
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
+  font-size: 100%;  
   margin: 0;
   color: #FFFFFF;
 }
@@ -579,6 +580,10 @@ br + br, br:last-child {
   line-height: 1.65em;
   font-weight: bold;
   margin: 0 0 30px 0;
+}
+
+.grid-page h3 a {
+  text-decoration: none;
 }
 
 .grid-page em {
@@ -950,8 +955,9 @@ br + br, br:last-child {
   color: #555555;
 }
 
-.article-content .code {
+.article-content .code, .article-content pre {
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
+  font-size: 100%;
 }
 
 .article-content .article-figure, .article-content .wp-caption {

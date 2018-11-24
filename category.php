@@ -6,7 +6,7 @@
 	    <div class="case-study grid-section">
 		<div class="faded image tile stripes-slope-right" style="background-image:url('<?php echo get_the_post_thumbnail_url(); ?>')"></div>
 		<div class="tile">
-		    <h3><?php echo the_title(); ?></h3>
+		    <h3><a href="<?php echo get_permalink(); ?>"><?php echo the_title(); ?></a></h3>
 		    <?php echo the_content('<p>Learn more&hellip;</p>'); ?>
 		</div>
 	    </div>
