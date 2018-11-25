@@ -502,6 +502,14 @@ br + br, br:last-child {
   );
 }
 
+@media screen and (max-width: 992px) {
+
+  .stripes-slope-left::after, .stripes-slope-right::after {
+    display: none;
+  }
+
+}
+
 @media screen and (max-width: 480px) {
 
   .button {
@@ -1375,6 +1383,7 @@ br + br, br:last-child {
   .article-content p, .article-content li, .article-content .full-width p, .article-content .full-width li, .article-content .full-width blockquote {
     font-size: 12pt;
     line-height: 1.5em;
+    color: #333333;
   }
 
   .article-content h2 {
