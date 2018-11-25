@@ -819,6 +819,10 @@ br + br, br:last-child {
   .grid-row, .tile {
     min-height: 300px;
     flex-direction: column;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .grid-row.feature {
@@ -836,10 +840,6 @@ br + br, br:last-child {
 
   .grid-row.stack-image-as-background-on-mobile-screens .tile:not(.image) {
     background-color: rgba(0, 0, 0, 0.40);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
   }
 
   .grid-row.stack-image-as-background-on-mobile-screens .tile.image {
