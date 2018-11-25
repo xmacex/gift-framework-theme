@@ -1383,6 +1383,9 @@ br + br, br:last-child {
   .article-content p, .article-content li, .article-content .full-width p, .article-content .full-width li, .article-content .full-width blockquote {
     font-size: 12pt;
     line-height: 1.5em;
+  }
+
+  .article-content p, .article-content li {
     color: #333333;
   }
 
