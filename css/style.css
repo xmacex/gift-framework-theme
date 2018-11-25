@@ -1,5 +1,5 @@
 /* Google Font Imports */
-@import url('https://fonts.googleapis.com/css?family=Inconsolata|Karla|Merriweather|Source+Code+Pro');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:regular,bold|Karla:regular,bold,italic|Merriweather:regular,bold|Source+Code+Pro:bold');
 
 /* Grid Structure
  * 3-column grid structure is based on 30% content, 5% padding
@@ -831,7 +831,7 @@ br + br, br:last-child {
   }
 
   .grid-page, .tile {
-    font-size: 15px;
+    font-size: 12pt;
     line-height: 1.6em;
   }
 
