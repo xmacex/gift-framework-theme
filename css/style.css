@@ -835,7 +835,7 @@ br + br, br:last-child {
   }
 
   .grid-row.stack-image-as-background-on-mobile-screens .tile:not(.image) {
-    background-color: rgba(55, 55, 55, 0.7);
+    background-color: rgba(0, 0, 0, 0.30);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -850,6 +850,7 @@ br + br, br:last-child {
     right: 10px;
     z-index: -1;
     opacity: 1;
+    filter: contrast(50%);
   }
 
   .grid-row.stack-image-as-background-on-mobile-screens .tile ~ .tile {
