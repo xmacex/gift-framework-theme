@@ -132,6 +132,31 @@ br + br, br:last-child {
   background-repeat: no-repeat;
 }
 
+.menu-container .menu-toggler {
+  display: none;
+  border: none;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  top: 36px;
+  right: 36px;
+  padding: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.5;
+  outline: none;
+}
+
+.menu-container:not(.open) .menu-toggler {
+  background-image: url('../img/hamburger-menu.png');
+}
+
+.menu-container.open .menu-toggler {
+  background-image: url('../img/close-button.png');
+}
+
 .menu-container .menu {
   height: 90px;
 }
@@ -260,8 +285,58 @@ br + br, br:last-child {
 
 @media screen and (max-width: 680px) {
 
-  .menu-container .menu {
+  .menu-container:not(.open) .menu {
     display: none;
+  }
+
+  .menu-container .menu-toggler {
+    display: block;
+  }
+
+  .menu > .menu-item:not(.active) > .sub-menu {
+    display: flex;
+    position: static;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .menu > .menu-item:not(.active) > .sub-menu::before {
+    display: none;
+  }
+
+  .menu > .menu-item:not(.active) > .sub-menu .menu-item {
+    color: #666666;
+    padding: 0;
+    min-height: 40px;
+    line-height: 40px;
+    height: auto;
+  }
+
+  .menu > .menu-item:not(.active) > .sub-menu .menu-item a {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .menu-container.open {
+    position: relative;
+  }
+
+  .menu-container.open .menu {
+    height: auto;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    padding: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .menu-container.open .menu-item {
+    padding: 0;
+    min-height: 45px;
+    line-height: 45px;
+    height: auto;
   }
 
 }

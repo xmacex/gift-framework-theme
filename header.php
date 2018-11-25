@@ -27,4 +27,5 @@
     	    'container' => 'nav',
     	    'container_class' => 'navigation menu main-navigation',
     	    'theme_location' => 'primary-menu')); ?>
+      <button class="menu-toggler"></button>
     </header>

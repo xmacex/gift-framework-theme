@@ -1,16 +1,20 @@
 window.addEventListener('DOMContentLoaded', () => {
 
+  let menuContainer = document.querySelector('.menu-container');
+
   // click / toggle functionality for menu
   let menuItems = document.querySelectorAll('.menu > .menu-item-has-children');
   menuItems.forEach(menuItem => {
     menuItem.addEventListener('click', function(e) {
-      e.stopPropagation();
-      menuItems.forEach(menuItemWithSubmenuToHide => {
-        if (menuItem !== menuItemWithSubmenuToHide) {
-          menuItemWithSubmenuToHide.classList.remove('active');
-        }
-      });
-      this.classList.toggle('active');
+      if (!menuContainer.classList.contains('open')) {
+        e.stopPropagation();
+        menuItems.forEach(menuItemWithSubmenuToHide => {
+          if (menuItem !== menuItemWithSubmenuToHide) {
+            menuItemWithSubmenuToHide.classList.remove('active');
+          }
+        });
+        this.classList.toggle('active');
+      }
     });
   });
 
@@ -18,6 +22,12 @@ window.addEventListener('DOMContentLoaded', () => {
   let body = document.querySelector('body');
   body.addEventListener('click', function(e) {
     menuItems.forEach(menuItem => menuItem.classList.remove('active'));
+  });
+
+  // click / toggle functionality for mobile menu
+  let menuToggler = document.querySelector('.menu-container .menu-toggler');
+  menuToggler.addEventListener('click', function(e) {
+    menuContainer.classList.toggle('open');
   });
 
 });
