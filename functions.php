@@ -707,13 +707,18 @@ function grid_row($atts, $content=null)
 
   $a = shortcode_atts(
       array(
-          'is_featured' => false), $atts
+          'is_featured' => false,
+          'stack_image_as_background_on_mobile' => false), $atts
   );
 
   $classes = array();
 
   if ($a['is_featured'] === 'true') {
     $classes[] = 'feature';
+  }
+
+  if ($a['stack_image_as_background_on_mobile'] === 'true') {
+    $classes[] = 'stack-image-as-background-on-mobile-screens';
   }
 
   return do_shortcode(

@@ -830,9 +830,39 @@ br + br, br:last-child {
     padding-top: 80px;
   }
 
+  .grid-row.stack-image-as-background-on-mobile-screens {
+    position: relative;
+  }
+
+  .grid-row.stack-image-as-background-on-mobile-screens .tile:not(.image) {
+    background-color: rgba(55, 55, 55, 0.7);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .grid-row.stack-image-as-background-on-mobile-screens .tile.image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    z-index: -1;
+    opacity: 1;
+  }
+
+  .grid-row.stack-image-as-background-on-mobile-screens .tile ~ .tile {
+    border-top: none;
+  }
+
+  .grid-row.stack-image-as-background-on-mobile-screens .tile.image:first-child {
+    opacity: 0.1;
+  }
+
   .grid-page, .tile {
     font-size: 12pt;
-    line-height: 1.6em;
+    line-height: 1.5em;
   }
 
   .tile, .tile.col-2-width {
@@ -867,12 +897,12 @@ br + br, br:last-child {
 @media screen and (max-width: 480px) {
 
   .tile, .tile.feature {
-    padding: 15px;
+    padding: 30px 15px;
   }
 
   .grid-page h1, .grid-page h2, .grid-page h3 {
     font-size: 22px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
 }
