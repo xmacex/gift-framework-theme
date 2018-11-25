@@ -819,6 +819,10 @@ br + br, br:last-child {
   background-size: 90% 90%;
 }
 
+.grid-row.feature .tile {
+  padding: 90px;
+}
+
 @media screen and (max-width: 1260px) {
 
   .grid-page, .tile {
@@ -829,7 +833,7 @@ br + br, br:last-child {
     font-size: 32px;
   }
 
-  .tile, .tile.feature {
+  .tile, .tile.feature, .grid-row.feature .tile {
     padding: 35px;
   }
 
@@ -864,6 +868,10 @@ br + br, br:last-child {
 
   .grid-row:first-child.feature {
     margin-top: -80px;
+  }
+
+  .grid-row.feature .tile {
+    padding: 80px;
   }
 
   .grid-row:first-child.feature > .tile {
@@ -903,6 +911,10 @@ br + br, br:last-child {
   .grid-row.feature {
     min-height: 400px;
     height: auto;
+  }
+
+  .grid-row.feature .tile {
+    padding: 15px;
   }
 
   .grid-row:first-child.feature > .tile {
