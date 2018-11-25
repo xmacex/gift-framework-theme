@@ -135,16 +135,16 @@ br + br, br:last-child {
 .menu-container .menu-toggler {
   display: none;
   border: none;
-  width: 22px;
-  height: 22px;
+  width: 40px;
+  height: 40px;
   position: absolute;
-  top: 36px;
-  right: 36px;
+  top: 25px;
+  right: 25px;
   padding: 0;
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: 22px 22px;
   opacity: 0.5;
   outline: none;
 }
