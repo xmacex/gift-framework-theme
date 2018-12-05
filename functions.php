@@ -742,8 +742,8 @@ function grid_row($atts, $content=null)
   }
 
   return do_shortcode(
-          container_grid_row($content, implode($classes, ' '))
-         );
+      container_grid_row($content, $classes)
+  );
 }
 
 /**
@@ -804,7 +804,7 @@ function grid_tile($atts, $content=null)
     $classes[] = $a['highlight'];
   }
 
-  return container_grid_tile($content, implode($classes, ' '), $url);
+  return container_grid_tile($content, $classes, $url);
 }
 
 /**
