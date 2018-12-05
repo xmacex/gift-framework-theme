@@ -525,7 +525,7 @@ function feature($atts, $content=null)
 
     return container_fw(
         $feature_content,
-        " dark edge-to-edge"
+        ["dark", "edge-to-edge"]
     );
 }
 
@@ -602,7 +602,7 @@ function how_to($atts, $content=null)
                 ) . '<div class="has-column-layout">' . $content . '</div>' . container_column(
                     container_column_inner($readmore)
                 )
-            ), " how-to"
+            ), ["how-to"]
         )
     );
 }
