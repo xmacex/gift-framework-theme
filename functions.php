@@ -150,7 +150,7 @@ function container($content, $classes=[])
  */
 function container_fw($content, $classes=[])
 {
-    array_push($classes, "full-width");
+    $classes[] = "full-width";
     return container($content, $classes);
 }
 
@@ -164,7 +164,7 @@ function container_fw($content, $classes=[])
  */
 function container_column($content, $classes=[])
 {
-    array_push($classes, "column-container");
+    $classes[] = "column-container";
     return container($content, $classes);
 }
 
@@ -178,7 +178,7 @@ function container_column($content, $classes=[])
  */
 function container_column_inner($content, $classes=[])
 {
-    array_push($classes, "column-container-inner");
+    $classes[] = "column-container-inner";
     return container($content, $classes);
 }
 
@@ -192,7 +192,7 @@ function container_column_inner($content, $classes=[])
  */
 function container_fw_inner($content, $classes=[])
 {
-    array_push($classes, "full-width-inner");
+    $classes[] = "full-width-inner";
     return container($content, $classes);
 }
 
@@ -206,7 +206,7 @@ function container_fw_inner($content, $classes=[])
  */
 function container_fw_inner_has_col_layout($content, $classes=[])
 {
-    array_push($classes, "has-column-layout");
+    $classes[] = "has-column-layout";
     return container_fw_inner($content, $classes);
 }
 
@@ -220,7 +220,7 @@ function container_fw_inner_has_col_layout($content, $classes=[])
  */
 function container_fw_inner_col($content, $classes=[])
 {
-    array_push($classes, "full-width-inner-col");
+    $classes[] = "full-width-inner-col";
     return container($content, $classes);
 }
 
@@ -234,7 +234,7 @@ function container_fw_inner_col($content, $classes=[])
  */
 function container_fw_img($content, $classes=[])
 {
-    array_push($classes, "full-width-image-container");
+    $classes[] = "full-width-image-container";
     return container($content, $classes);
 }
 
@@ -248,7 +248,7 @@ function container_fw_img($content, $classes=[])
  */
 function container_fw_video($content, $classes=[])
 {
-    array_push($classes, "full-width-video-container-wrap");
+    $classes[] = "full-width-video-container-wrap";
     return container(
             container($content, ["full-width-video-container"]),
             $classes
@@ -265,7 +265,7 @@ function container_fw_video($content, $classes=[])
  */
 function container_grid_row($content, $classes=[])
 {
-    array_push($classes, "grid-row");
+    $classes[] = "grid-row";
     return container($content, $classes);
 }
 
@@ -280,7 +280,7 @@ function container_grid_row($content, $classes=[])
  */
 function container_grid_tile($content, $classes=[], $background_image_url=null)
 {
-    array_push($classes, "tile");
+    $classes[] = "tile";
     $style_attribute = '';
     if (!empty($background_image_url)) {
       $style_attribute = 'style="background-image: url(\'' . $background_image_url . '\')"';
@@ -299,7 +299,7 @@ function container_grid_tile($content, $classes=[], $background_image_url=null)
  */
 function container_grid_break($content, $classes=[])
 {
-    array_push($classes, "grid-break");
+    $classes[] = "grid-break";
     return container($content, $classes);
 }
 
@@ -313,7 +313,7 @@ function container_grid_break($content, $classes=[])
  */
 function container_text_section($content, $classes=[])
 {
-    array_push($classes, "text-section");
+    $classes[] = "text-section";
     return container($content, $classes);
 }
 
@@ -327,7 +327,7 @@ function container_text_section($content, $classes=[])
  */
 function container_reference_list($content, $classes=[])
 {
-    array_push($classes, "reference-list");
+    $classes[] = "reference-list";
     return container($content, $classes);
 }
 
