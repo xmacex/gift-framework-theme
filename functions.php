@@ -124,191 +124,211 @@ function prepend_cover_to_article()
  * A most generic container.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string[] $classes A string to append to classes
  *
  * @return string HTML representation
  */
-function container($content, $classes=null)
+function container($content, $classes=[])
 {
-    return '<div class="' . $classes . '">' . $content . '</div>';
+    foreach($classes as $class)
+    {
+        if(strpos($class, ' '))
+        {
+            throw new UnexpectedValueException("Class contains a space");
+        }
+    }
+    return '<div class="' . implode(' ', $classes) . '">' . $content . '</div>';
 }
 
 /**
  * A full-width container, a row.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string[] $classes A string to append to classes
  *
  * @return string HTML representation
  */
-function container_fw($content, $classes=null)
+function container_fw($content, $classes=[])
 {
-    return container($content, "full-width" . $classes);
+    array_push($classes, "full-width");
+    return container($content, $classes);
 }
 
 /**
  * A column container, a row.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string[] $classes A string to append to classes
  *
  * @return string HTML representation
  */
-function container_column($content, $classes=null)
+function container_column($content, $classes=[])
 {
-    return container($content, "column-container" . $classes);
+    array_push($classes, "column-container");
+    return container($content, $classes);
 }
 
 /**
  * An inner container for column container, a column.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string[] $classes A string to append to classes
  *
  * @return string HTML representation
  */
-function container_column_inner($content, $classes=null)
+function container_column_inner($content, $classes=[])
 {
-    return container($content, "column-container-inner" . $classes);
+    array_push($classes, "column-container-inner");
+    return container($content, $classes);
 }
 
 /**
  * An inner container for full width container.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string[] $classes A string to append to classes
  *
  * @return string HTML representation
  */
-function container_fw_inner($content, $classes=null)
+function container_fw_inner($content, $classes=[])
 {
-    return container($content, $classes . " full-width-inner");
+    array_push($classes, "full-width-inner");
+    return container($content, $classes);
 }
 
 /**
  * An inner container for full width container with column inside, a row.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string $classes[] A string to append to classes
  *
  * @return string HTML representation
  */
-function container_fw_inner_has_col_layout($content, $classes=null)
+function container_fw_inner_has_col_layout($content, $classes=[])
 {
-    return container_fw_inner($content, $classes . " has-column-layout");
+    array_push($classes, "has-column-layout");
+    return container_fw_inner($content, $classes);
 }
 
 /**
  * An inner container for full width container container, a column.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string[] $classes A string to append to classes
  *
  * @return string HTML representation
  */
-function container_fw_inner_col($content, $classes=null)
+function container_fw_inner_col($content, $classes=[])
 {
-    return container($content, "full-width-inner-col" . $classes);
+    array_push($classes, "full-width-inner-col");
+    return container($content, $classes);
 }
 
 /**
  * A full-width image container.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string $classes[] A string to append to classes
  *
  * @return string HTML representation
  */
-function container_fw_img($content, $classes=null)
+function container_fw_img($content, $classes=[])
 {
-    return container($content, "full-width-image-container");
+    array_push($classes, "full-width-image-container");
+    return container($content, $classes);
 }
 
 /**
  * A full-width video container.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string[] $classes A string to append to classes
  *
  * @return string HTML representation
  */
-function container_fw_video($content, $classes=null)
+function container_fw_video($content, $classes=[])
 {
+    array_push($classes, "full-width-video-container-wrap");
     return container(
-            container($content, "full-width-video-container"),
-            "full-width-video-container-wrap"
-          );
+            container($content, ["full-width-video-container"]),
+            $classes
+    );
 }
 
 /**
  * A grid row container.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string $classes[] A string to append to classes
  *
  * @return string HTML representation
  */
-function container_grid_row($content, $classes=null)
+function container_grid_row($content, $classes=[])
 {
-    return container($content, $classes . " grid-row");
+    array_push($classes, "grid-row");
+    return container($content, $classes);
 }
 
 /**
  * A grid tile container.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string $classes[] A string to append to classes
  * @param string $background_image_url A background image URL
  *
  * @return string HTML representation
  */
-function container_grid_tile($content, $classes=null, $background_image_url=null)
+function container_grid_tile($content, $classes=[], $background_image_url=null)
 {
+    array_push($classes, "tile");
     $style_attribute = '';
     if (!empty($background_image_url)) {
       $style_attribute = 'style=" background-image: url(\'' . $background_image_url . '\')"';
     }
 
-    return '<div class="tile ' . $classes . '"' . $style_attribute . '>' . $content . '</div>';
+    return '<div class=' . implode(' ', $classes) . $style_attribute . '>' . $content . '</div>';
 }
 
 /**
  * A grid break container.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string $classes[] A string to append to classes
  *
  * @return string HTML representation
  */
-function container_grid_break($content, $classes=null)
+function container_grid_break($content, $classes=[])
 {
-    return container($content, $classes . " grid-break");
+    array_push($classes, "grid-break");
+    return container($content, $classes);
 }
 
 /**
  * A container for a text section
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string[] $classes A string to append to classes
  *
  * @return string HTML representation
  */
-function container_text_section($content, $classes=null)
+function container_text_section($content, $classes=[])
 {
-    return container($content, "text-section");
+    array_push($classes, "text-section");
+    return container($content, $classes);
 }
 
 /**
  * A container for a reference list.
  *
  * @param string $content Content from the database
- * @param string $classes A string to append to classes
+ * @param string[] $classes A string to append to classes
  *
  * @return string HTML representation
  */
-function container_reference_list($content, $classes=null)
+function container_reference_list($content, $classes=[])
 {
-    return container($content, "reference-list");
+    array_push($classes, "reference-list");
+    return container($content, $classes);
 }
 
 /**
