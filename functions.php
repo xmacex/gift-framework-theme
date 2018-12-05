@@ -283,10 +283,10 @@ function container_grid_tile($content, $classes=[], $background_image_url=null)
     array_push($classes, "tile");
     $style_attribute = '';
     if (!empty($background_image_url)) {
-      $style_attribute = 'style=" background-image: url(\'' . $background_image_url . '\')"';
+      $style_attribute = 'style="background-image: url(\'' . $background_image_url . '\')"';
     }
 
-    return '<div class=' . implode(' ', $classes) . $style_attribute . '>' . $content . '</div>';
+    return '<div class="' . implode(' ', $classes) . '" ' . $style_attribute . '>' . $content . '</div>';
 }
 
 /**
