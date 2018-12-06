@@ -105,7 +105,7 @@ class testContainerDecorators extends TestCase {
         return [
             'Class with space' => [
                 ['spacy class']
-            ]
+            ],
         ];
     }
 }

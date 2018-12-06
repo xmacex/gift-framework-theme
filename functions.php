@@ -132,7 +132,7 @@ function container($content, $classes=[])
 {
     foreach($classes as $class)
     {
-        if(strpos($class, ' '))
+        if(strpos($class, ' ') !== false)
         {
             throw new UnexpectedValueException("Class contains a space");
         }
