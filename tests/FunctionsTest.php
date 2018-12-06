@@ -106,6 +106,9 @@ class testContainerDecorators extends TestCase {
             'Class with space' => [
                 ['spacy class']
             ],
+            'Class with leading space' => [
+                [' spacyclass']
+                ]
         ];
     }
 }
