@@ -115,26 +115,17 @@ class PartnerWidgetTest extends WP_UnitTestCase
         $output = partner(null, "Organization Name");
 
         $this->assertEquals(
-            '<div class="partner">Organization Name</div>',
+            '<div class="partner"><div class="partner-name">Organization Name</div></div>',
             $output);
     }
 
-    function test_decorator_generates_link_when_given_url()
-    {
-        $output = partner(['url'=>'http://example.org'], "Organization Name");
-
-        $this->assertEquals(
-            '<div class="partner"><a href="http://example.org">Organization Name</a></div>',
-            $output);
-    }
-
-    function test_decorator_generates_link_when_given_logo_and_url()
+    function test_decorator_generates_logo_when_given_media()
     {
         $media = $this->factory->attachment->create(); // ID is returned
-        $output = partner(['logo'=>$media, 'url'=>'http://example.org'], "Organization Name");
+        $output = partner(['logo'=>$media], "Organization Name");
 
         $this->assertEquals(
-            '<div class="partner"><a href="http://example.org"><img class="partner-logo" src="http://example.org/?attachment_id=' . $media . '"/>Organization Name</a></div>',
+            '<div class="partner"><div class="partner-logo"><img src="http://example.org/?attachment_id=' . $media . '"/></div><div class="partner-name">Organization Name</div></div>',
             $output);
     }
 
@@ -148,30 +139,19 @@ class PartnerWidgetTest extends WP_UnitTestCase
         $output = ob_get_clean();
 
         $this->assertEquals(
-            '<div class="partner">Organization Name</div>',
+            '<div class="partner"><div class="partner-name">Organization Name</div></div>',
             $output);
     }
 
-    function test_shortcode_generates_link_when_given_url()
-    {
-        ob_start();
-        echo do_shortcode('[partner url=http://example.org]Organization Name[/partner]');
-        $output = ob_get_clean();
-
-        $this->assertEquals(
-            '<div class="partner"><a href="http://example.org">Organization Name</a></div>',
-            $output);
-    }
-
-    function test_shortcode_generates_link_when_given_url_and_logo()
+    function test_shortcode_generates_link_when_given_media()
     {
         $media = $this->factory->attachment->create(); // ID is returned
         ob_start();
-        echo do_shortcode('[partner logo=' . $media . ' url=http://example.org]Organization Name[/partner]');
+        echo do_shortcode('[partner logo=' . $media . ']Organization Name[/partner]');
         $output = ob_get_clean();
 
         $this->assertEquals(
-            '<div class="partner"><a href="http://example.org"><img class="partner-logo" src="http://example.org/?attachment_id=' . $media . '"/>Organization Name</a></div>',
+            '<div class="partner"><div class="partner-logo"><img src="http://example.org/?attachment_id=' . $media . '"/></div><div class="partner-name">Organization Name</div></div>',
             $output);
     }
 }
