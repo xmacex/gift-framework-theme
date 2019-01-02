@@ -1,5 +1,5 @@
 <?php
-class testCallToAction extends WP_UnitTestCase {
+class CallToActionTest extends WP_UnitTestCase {
     function test_unit_testing_is_in_place()
     {
         return $this->assertEquals(true, true);
@@ -19,7 +19,7 @@ class testCallToAction extends WP_UnitTestCase {
     }
 }
 
-class testContainerDecorators extends WP_UnitTestCase {
+class ContainerDecoratorTest extends WP_UnitTestCase {
     function test_container_without_classes_should_just_wrap_content()
     {
         $this->assertEquals(
@@ -108,13 +108,70 @@ class testContainerDecorators extends WP_UnitTestCase {
     }
 }
 
-class testPartnerWidget extends TestCase
+class PartnerWidgetTest extends WP_UnitTestCase
 {
-    function test_wraps_content_with_minimal_arguments()
+    function test_decorator_wraps_content_with_minimal_arguments()
     {
-        $html = partner(null, "content here");
+        $output = partner(null, "Organization Name");
+
         $this->assertEquals(
-            '<div class="participant">content here</div>',
-            $html);
+            '<div class="participant">Organization Name</div>',
+            $output);
+    }
+
+    function test_decorator_generates_link_when_given_url()
+    {
+        $output = partner(['url'=>'http://example.org'], "Organization Name");
+
+        $this->assertEquals(
+            '<div class="participant"><a href="http://example.org">Organization Name</a></div>',
+            $output);
+    }
+
+    function test_decorator_generates_link_when_given_logo_and_url()
+    {
+        $media = $this->factory->attachment->create(); // ID is returned
+        $output = partner(['logo'=>$media, 'url'=>'http://example.org'], "Organization Name");
+
+        $this->assertEquals(
+            '<div class="participant"><a href="http://example.org"><img class="participant-logo" src="http://example.org/?attachment_id=' . $media . '"/>Organization Name</a></div>',
+            $output);
+    }
+
+    /**
+     * Integration tests for shortcodes
+     */
+    function test_shortcode_calls_decorator_with_minimal_parameters()
+    {
+        ob_start();
+        echo do_shortcode('[partner]Organization Name[/partner]');
+        $output = ob_get_clean();
+
+        $this->assertEquals(
+            '<div class="participant">Organization Name</div>',
+            $output);
+    }
+
+    function test_shortcode_generates_link_when_given_url()
+    {
+        ob_start();
+        echo do_shortcode('[partner url=http://example.org]Organization Name[/partner]');
+        $output = ob_get_clean();
+        
+        $this->assertEquals(
+            '<div class="participant"><a href="http://example.org">Organization Name</a></div>',
+            $output);
+    }
+
+    function test_shortcode_generates_link_when_given_url_and_logo()
+    {
+        $media = $this->factory->attachment->create(); // ID is returned
+        ob_start();
+        echo do_shortcode('[partner logo=' . $media . ' url=http://example.org]Organization Name[/partner]');
+        $output = ob_get_clean();
+
+        $this->assertEquals(
+            '<div class="participant"><a href="http://example.org"><img class="participant-logo" src="http://example.org/?attachment_id=' . $media . '"/>Organization Name</a></div>',
+            $output);
     }
 }

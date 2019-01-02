@@ -833,11 +833,29 @@ function partner($atts, $content=null)
     $a = shortcode_atts(
         array(
             'logo' => null,
-            'url' => null,
-            'highlight' => null), $atts
+            'url' => null), $atts
     );
+    $classes[] = "participant";
 
-    return container($content);
+    $a_b = '<a href="';
+    $a_m = '">';
+    $a_e = '</a>';
+
+    if($a['logo'])
+    {
+        $attachment = get_post($a['logo']);
+        $url = $attachment->guid;
+        $img = '<img class="participant-logo" src="' . $url . '"/>';
+    } else {
+        $img = null;
+    }
+
+    if($a['url'])
+    {
+        $content = $a_b . $a['url'] . $a_m . $img . $content . $a_e;
+    }
+    
+    return container($content, $classes);
 }
 
 /**
