@@ -835,7 +835,7 @@ function partner($atts, $content=null)
             'logo' => null,
             'url' => null), $atts
     );
-    $classes[] = "participant";
+    $classes[] = "partner";
 
     $a_b = '<a href="';
     $a_m = '">';
@@ -845,7 +845,7 @@ function partner($atts, $content=null)
     {
         $attachment = get_post($a['logo']);
         $url = $attachment->guid;
-        $img = '<img class="participant-logo" src="' . $url . '"/>';
+        $img = '<img class="partner-logo" src="' . $url . '"/>';
     } else {
         $img = null;
     }
@@ -854,7 +854,7 @@ function partner($atts, $content=null)
     {
         $content = $a_b . $a['url'] . $a_m . $img . $content . $a_e;
     }
-    
+
     return container($content, $classes);
 }
 

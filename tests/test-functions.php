@@ -115,7 +115,7 @@ class PartnerWidgetTest extends WP_UnitTestCase
         $output = partner(null, "Organization Name");
 
         $this->assertEquals(
-            '<div class="participant">Organization Name</div>',
+            '<div class="partner">Organization Name</div>',
             $output);
     }
 
@@ -124,7 +124,7 @@ class PartnerWidgetTest extends WP_UnitTestCase
         $output = partner(['url'=>'http://example.org'], "Organization Name");
 
         $this->assertEquals(
-            '<div class="participant"><a href="http://example.org">Organization Name</a></div>',
+            '<div class="partner"><a href="http://example.org">Organization Name</a></div>',
             $output);
     }
 
@@ -134,7 +134,7 @@ class PartnerWidgetTest extends WP_UnitTestCase
         $output = partner(['logo'=>$media, 'url'=>'http://example.org'], "Organization Name");
 
         $this->assertEquals(
-            '<div class="participant"><a href="http://example.org"><img class="participant-logo" src="http://example.org/?attachment_id=' . $media . '"/>Organization Name</a></div>',
+            '<div class="partner"><a href="http://example.org"><img class="partner-logo" src="http://example.org/?attachment_id=' . $media . '"/>Organization Name</a></div>',
             $output);
     }
 
@@ -148,7 +148,7 @@ class PartnerWidgetTest extends WP_UnitTestCase
         $output = ob_get_clean();
 
         $this->assertEquals(
-            '<div class="participant">Organization Name</div>',
+            '<div class="partner">Organization Name</div>',
             $output);
     }
 
@@ -157,9 +157,9 @@ class PartnerWidgetTest extends WP_UnitTestCase
         ob_start();
         echo do_shortcode('[partner url=http://example.org]Organization Name[/partner]');
         $output = ob_get_clean();
-        
+
         $this->assertEquals(
-            '<div class="participant"><a href="http://example.org">Organization Name</a></div>',
+            '<div class="partner"><a href="http://example.org">Organization Name</a></div>',
             $output);
     }
 
@@ -171,7 +171,7 @@ class PartnerWidgetTest extends WP_UnitTestCase
         $output = ob_get_clean();
 
         $this->assertEquals(
-            '<div class="participant"><a href="http://example.org"><img class="participant-logo" src="http://example.org/?attachment_id=' . $media . '"/>Organization Name</a></div>',
+            '<div class="partner"><a href="http://example.org"><img class="partner-logo" src="http://example.org/?attachment_id=' . $media . '"/>Organization Name</a></div>',
             $output);
     }
 }
