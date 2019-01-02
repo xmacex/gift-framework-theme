@@ -821,6 +821,26 @@ function grid_break($atts, $content=null)
 }
 
 /**
+ * A partner organization
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function partner($atts, $content=null)
+{
+    $a = shortcode_atts(
+        array(
+            'logo' => null,
+            'url' => null,
+            'highlight' => null), $atts
+    );
+
+    return container($content);
+}
+
+/**
  * Add the shortcodes.
  */
 add_shortcode('call_to_action_area', 'call_to_action_area');
@@ -852,6 +872,8 @@ add_shortcode('grid_tile', 'grid_tile');
 add_shortcode('grid_break', 'grid_break');
 
 add_shortcode('references', 'references');
+
+add_shortcode('partner', 'partner');
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */

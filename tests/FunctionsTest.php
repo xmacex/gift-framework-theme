@@ -112,3 +112,14 @@ class testContainerDecorators extends TestCase {
         ];
     }
 }
+
+class testPartnerWidget extends TestCase
+{
+    function test_wraps_content_with_minimal_arguments()
+    {
+        $html = partner(null, "content here");
+        $this->assertEquals(
+            '<div class="participant">content here</div>',
+            $html);
+    }
+}
