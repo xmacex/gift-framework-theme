@@ -1,10 +1,5 @@
 <?php
-require('tests/mockwp.php');
-require('functions.php');
-
-use PHPUnit\Framework\TestCase;
-
-class testCallToAction extends TestCase {
+class testCallToAction extends WP_UnitTestCase {
     function test_unit_testing_is_in_place()
     {
         return $this->assertEquals(true, true);
@@ -24,7 +19,7 @@ class testCallToAction extends TestCase {
     }
 }
 
-class testContainerDecorators extends TestCase {
+class testContainerDecorators extends WP_UnitTestCase {
     function test_container_without_classes_should_just_wrap_content()
     {
         $this->assertEquals(
