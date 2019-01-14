@@ -856,6 +856,24 @@ br + br, br:last-child {
   padding: 90px;
 }
 
+.partner {
+  display: flex;
+  margin-top: 30px;
+}
+
+.partner-logo {
+  flex: 0 15%;
+  margin-right: 5%;
+}
+
+.partner-logo img {
+  width: 100%;
+}
+
+.partner-name {
+  flex: 1;
+}
+
 @media screen and (max-width: 1260px) {
 
   .grid-page, .tile {
