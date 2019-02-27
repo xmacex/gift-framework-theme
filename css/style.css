@@ -1,15 +1,13 @@
 /* Google Font Imports */
-@import url('https://fonts.googleapis.com/css?family=Inconsolata:regular,bold|Karla:regular,bold,italic|Merriweather:regular,bold|Source+Code+Pro:bold');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:regular,bold|Karla:regular,bold|Merriweather|Source+Code+Pro');
 
 /* Grid Structure
  * 3-column grid structure is based on 30% content, 5% padding
  * 30% - 5% - 30% - 5% - 30%
  */
 
-/* Response Screen Sizes
- * @media screen and (max-width: 480px) [small mobile size]
- * @media screen and (max-width: 680px) [mobile size]
- * @media screen and (max-width: 860px) [tablet size]
+/* Bootstrap Response Screen Sizes
+ * @media screen and (max-width: 576px)
  * @media screen and (max-width: 768px)
  * @media screen and (max-width: 992px)
  * @media screen and (max-width: 1200px)
