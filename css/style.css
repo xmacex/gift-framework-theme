@@ -13,6 +13,7 @@
  * @media screen and (max-width: 1200px)
  */
 
+
 /* Base Body, HTML Styles and other Generic Styles */
 
 body, html {
@@ -439,6 +440,83 @@ br + br, br:last-child {
   color: #555555;
 }
 
+
+/* Generic Styling */
+
+.content-area h1, .content-area h2, .content-area h3 {
+  font-family: 'Karla', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+.content-area h1 {
+  color: #444444;
+  font-size: 42px;
+  line-height: 1.4em;
+  margin: 0 0 40px 0;
+  letter-spacing: -0.05em;
+}
+
+.content-area h2 {
+  color: #666666;
+  font-size: 32px;
+  line-height: 1.4em;
+  margin: 45px 0 21px 0;
+  letter-spacing: -0.04em;
+}
+
+.content-area h3 {
+  color: #666666;
+  font-size: 22px;
+  line-height: 1.75em;
+  margin: 40px 0 21px 0;
+}
+
+.content-area p, .content-area li {
+  font-family: 'Karla', Helvetica, Arial, sans-serif;
+  color: #666666;
+  font-size: 18px;
+  line-height: 1.75em;
+}
+
+.content-area blockquote {
+  color: #555555;
+}
+
+.content-area .code {
+  font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
+}
+
+.content-area em {
+  color: #EE5E54;
+  font-weight: bold;
+  font-style: normal;
+}
+
+@media screen and (max-width: 1260px) {
+
+  .content-area h1 {
+    font-size: 36px;
+  }
+
+}
+
+@media screen and (max-width: 576px) {
+
+  .content-area h1 {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  .content-area h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .content-area p, .content-area li {
+    line-height: 1.5em;
+  }
+
+}
 
 /* Buttons and UI */
 

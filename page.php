@@ -3,7 +3,7 @@
 <!-- Site Content Goes Here -->
 <?php while (have_posts()): the_post(); ?>
     <?php echo prepend_cover_to_article(); ?>
-    <article class="article-content wrap-container">
+    <article class="article-content wrap-container content-area">
 	<?php the_content(); ?>
     </article>
 <?php endwhile; ?>
