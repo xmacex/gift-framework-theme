@@ -1020,7 +1020,7 @@ input[type='button'].primary {
     padding-left: 90px;
   }
 
-  .feature-block:nth-child(2n+0) .feature-block-caption {
+  .feature-block:nth-child(2n+1) .feature-block-caption {
     padding-right: 90px;
   }
 
