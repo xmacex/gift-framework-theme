@@ -157,41 +157,12 @@ br + br, br:last-child {
   background-image: url('../img/hamburger-menu.png');
 }
 
-.menu-container.open .menu-toggler, .menu-container.white.open .menu-toggler {
+.menu-container.open .menu-toggler, .menu-container.white-on-mobile.open .menu-toggler {
   background-image: url('../img/close-button.png');
 }
 
 .menu-container .menu {
   height: 90px;
-}
-
-.menu-container.white {
-  background-image: linear-gradient(
-    180deg,
-    rgba(51, 51, 51, 0.7) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
-}
-
-.menu-container.white .gift-logo {
-  background-image: url('../img/gift-logo-white.png');
-}
-
-.menu-container.white .menu-toggler {
-  background-image: url('../img/hamburger-menu-white.png');
-  opacity: 1;
-}
-
-.menu-container.white .navigation ul li {
-  color: #FFFFFF;
-}
-
-.menu-container.white .navigation ul li a:hover {
-  color: #DDDDDD;
-}
-
-.menu-container + .cover {
-  top: -90px;
 }
 
 .menu-item {
@@ -295,6 +266,31 @@ br + br, br:last-child {
 
   .menu-container .navigation {
     margin-left: 90px;
+  }
+
+  .menu-container.white-on-mobile {
+    background-image: linear-gradient(
+      180deg,
+      rgba(51, 51, 51, 0.7) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
+  .menu-container.white-on-mobile .gift-logo {
+    background-image: url('../img/gift-logo-white.png');
+  }
+
+  .menu-container.white-on-mobile .menu-toggler {
+    background-image: url('../img/hamburger-menu-white.png');
+    opacity: 1;
+  }
+
+  .menu-container.white-on-mobile .navigation ul li {
+    color: #FFFFFF;
+  }
+
+  .menu-container.white-on-mobile .navigation ul li a:hover {
+    color: #DDDDDD;
   }
 
 }
@@ -1176,6 +1172,7 @@ input[type='button'].primary {
   width: calc(0.3 * 1080px + ((100% - 1080px) / 2));
   height: 800px;
   z-index: 1;
+  min-height: 90px;
 }
 
 .image-and-call-to-action .featured-image {
@@ -1189,6 +1186,10 @@ input[type='button'].primary {
 .image-and-call-to-action .button {
   text-decoration: none;
   margin: 20px 0 10px 0;
+}
+
+.image-and-call-to-action .button:first-child {
+  margin-top: 570px;
 }
 
 .image-and-call-to-action .description {
@@ -1225,6 +1226,10 @@ input[type='button'].primary {
     height: 450px;
   }
 
+  .image-and-call-to-action .button:first-child {
+    margin-top: 470px;
+  }
+
   .image-and-call-to-action .button, .image-and-call-to-action .description {
     width: calc(((100vw - 180px) * 0.3));
   }
@@ -1235,6 +1240,10 @@ input[type='button'].primary {
 
   .image-and-call-to-action .featured-image {
     height: 400px;
+  }
+
+  .image-and-call-to-action .button:first-child {
+    margin-top: 420px;
   }
 
   .image-and-call-to-action .button, .image-and-call-to-action .description {
@@ -1521,8 +1530,8 @@ input[type='button'].primary {
   }
 
   .article-content h1, .article-content h2, .article-content h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 28px;
+    margin-bottom: 16px;
   }
 
   .article-content p, .article-content li, .article-content .full-width p, .article-content .full-width li, .article-content .full-width blockquote {

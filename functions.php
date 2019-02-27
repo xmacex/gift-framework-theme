@@ -116,6 +116,73 @@ function prepend_cover_to_article()
     }
 }
 
+/*
+ * Add the image and call to action to the article
+ *
+ * @return string HTML representation
+ */
+function prepend_image_and_call_to_action_to_article()
+{
+    $imgurl = get_the_post_thumbnail_url();
+    $postfields = get_post_custom();
+    $call_to_action_link = $postfields['call_to_action_link'][0];
+    $call_to_action_link_label = $postfields['call_to_action_link_label'][0];
+    $call_to_action_link_description = $postfields['call_to_action_link_description'][0];
+
+    $image_and_call_to_action = '';
+
+    if ($imgurl || ($call_to_action_link && $call_to_action_link_label))
+    {
+
+      $image_and_call_to_action_b = '<aside class="image-and-call-to-action">';
+      $image_and_call_to_action_e = '</aside>';
+
+      $feature_image_el = '';
+      if ($imgurl) {
+        $feature_image_b = '<div class="featured-image" style="background-image: url(\'' . $imgurl . '\')">';
+        $feature_image_e = '</div>';
+        $feature_image_el = $feature_image_b .
+                         $feature_image_e;
+      }
+
+      $call_to_action_link_el = '';
+      if ($call_to_action_link && $call_to_action_link_label) {
+
+        if (is_numeric($call_to_action_link)) {
+          $link_url = get_permalink($call_to_action_link);
+        } else {
+          $link_url = $call_to_action_link;
+        }
+
+        $call_to_action_link_b = '<a id="call-to-action-link" class="button" href="' . $link_url . '">';
+        $call_to_action_link_e = '</a>';
+        $call_to_action_link_el = $call_to_action_link_b .
+                               $call_to_action_link_label .
+                               $call_to_action_link_e;
+      }
+
+      $call_to_action_link_description_el = '';
+      if ($call_to_action_link_description) {
+        $call_to_action_link_description_b = '<label for="call-to-action-link" class="description">';
+        $call_to_action_link_description_e = '</label>';
+        $call_to_action_link_description_el = $call_to_action_link_description_b .
+                                              $call_to_action_link_description .
+                                              $call_to_action_link_description_e;
+
+      }
+
+      $image_and_call_to_action = $image_and_call_to_action_b .
+                                  $feature_image_el .
+                                  $call_to_action_link_el .
+                                  $call_to_action_link_description_el .
+                                  $image_and_call_to_action_e;
+
+    }
+
+    echo $image_and_call_to_action;
+
+}
+
 /**
  * Decorator Pattern inspired wrapper functions
  */
