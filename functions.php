@@ -351,24 +351,9 @@ function leading_content($atts, $content=null)
 {
     $a = shortcode_atts(
         array(
-            'byline' => '',
-            'cta_label' => null,
-            'cta_item' => null,
-            'cta_text' => null), $atts
+            'byline' => ''), $atts
     );
 
-    if (is_numeric($a['cta_item'])) {
-        $attachment = get_post($a['cta_item']);
-        $url = $attachment->guid;
-    } else {
-        $url = $a['cta_item'];
-    }
-
-    if ($a['cta_label']) {
-        $cta = call_to_action($a['cta_label'], $url, $a['cta_text']);
-    } else {
-        $cta = null;
-    }
     $bc = get_breadcrumb();
 
     $author_citation = '';
@@ -389,31 +374,13 @@ function leading_content($atts, $content=null)
 
     return do_shortcode(
         container_column(
-            $cta . container_column_inner(
+            container_column_inner(
                 $bc . $heading . $author_citation . $blurb
             )
         )
     );
 }
 
-/**
- * Generate the call to action area shortcode.
- *
- * @param array  $atts    Shortcode attributes
- * @param string $content Content from the database
- *
- * @return string HTML representation
- */
-function call_to_action_area($atts, $content=null)
-{
-    $a = shortcode_atts(
-        array(
-            'label' => null,
-            'item' => null), $atts
-    );
-
-    return call_to_action($a['label'], $a['item'], $content);
-}
 
 /**
  * Wrapper for the questions section shortcode.
@@ -828,7 +795,6 @@ function grid_break($atts, $content=null)
 /**
  * Add the shortcodes.
  */
-add_shortcode('call_to_action_area', 'call_to_action_area');
 add_shortcode('leading_content', 'leading_content');
 
 add_shortcode('questions', 'questions');
