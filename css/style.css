@@ -52,11 +52,11 @@ br + br, br:last-child {
 
 /* Generic Horizontal Wrapping Behaviour */
 
-.wrap-container, .menu-container {
+.wrap-container {
   padding: 0 90px;
 }
 
-.wrap-container > *:not(.full-width), .full-width > *, .menu-container > .menu {
+.wrap-container > *:not(.full-width), .full-width > * {
   max-width: 1080px;
   margin: 0 auto;
 }
@@ -64,19 +64,22 @@ br + br, br:last-child {
 .wrap-container .full-width {
   margin-left: -90px;
   margin-right: -90px;
+  padding: 0 90px;
 }
 
-.wrap-container .full-width:not(.edge-to-edge) {
-  padding: 0 90px;
+@media screen and (min-width: 1440px) {
+  .wrap-container > *:not(.full-width), .full-width > * {
+    max-width: 1280px;
+  }
 }
 
 @media screen and (max-width: 992px) {
 
-  .wrap-container:not(.menu-container) {
+  .wrap-container {
     padding: 0;
   }
 
-  .wrap-container > *:not(.full-width), .full-width > * {
+  .wrap-container:not(.menu-container) > *:not(.full-width), .full-width > * {
     padding: 0 45px;
   }
 
@@ -96,17 +99,9 @@ br + br, br:last-child {
 
 }
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 576px) {
 
-  .wrap-container > *:not(.full-width), .full-width > * {
-    padding: 0 25px;
-  }
-
-}
-
-@media screen and (max-width: 480px) {
-
-  .wrap-container > *:not(.full-width), .full-width > * {
+  .wrap-container:not(.menu-container) > *:not(.full-width), .full-width > * {
     padding: 0 15px;
   }
 
