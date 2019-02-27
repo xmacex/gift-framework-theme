@@ -508,7 +508,7 @@ function feature($atts, $content=null)
         $url = $attachment->guid;
         $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
         $img = $img_b . 'src="' . $url . '" alt="' . $alt . '"' . $img_e;
-        $feature_content = container_fw_img($img);
+        $feature_content = $img;
       /**
        * Checks for the presence of a Vimeo URL via regular expression and then
        * generates an <iframe> of a Vimeo player based on that ID.
@@ -525,7 +525,7 @@ function feature($atts, $content=null)
 
     return container_fw(
         $feature_content,
-        ["dark", "edge-to-edge"]
+        ["image-container"]
     );
 }
 
