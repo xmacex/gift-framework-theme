@@ -495,6 +495,8 @@ function feature($atts, $content=null)
             'media' => ''), $atts
     );
 
+    $container_classes = ["image-container"];
+
     if ($a['media'] !== '') {
       /**
        * Quick check if it's numeric so as to determine if it's a media ID
@@ -520,12 +522,14 @@ function feature($atts, $content=null)
         $iframe_e = 'frameborder="0" allow="autoplay; fullscreen" allowfullscreen=""></iframe>';
         $iframe = $iframe_b . 'src="https://player.vimeo.com/video/' . $vimeo_id . '" ' . $iframe_e;
         $feature_content = container_fw_video($iframe);
+        $container_classes[] = 'dark';
+        $container_classes[] = 'edge-to-edge';
       }
     }
 
     return container_fw(
         $feature_content,
-        ["image-container"]
+        $container_classes
     );
 }
 
