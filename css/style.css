@@ -1149,9 +1149,12 @@ input[type='button'].primary {
     height: 250px;
   }
 
-  .feature-block-image-caption {
-    padding: 80px;
+  .feature-block-image .feature-block-image-caption {
+    padding: 80px 40px;
+    font-size: 22px;
   }
+
+
 
   .feature-block-caption,
   .feature-block.downshifted .feature-block-caption,

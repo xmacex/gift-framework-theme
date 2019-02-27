@@ -851,7 +851,10 @@ function feature_block_caption($atts, $content=null) {
 function feature_block_image($atts, $content=null) {
 
   $a = shortcode_atts(
-    array('media' => null), $atts
+    array(
+      'media' => null,
+      'caption' => null
+    ), $atts
   );
 
   if (!is_null($a['media'])) {
@@ -867,7 +870,9 @@ function feature_block_image($atts, $content=null) {
 
     $content = '';
     $content .= '<img class="feature-block-image-image" src="' . $url . '" />';
-    $content .= '<div class="feature-block-image-displayable" style="background-image: url(\'' . $url . '\')"></div>';
+    $content .= '<div class="feature-block-image-displayable" style="background-image: url(\'' . $url . '\')">';
+    $content .= $a['caption'] ? '<h1 class="feature-block-image-caption">' . $a['caption'] . '</h1>' : '';
+    $content .= '</div>';
 
     return do_shortcode(
         container_feature_block_image($content)
