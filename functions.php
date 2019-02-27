@@ -323,6 +323,49 @@ function container_fw_video($content, $classes=[])
 }
 
 /**
+ * A feature block container
+ *
+ * @param string $content Content from the database
+ * @param string $classes[] A string to append to classes
+ *
+ * @return string HTML representation
+ */
+function container_feature_block($content, $classes=[])
+{
+    $classes[] = "feature-block";
+    $classes[] = "content-area";
+    return container($content, $classes);
+}
+
+/**
+ * A feature block caption container
+ *
+ * @param string $content Content from the database
+ * @param string $classes[] A string to append to classes
+ *
+ * @return string HTML representation
+ */
+function container_feature_block_caption($content, $classes=[])
+{
+    $classes[] = "feature-block-caption";
+    return container($content, $classes);
+}
+
+/**
+ * A feature block image container
+ *
+ * @param string $content Content from the database
+ * @param string $classes[] A string to append to classes
+ *
+ * @return string HTML representation
+ */
+function container_feature_block_image($content, $classes=[])
+{
+    $classes[] = "feature-block-image";
+    return container($content, $classes);
+}
+
+/**
  * A grid row container.
  *
  * @param string $content Content from the database
@@ -754,70 +797,62 @@ function call_to_action_button($atts, $content=null)
 }
 
 /**
- * A grid row
+ * A feature block
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
  *
  * @return string HTML representation
  */
-function grid_row($atts, $content=null)
+function feature_block($atts, $content=null)
 {
-
   $a = shortcode_atts(
-      array(
-          'is_featured' => false,
-          'stack_image_as_background_on_mobile' => false), $atts
+    array(
+      'is_hero' => false,
+      'is_downshifted' => false,
+      'is_highlighted' => false), $atts
   );
 
   $classes = array();
 
-  if ($a['is_featured'] === 'true') {
-    $classes[] = 'feature';
+  if ($a['is_hero'] === 'true') {
+    $classes[] = 'hero';
   }
 
-  if ($a['stack_image_as_background_on_mobile'] === 'true') {
-    $classes[] = 'stack-image-as-background-on-mobile-screens';
+  if ($a['is_downshifted'] === 'true') {
+    $classes[] = 'downshifted';
+  }
+
+  if ($a['is_highlighted'] === 'true') {
+    $classes[] = 'highlighted';
   }
 
   return do_shortcode(
-      container_grid_row($content, $classes)
+      container_feature_block($content, $classes)
   );
 }
 
 /**
- * A grid tile
+ * A feature block's caption
  *
  * @param array  $atts    Shortcode attributes
  * @param string $content Content from the database
  *
  * @return string HTML representation
  */
-function grid_tile($atts, $content=null)
-{
+function feature_block_caption($atts, $content=null) {
 
-  $a = shortcode_atts(
-      array(
-          'is_larger' => false,
-          'hide_on' => null,
-          'media' => null,
-          'highlight' => null), $atts
+  return do_shortcode(
+      container_feature_block_caption($content)
   );
 
-  $classes = array();
-  $url = '';
+}
 
-  if ($a['is_larger'] === 'true') {
-    $classes[] = 'col-2-width';
-  }
+function feature_block_image($atts, $content=null) {
 
-  if (!is_null($a['hide_on'])) {
-    if ($a['hide_on'] === 'tablet') {
-      $classes[] = 'hide-on-tablet-screens';
-    } else if ($a['hide_on'] === 'mobile') {
-      $classes[] = 'hide-on-mobile-screens';
-    }
-  }
+  $a = shortcode_atts(
+    array('media' => null), $atts
+  );
 
   if (!is_null($a['media'])) {
 
@@ -830,34 +865,17 @@ function grid_tile($atts, $content=null)
       $url = $a['media'];
     }
 
-    if (!empty($url)) {
-      $classes[] = 'faded';
-      $classes[] = 'image';
-      $classes[] = 'stripes-slope-left';
-    }
+    $content = '';
+    $content .= '<img class="feature-block-image-image" src="' . $url . '" />';
+    $content .= '<div class="feature-block-image-displayable" style="background-image: url(\'' . $url . '\')"></div>';
 
+    return do_shortcode(
+        container_feature_block_image($content)
+    );
   }
 
-  if (!is_null($a['highlight'])) {
-    $classes[] = 'coloured';
-    $classes[] = $a['highlight'];
-  }
-
-  return container_grid_tile($content, $classes, $url);
 }
 
-/**
- * A grid break
- *
- * @param array  $atts    Shortcode attributes
- * @param string $content Content from the database
- *
- * @return string HTML representation
- */
-function grid_break($atts, $content=null)
-{
-  return container_grid_break($content);
-}
 
 /**
  * Add the shortcodes.
@@ -888,6 +906,10 @@ add_shortcode('code', 'code');
 add_shortcode('grid_row', 'grid_row');
 add_shortcode('grid_tile', 'grid_tile');
 add_shortcode('grid_break', 'grid_break');
+
+add_shortcode('feature_block', 'feature_block');
+add_shortcode('feature_block_caption', 'feature_block_caption');
+add_shortcode('feature_block_image', 'feature_block_image');
 
 add_shortcode('references', 'references');
 
