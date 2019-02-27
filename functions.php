@@ -178,7 +178,7 @@ function container_column($content, $classes=[])
  */
 function container_column_inner($content, $classes=[])
 {
-    $classes[] = "column-container-inner";
+    $classes[] = "content-wrap";
     return container($content, $classes);
 }
 
@@ -450,18 +450,19 @@ function question($atts, $content=null)
 
     $heading = '<h3>' . $a['question'] . '</h3>';
     $text = '<p>' . $content . '</p>';
-    $links_b = '<ul class="list-of-links">';
-    $links_e = '</ul>';
-    $links = "";
+    $content = $heading . $text;
     if ($a['links']) {
-        foreach (explode(",", $a['links']) as $pid) {
-            $post = get_post($pid);
-            $link = '<a href="' . $post->guid . '">'. $post->post_title . '</a>';
-            $listitem = '<li>' . $link . '</li>';
-            $links .= $listitem;
-        }
+      $links_b = '<ul class="list-of-links">';
+      $links_e = '</ul>';
+      $links = "";
+      foreach (explode(",", $a['links']) as $pid) {
+          $post = get_post($pid);
+          $link = '<a href="' . $post->guid . '">'. $post->post_title . '</a>';
+          $listitem = '<li>' . $link . '</li>';
+          $links .= $listitem;
+      }
+      $content .= $links_b . $links . $links_e;
     }
-    $content = $heading . $text . $links_b . $links . $links_e;
     return container_fw_inner_col($content);
 }
 
@@ -606,7 +607,7 @@ function how_to($atts, $content=null)
                 ) . '<div class="has-column-layout">' . $content . '</div>' . container_column(
                     container_column_inner($readmore)
                 )
-            ), ["how-to"]
+            ), ["how-to", "preserve-horizontal-col-layout-on-tablet"]
         )
     );
 }
