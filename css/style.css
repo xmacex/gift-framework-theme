@@ -567,6 +567,105 @@ input[type='button'].primary {
 }
 
 
+/* Forms */
+
+.standard-form {
+  margin: 45px 0 0 0;
+  width: 100%;
+}
+
+.standard-form .standard-form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.standard-form .standard-form-group + .standard-form-group {
+  margin-top: 23px;
+}
+
+.standard-form fieldset + fieldset {
+  margin-top: 34px;
+}
+
+.standard-form label {
+  display: block;
+  padding: 9px 30px 0 0;
+  width: 130px;
+}
+
+.standard-form input[type="text"],
+.standard-form input[type="email"],
+.standard-form input[type="password"] {
+  font-size: inherit;
+  color: inherit;
+  box-sizing: border-box;
+  border: 1px solid #666666;
+  height: 58px;
+  padding: 14px;
+  flex-grow: 1;
+}
+
+.standard-form input[type="text"]::placeholder,
+.standard-form input[type="email"]::placeholder,
+.standard-form input[type="password"]::placeholder {
+  color: #999999;
+}
+
+.standard-form input[type="radio"],
+.standard-form input[type="checkbox"] {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #666666;
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+}
+
+.standard-form input[type="radio"]:checked:before,
+.standard-form input[type="radio"]:hover:before {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  margin-top: -13px;
+  margin-left: -13px;
+}
+
+.standard-form input[type="radio"]:hover:before {
+  background-color: #EEEEEE;
+}
+
+.standard-form input[type="radio"]:checked:before {
+  background-color: #999999;
+}
+
+.standard-form input[type="radio"] + label,
+.standard-form input[type="checkbox"] + label {
+  flex-grow: 1;
+  margin-left: 27px;
+}
+
+@media screen and (max-width: 576px) {
+
+  .standard-form .standard-form-group.text-field-group {
+    flex-direction: column;
+  }
+
+  .standard-form .standard-form-group.text-field-group label,
+  .standard-form .standard-form-group.text-field-group input {
+    width: 100%;
+  }
+
+  .standard-form .standard-form-group.text-field-group label {
+    padding: 0;
+  }
+
 }
 
 
