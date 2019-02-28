@@ -1051,7 +1051,7 @@ input[type='button'].primary {
 
   .feature-block.downshifted .feature-block-image {
     padding-top: 0;
-    padding-bottom: 0;
+    padding-bottom: 10vh;
   }
 
   .feature-block.hero {
@@ -1116,6 +1116,10 @@ input[type='button'].primary {
   .feature-block.downshifted .feature-block-caption {
     padding-top: 70px;
     padding-bottom: 70px;
+  }
+
+  .feature-block.downshifted .feature-block-image {
+    padding-bottom: 0;
   }
 
 }
