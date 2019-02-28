@@ -1037,13 +1037,21 @@ input[type='button'].primary {
     padding: 45px;
   }
 
+  .feature-block:nth-child(2n+0) .feature-block-caption {
+    padding-left: 45px;
+  }
+
+  .feature-block:nth-child(2n+1) .feature-block-caption {
+    padding-right: 45px;
+  }
+
   .feature-block.downshifted .feature-block-caption {
     padding-top: 10vh;
   }
 
   .feature-block.downshifted .feature-block-image {
     padding-top: 0;
-    padding-bottom: 10vh;
+    padding-bottom: 0;
   }
 
   .feature-block.hero {
