@@ -908,10 +908,6 @@ add_shortcode('call_to_action', 'call_to_action_button'); // 'get_started_now_bu
 add_shortcode('text', 'text_section');
 add_shortcode('code', 'code');
 
-add_shortcode('grid_row', 'grid_row');
-add_shortcode('grid_tile', 'grid_tile');
-add_shortcode('grid_break', 'grid_break');
-
 add_shortcode('feature_block', 'feature_block');
 add_shortcode('feature_block_caption', 'feature_block_caption');
 add_shortcode('feature_block_image', 'feature_block_image');
