@@ -768,7 +768,7 @@ function references($atts, $content=null)
  */
 function code($atts, $content=null)
 {
-    return container_fw(container_fw_inner($content), " dark code");
+    return container_fw(container_fw_inner($content), array('dark', 'code'));
 }
 
 /**

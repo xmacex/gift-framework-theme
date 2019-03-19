@@ -478,10 +478,6 @@ br + br, br:last-child {
   color: #555555;
 }
 
-.content-area .code {
-  font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
-}
-
 .content-area em {
   color: #EE5E54;
   font-weight: bold;
@@ -1429,6 +1425,10 @@ input[type='button'].primary {
 .article-content .full-width p, .article-content .full-width li, .article-content .full-width blockquote {
   font-size: 18px;
   line-height: 1.5em;
+}
+
+.article-content .full-width.code p  {
+  font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
 }
 
 .article-content .full-width + .column-container {
