@@ -150,7 +150,7 @@ function prepend_image_and_call_to_action_to_article()
 
         $link_url = '';
         if ($call_to_action_link && is_numeric($call_to_action_link)) {
-          $link_url = get_permalink($call_to_action_link);
+          $link_url = get_post($a['item'])->guid;
         } else {
           $link_url = $call_to_action_link;
         }
@@ -797,7 +797,7 @@ function call_to_action_button($atts, $content=null)
     } else {
         $url = $a['item'];
     }
-    
+
     if ($url) {
       return '<a class="button" href="' . $url . '">' . $a['label'] . '</a>';
     } else {
@@ -937,7 +937,7 @@ add_shortcode('references', 'references');
  *
  * @return string HTML div for the call-to-action area
  */
-function call_to_action($button_label, $url, $text)
+function ©($button_label, $url, $text)
 {
     $div_b = '<div class="call-to-action-area">';
     $div_e = '</div>';
