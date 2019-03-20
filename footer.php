@@ -1,10 +1,11 @@
 <footer class="wrap-container">
     <div class="footer-container">
-    	<div class="footer-container-inner">
+      <div class="footer-container-inner">
+        <p class="footer-header">Learn more about <a href="<?php echo get_permalink(357); ?>">The GIFT Project</a>.</p>
         <img class="eu-flag-footer" src="<?php echo get_stylesheet_directory_uri(); ?>/img/eu-flag-footer.png" alt="European Union Flag" />
-          <p>
-  		      Learn more about <a href="<?php echo get_permalink(357); ?>">The GIFT Project</a>. This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 727040.
-          </p>
+        <p>
+		      This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 727040.
+        </p>
     	</div>
     </div>
 </footer>

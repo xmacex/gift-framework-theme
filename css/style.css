@@ -1471,6 +1471,7 @@ input[type='button'].primary {
 .article-content button,
 .article-content input[type="button"] {
   margin-top: 70px;
+  color: #FFFFFF;
 }
 
 .article-content .reference-list h3 {
@@ -1627,6 +1628,13 @@ input[type='button'].primary {
   width: 300px;
   height: 5px;
   background-color: #EE5E54;
+}
+
+.footer-container-inner .footer-header {
+  color: #777777;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 18px;
 }
 
 .footer-container-inner .eu-flag-footer {
