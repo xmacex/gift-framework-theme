@@ -487,8 +487,11 @@ br + br, br:last-child {
   color: #555555;
 }
 
-.content-area em {
+.content-area a {
   color: #EE5E54;
+}
+
+.content-area em {
   font-weight: bold;
   font-style: normal;
 }
