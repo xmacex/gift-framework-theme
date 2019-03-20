@@ -131,7 +131,7 @@ function prepend_image_and_call_to_action_to_article()
 
     $image_and_call_to_action = '';
 
-    if ($imgurl || ($call_to_action_link && $call_to_action_link_label))
+    if ($imgurl || $call_to_action_link_label)
     {
 
       $image_and_call_to_action_b = '<aside class="image-and-call-to-action">';
@@ -146,15 +146,20 @@ function prepend_image_and_call_to_action_to_article()
       }
 
       $call_to_action_link_el = '';
-      if ($call_to_action_link && $call_to_action_link_label) {
+      if ($call_to_action_link_label) {
 
-        if (is_numeric($call_to_action_link)) {
+        $link_url = '';
+        if ($call_to_action_link && is_numeric($call_to_action_link)) {
           $link_url = get_permalink($call_to_action_link);
         } else {
           $link_url = $call_to_action_link;
         }
 
-        $call_to_action_link_b = '<a id="call-to-action-link" class="button" href="' . $link_url . '">';
+        if ($link_url) {
+          $call_to_action_link_b = '<a id="call-to-action-link" class="button" href="' . $link_url . '">';
+        } else {
+          $call_to_action_link_b = '<a id="call-to-action-link" class="button placeholder">';
+        }
         $call_to_action_link_e = '</a>';
         $call_to_action_link_el = $call_to_action_link_b .
                                $call_to_action_link_label .
@@ -792,8 +797,12 @@ function call_to_action_button($atts, $content=null)
     } else {
         $url = $a['item'];
     }
-
-    return '<a class="button" href="' . $url . '">' . $a['label'] . '</a>';
+    
+    if ($url) {
+      return '<a class="button" href="' . $url . '">' . $a['label'] . '</a>';
+    } else {
+      return '<a class="button placeholder">' . $a['label'] . '</a>';
+    }
 }
 
 /**

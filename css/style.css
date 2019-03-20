@@ -488,10 +488,12 @@ br + br, br:last-child {
 }
 
 .content-area a {
-  color: #EE5E54;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .content-area em {
+  color: #EE5E54;
   font-weight: bold;
   font-style: normal;
 }
@@ -548,9 +550,24 @@ input[type='button'].primary {
   text-decoration: none;
 }
 
+.button.placeholder,
+button.placeholder,
+input[type='button'].placeholder {
+  background: transparent;
+  border: 2px solid #666666;
+  color: #666666;
+  line-height: 3em;
+  cursor: default;
+}
+
+.button.placeholder:hover,
+button.placeholder:hover,
+input[type='button'].placeholder:hover {
+  color: #666666;
+}
+
 .button:hover, button:hover, input[type="button"]:hover, .button.primary:hover, button.primary:hover, input[type='button'].primary:hover {
   text-decoration: none;
-  color: inherit;
   color: #FFFFFF;
 }
 
@@ -1472,6 +1489,8 @@ input[type='button'].primary {
 .article-content input[type="button"] {
   margin-top: 70px;
   color: #FFFFFF;
+  text-decoration: none;
+  font-weight: normal;
 }
 
 .article-content .reference-list h3 {
