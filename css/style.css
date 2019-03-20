@@ -939,7 +939,7 @@ input[type='button'].primary {
 }
 
 .feature-block.hero .feature-block-caption {
-  padding-right: calc((100vw - 1080px) / 2);
+  padding-right: 180px;;
 }
 
 .feature-block-caption h2,
