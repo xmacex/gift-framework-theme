@@ -1194,7 +1194,7 @@ input[type='button'].primary {
   top: 0;
   right: 0;
   width: calc(0.3 * 1080px + ((100% - 1080px) / 2));
-  height: 800px;
+  height: 720px;
   z-index: 1;
   min-height: 90px;
 }
@@ -1402,7 +1402,7 @@ input[type='button'].primary {
 }
 
 .article-content > .column-container:first-of-type {
-  min-height: 520px;
+  min-height: 420px;
 }
 
 .article-content > .column-container:first-of-type p,
