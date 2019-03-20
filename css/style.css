@@ -1500,7 +1500,7 @@ input[type='button'].primary {
   }
 
   .article-content > .column-container:first-of-type {
-    min-height: 420px;
+    min-height: 380px;
   }
 
   .article-content .column-container .content-wrap {
