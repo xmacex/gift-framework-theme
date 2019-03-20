@@ -452,6 +452,15 @@ br + br, br:last-child {
   letter-spacing: -0.05em;
 }
 
+.content-area h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.content-area h1 a:hover {
+  color: #666666;
+}
+
 .content-area h2 {
   color: #666666;
   font-size: 32px;
@@ -926,6 +935,10 @@ input[type='button'].primary {
 }
 
 .feature-block:nth-child(2n+1) .feature-block-caption {
+  padding-right: calc((100vw - 1080px) / 2);
+}
+
+.feature-block.hero .feature-block-caption {
   padding-right: calc((100vw - 1080px) / 2);
 }
 
