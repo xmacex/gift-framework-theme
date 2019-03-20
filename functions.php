@@ -149,16 +149,18 @@ function prepend_image_and_call_to_action_to_article()
       if ($call_to_action_link_label) {
 
         $link_url = '';
+        $external_url = false;
         if ($call_to_action_link && is_numeric($call_to_action_link)) {
           $link_url = get_post($call_to_action_link)->guid;
         } else {
           $link_url = $call_to_action_link;
+          $external_url = true;
         }
 
         if ($link_url) {
-          $call_to_action_link_b = '<a id="call-to-action-link" class="button" target="_blank" href="' . $link_url . '">';
+          $call_to_action_link_b = '<a id="call-to-action-link" class="button" ' . ($external_url ? ' target="_blank"' : '') . ' href="' . $link_url . '">';
         } else {
-          $call_to_action_link_b = '<a id="call-to-action-link" class="button placeholder" target="_blank">';
+          $call_to_action_link_b = '<a id="call-to-action-link" class="button placeholder">';
         }
         $call_to_action_link_e = '</a>';
         $call_to_action_link_el = $call_to_action_link_b .
@@ -792,14 +794,16 @@ function call_to_action_button($atts, $content=null)
             'item' => null), $atts
     );
 
+    $external_url = false;
     if (is_numeric($a['item'])) {
         $url = get_post($a['item'])->guid;
     } else {
         $url = $a['item'];
+        $external_url = true;
     }
 
     if ($url) {
-      return '<a class="button" href="' . $url . '" target="_blank">' . $a['label'] . '</a>';
+      return '<a class="button" href="' . $url . '"' . ($external_url ? ' target="_blank"' : '') . '>' . $a['label'] . '</a>';
     } else {
       return '<a class="button placeholder" target="_blank">' . $a['label'] . '</a>';
     }
