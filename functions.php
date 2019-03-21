@@ -924,9 +924,9 @@ function feature_block_image($atts, $content=null) {
  */
 function feature_block_tile_list($atts, $content=null) {
 
-  $feature_block_image_1 = get_post(666);
-  $feature_block_image_2 = get_post(664);
-  $feature_block_image_3 = get_post(665);
+  $feature_block_image_1 = get_post(1549);
+  $feature_block_image_2 = get_post(1547);
+  $feature_block_image_3 = get_post(1548);
 
   $gifting_url = get_permalink(5);
   $artcodes_url = get_permalink(41);
