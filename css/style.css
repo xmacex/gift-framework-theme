@@ -1,5 +1,5 @@
 /* Google Font Imports */
-@import url('https://fonts.googleapis.com/css?family=Inconsolata:regular,bold|Karla:regular,bold|Merriweather|Source+Code+Pro');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:regular,bold|Karla:regular,bold,italic|Merriweather|Source+Code+Pro');
 
 /* Grid Structure
  * 3-column grid structure is based on 30% content, 5% padding
@@ -489,13 +489,16 @@ br + br, br:last-child {
 
 .content-area a {
   font-weight: bold;
+  color: #EE5E54;
+  text-decoration: none;
+}
+
+.content-area a:hover {
   text-decoration: underline;
 }
 
 .content-area em {
-  color: #EE5E54;
-  font-weight: bold;
-  font-style: normal;
+  font-style: oblique;
 }
 
 @media screen and (max-width: 1260px) {
@@ -530,7 +533,13 @@ br + br, br:last-child {
 input[type="button"],
 .button.primary,
 button.primary,
-input[type='button'].primary {
+input[type='button'].primary,
+.content-area .button, button,
+.content-area input[type="button"],
+.content-area .button.primary,
+.content-area button.primary,
+.content-area input[type='button'].primary
+ {
   text-align: center;
   display: block;
   border: none;
@@ -552,7 +561,10 @@ input[type='button'].primary {
 
 .button.placeholder,
 button.placeholder,
-input[type='button'].placeholder {
+input[type='button'].placeholder,
+.content-area .button.placeholder,
+.content-area button.placeholder,
+.content-area input[type='button'].placeholder {
   background: transparent;
   border: 2px solid #666666;
   color: #666666;
@@ -562,16 +574,35 @@ input[type='button'].placeholder {
 
 .button.placeholder:hover,
 button.placeholder:hover,
-input[type='button'].placeholder:hover {
+input[type='button'].placeholder:hover,
+.content-area .button.placeholder:hover,
+.content-area button.placeholder:hover,
+.content-area input[type='button'].placeholder:hover {
   color: #666666;
 }
 
-.button:hover, button:hover, input[type="button"]:hover, .button.primary:hover, button.primary:hover, input[type='button'].primary:hover {
+.button:hover,
+button:hover,
+input[type="button"]:hover,
+.button.primary:hover,
+button.primary:hover,
+input[type='button'].primary:hover,
+.content-area .button:hover,
+.content-area button:hover,
+.content-area input[type="button"]:hover,
+.content-area .button.primary:hover,
+.content-area button.primary:hover,
+.content-area input[type='button'].primary:hover {
   text-decoration: none;
   color: #FFFFFF;
 }
 
-.button.secondary, button.secondary, input[type='button'].secondary {
+.button.secondary,
+button.secondary,
+input[type='button'].secondary,
+.content-area .button.secondary,
+.content-area button.secondary,
+.content-area input[type='button'].secondary {
   background-color: #EEA61A;
 }
 
