@@ -373,6 +373,20 @@ function container_feature_block_image($content, $classes=[])
 }
 
 /**
+ * A feature block tile list container
+ *
+ * @param string $content Content from the database
+ * @param string $classes[] A string to append to classes
+ *
+ * @return string HTML representation
+ */
+function container_feature_block_tile_list($content, $classes=[])
+{
+    $classes[] = "feature-block-tile-list";
+    return container($content, $classes);
+}
+
+/**
  * A grid row container.
  *
  * @param string $content Content from the database
@@ -861,12 +875,19 @@ function feature_block_caption($atts, $content=null) {
 
 }
 
+/**
+ * A feature block's image
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
 function feature_block_image($atts, $content=null) {
 
   $a = shortcode_atts(
     array(
-      'media' => null,
-      'caption' => null
+      'media' => null
     ), $atts
   );
 
@@ -884,13 +905,90 @@ function feature_block_image($atts, $content=null) {
     $content = '';
     $content .= '<img class="feature-block-image-image" src="' . $url . '" />';
     $content .= '<div class="feature-block-image-displayable" style="background-image: url(\'' . $url . '\')">';
-    $content .= $a['caption'] ? '<h1 class="feature-block-image-caption">' . $a['caption'] . '</h1>' : '';
     $content .= '</div>';
 
     return do_shortcode(
         container_feature_block_image($content)
     );
   }
+
+}
+
+/**
+ * A feature block's tile list
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function feature_block_tile_list($atts, $content=null) {
+
+  $feature_block_image_1 = get_post(666);
+  $feature_block_image_2 = get_post(664);
+  $feature_block_image_3 = get_post(665);
+
+  $gifting_url = get_permalink(5);
+  $artcodes_url = get_permalink(41);
+  $mixed_reality_url = get_permalink(287);
+
+  $content = <<<EOD
+  <a href="{$gifting_url}" class="feature-block-tile">
+    <img src="{$feature_block_image_1->guid}" alt="{$feature_block_image_1->post_title}" />
+    <p>
+      Instead of sharing, <strong>enable gifting.</strong>
+    </p>
+  </a>
+  <a href="{$artcodes_url}" class="feature-block-tile">
+    <img src="{$feature_block_image_2->guid}" alt="{$feature_block_image_2->post_title}" />
+    <p>
+      Instead of QR codes, <strong>use ArtCodes.</strong>
+    </p>
+  </a>
+  <a href="{$mixed_reality_url}" class="feature-block-tile">
+    <img src="{$feature_block_image_3->guid}" alt="{$feature_block_image_3->post_title}" />
+    <p>
+      Instead of comments, <strong>let visitors share objects and stories.</strong>
+    </p>
+  </a>
+EOD;
+
+  return do_shortcode(
+    container_feature_block_tile_list($content)
+  );
+
+}
+
+/**
+ * A feature block's tile
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function feature_block_tile($atts, $content=null) {
+
+  $a = shortcode_atts(
+    array(
+      'icon' => null,
+      'link' => null
+    ), $atts
+  );
+
+  $img = '';
+  if (is_numeric($a['icon'])) {
+    $attachment = get_post($a['icon']);
+    $img_src = $attachment->guid;
+    $img_alt = $attachment->post_title;
+    $img = '<img src="' . $img_src . '" alt="' . $img_alt . '" />';
+  }
+
+  $tile_b = '<a class="feature-block-tile">';
+  $tile_c = '<p>' . $content . '</p>';
+  $tile_e = '</a>';
+
+  return $tile_b . $img . $tile_c . $tile_e;
 
 }
 
@@ -924,6 +1022,8 @@ add_shortcode('code', 'code');
 add_shortcode('feature_block', 'feature_block');
 add_shortcode('feature_block_caption', 'feature_block_caption');
 add_shortcode('feature_block_image', 'feature_block_image');
+add_shortcode('feature_block_tile_list', 'feature_block_tile_list');
+add_shortcode('feature_block_tile', 'feature_block_tile');
 
 add_shortcode('references', 'references');
 
