@@ -125,9 +125,9 @@ function prepend_image_and_call_to_action_to_article()
 {
     $imgurl = get_the_post_thumbnail_url();
     $postfields = get_post_custom();
-    $call_to_action_link = $postfields['call_to_action_link'][0];
-    $call_to_action_link_label = $postfields['call_to_action_link_label'][0];
-    $call_to_action_link_description = $postfields['call_to_action_link_description'][0];
+    $call_to_action_link = isset($postfields['call_to_action_link']) ? $postfields['call_to_action_link'][0] : NULL;
+    $call_to_action_link_label = isset($postfields['call_to_action_link_label']) ? $postfields['call_to_action_link_label'][0] : NULL;
+    $call_to_action_link_description = isset($postfields['call_to_action_link_description']) ? $postfields['call_to_action_link_description'][0] : NULL;
 
     $image_and_call_to_action = '';
 
