@@ -178,6 +178,14 @@ br + br, br:last-child {
   overflow: visible;
 }
 
+.menu-item > a {
+  transition: opacity 200ms;
+}
+
+.menu-item > a:hover {
+  opacity: 0.8;
+}
+
 .menu > .menu-item > .sub-menu::before {
   content: '';
   display: block;
@@ -569,6 +577,7 @@ input[type='button'].primary,
   font-weight: normal;
   box-sizing: border-box;
   text-decoration: none;
+  transition: background-color 500ms;
 }
 
 .button.placeholder,
@@ -607,6 +616,7 @@ input[type='button'].primary:hover,
 .content-area input[type='button'].primary:hover {
   text-decoration: none;
   color: #FFFFFF;
+  background-color: #FF7C73;
 }
 
 .button.secondary,
