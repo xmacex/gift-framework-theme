@@ -1235,10 +1235,6 @@ input[type='button'].secondary,
     display: none;
   }
 
-}
-
-@media screen and (max-width: 992px) {
-
   .feature-block, .feature-block.downshifted {
     height: 600px;
     min-height: 0;
