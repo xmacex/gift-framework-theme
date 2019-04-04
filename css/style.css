@@ -1227,6 +1227,8 @@ input[type='button'].secondary,
 
   .feature-block.hero .feature-block-caption {
     width: 100%;
+    height: 600px;
+    min-height: 0;
   }
 
   .feature-block.hero .feature-block-image {
