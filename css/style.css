@@ -1055,6 +1055,11 @@ input[type='button'].secondary,
   line-height: 1.0em;
 }
 
+.feature-block.hero .feature-block-caption .feature-block-tile-list ~ p {
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
 .feature-block.hero .feature-block-caption h1,
 .feature-block.hero .feature-block-caption h2,
 .feature-block.hero .feature-block-caption p,
@@ -1145,6 +1150,8 @@ input[type='button'].secondary,
 .feature-block-tile p {
   font-weight: normal;
   font-size: 15px;
+  margin-bottom: 3px;
+  line-height: 1.6em;
 }
 
 .feature-block-tile p strong {

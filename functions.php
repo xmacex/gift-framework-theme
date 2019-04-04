@@ -77,13 +77,43 @@ function register_primary_menu()
 }
 add_action('init', 'register_primary_menu');
 
-/* Support for featured image */
+/**
+ * Support for featured images
+ */
 add_theme_support('post-thumbnails');
 add_image_size('cover-image', 1440, 500);
 
 /**
- * Define content filters. These could go to a separate file actually
+ * Remove empty paragraphs created by wpautop()
+ * @author Ryan Hamilton
+ * @link https://gist.github.com/Fantikerz/5557617
  */
+function remove_empty_p($content)
+{
+  $content = force_balance_tags($content);
+	$content = preg_replace('#<p>\s*+(<br\s*/*>)?\s*</p>#i', '', $content);
+	$content = preg_replace('~\s?<p>(\s|&nbsp;)+</p>\s?~', '', $content);
+	return $content;
+}
+
+/**
+ * Remove the extra paragraphs that get wrapped around shortcode elements
+ * @author Johann Heyne
+ * @link https://wordpress.org/plugins/shortcode-empty-paragraph-fix/
+ */
+function remove_p_around_shortcodes($content)
+{
+  $content = remove_empty_p($content);
+
+  $content_to_replace = array(
+    '<p>[' => '[',
+    '<p>[/' => '[/',
+    ']</p>' => ']',
+    ']<br />' => ']'
+  );
+
+  return strtr($content, $content_to_replace);
+}
 
 /**
  * Wrapper function for getting the whole article in an article container
@@ -924,37 +954,11 @@ function feature_block_image($atts, $content=null) {
  */
 function feature_block_tile_list($atts, $content=null) {
 
-  $feature_block_image_1 = get_post(1549);
-  $feature_block_image_2 = get_post(1547);
-  $feature_block_image_3 = get_post(1548);
-
-  $gifting_url = get_permalink(5);
-  $artcodes_url = get_permalink(41);
-  $mixed_reality_url = get_permalink(287);
-
-  $content = <<<EOD
-  <a href="{$gifting_url}" class="feature-block-tile">
-    <img src="{$feature_block_image_1->guid}" alt="{$feature_block_image_1->post_title}" />
-    <p>
-      Instead of sharing, <strong>enable gifting.</strong>
-    </p>
-  </a>
-  <a href="{$artcodes_url}" class="feature-block-tile">
-    <img src="{$feature_block_image_2->guid}" alt="{$feature_block_image_2->post_title}" />
-    <p>
-      Instead of QR codes, <strong>use ArtCodes.</strong>
-    </p>
-  </a>
-  <a href="{$mixed_reality_url}" class="feature-block-tile">
-    <img src="{$feature_block_image_3->guid}" alt="{$feature_block_image_3->post_title}" />
-    <p>
-      Instead of comments, <strong>let visitors share objects and stories.</strong>
-    </p>
-  </a>
-EOD;
-
-  return do_shortcode(
-    container_feature_block_tile_list($content)
+  return remove_empty_p(do_shortcode(
+    container_feature_block_tile_list(
+      remove_p_around_shortcodes($content)
+      )
+    )
   );
 
 }
@@ -984,7 +988,17 @@ function feature_block_tile($atts, $content=null) {
     $img = '<img src="' . $img_src . '" alt="' . $img_alt . '" />';
   }
 
-  $tile_b = '<a class="feature-block-tile">';
+  $url = '';
+  if (is_numeric($a['link'])) {
+    $attachment = get_post($a['link']);
+    if ($attachment) {
+      $url = $attachment->guid;
+    }
+  } else if (esc_url_raw($a['link']) === $a['link']) {
+    $url = $a['link'];
+  }
+
+  $tile_b = '<a class="feature-block-tile"' . ($url ? ' href="' . $url . '"' : '') . '>';
   $tile_c = '<p>' . $content . '</p>';
   $tile_e = '</a>';
 
