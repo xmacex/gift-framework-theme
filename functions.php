@@ -1032,7 +1032,7 @@ function full_width_thumbnail_gallery($atts, $content=null)
     ), $atts
   );
 
-  $classes = ['margins-none', 'thumbnail-gallery'];
+  $classes = ['thumbnail-gallery'];
 
   if ($a['circular_images']) {
     $classes[] = 'circular-images';
