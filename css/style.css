@@ -747,6 +747,69 @@ input[type='button'].secondary,
 
 }
 
+/* Thumbnails and Thumbnail Galleries */
+
+.thumbnail-gallery {
+  text-align: center;
+}
+
+.thumbnail-gallery-inner {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.thumbnail-gallery .thumbnail {
+  margin: 30px 15px;
+  width: 220px;
+}
+
+.thumbnail-gallery .thumbnail .thumbnail-image {
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto 12.5% auto;
+}
+
+.thumbnail-gallery.circular-images .thumbnail .thumbnail-image {
+  border-radius: 50%;
+}
+
+.thumbnail-gallery.fitted-images .thumbnail .thumbnail-image {
+  background-size: contain;
+}
+
+.thumbnail-gallery .thumbnail figcaption p {
+  margin-bottom: 0;
+  line-height: 1.4em;
+}
+
+.thumbnail-gallery .thumbnail figcaption p:not(:first-child) {
+  line-height: 1.2em;
+}
+
+@media screen and (max-width: 576px) {
+
+  .thumbnail-gallery .thumbnail {
+    width: 40%;
+    margin: 0 2.5% 10% 2.5%;
+  }
+
+  .thumbnail-gallery .thumbnail .thumbnail-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .thumbnail-gallery .thumbnail figcaption p:not(:first-child) {
+    line-height: 1.0em;
+  }
+
+}
 
 /* Full Width Sections */
 
@@ -763,8 +826,16 @@ input[type='button'].secondary,
   background-color: #444444;
 }
 
+.full-width.no-background {
+  background-color: transparent;
+}
+
 .full-width.how-to {
   background-color: #38A0DA;
+}
+
+.full-width.image-container {
+  padding: 0;
 }
 
 .full-width.code pre {
@@ -772,10 +843,6 @@ input[type='button'].secondary,
   font-size: 100%;
   margin: 0;
   color: #FFFFFF;
-}
-
-.full-width.image-container {
-  padding: 0;
 }
 
 .full-width .full-width-image {
@@ -842,6 +909,11 @@ input[type='button'].secondary,
 .full-width .full-width-inner.margins-reduced {
   padding-top: 60px;
   padding-bottom: 60px;
+}
+
+.full-width .full-width-inner.margins-none {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .full-width .full-width-inner.positioned {

@@ -417,6 +417,20 @@ function container_feature_block_tile_list($content, $classes=[])
 }
 
 /**
+ * A thumbnail gallery container
+ *
+ * @param string $content Content from the database
+ * @param string $classes[] A string to append to classes
+ *
+ * @return string HTML representation
+ */
+function container_thumbnail_gallery_inner($content, $classes=[])
+{
+    $classes[] = "thumbnail-gallery-inner";
+    return container($content, $classes);
+}
+
+/**
  * A grid row container.
  *
  * @param string $content Content from the database
@@ -923,14 +937,7 @@ function feature_block_image($atts, $content=null) {
 
   if (!is_null($a['media'])) {
 
-    if (is_numeric($a['media'])) {
-      $attachment = get_post($a['media']);
-      if ($attachment) {
-        $url = $attachment->guid;
-      }
-    } else if (esc_url_raw($a['media']) === $a['media']) {
-      $url = $a['media'];
-    }
+    $url = get_media_url_from_id_or_url($a['media']);
 
     $content = '';
     $content .= '<img class="feature-block-image-image" src="' . $url . '" />';
@@ -938,7 +945,7 @@ function feature_block_image($atts, $content=null) {
     $content .= '</div>';
 
     return do_shortcode(
-        container_feature_block_image($content)
+      container_feature_block_image($content)
     );
   }
 
@@ -1006,6 +1013,98 @@ function feature_block_tile($atts, $content=null) {
 
 }
 
+/**
+ * A full width thumbnail gallery
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function full_width_thumbnail_gallery($atts, $content=null)
+{
+
+  $a = shortcode_atts(
+    array(
+      'title' => null,
+      'circular_images' => false,
+      'fitted_images' => false
+    ), $atts
+  );
+
+  $classes = ['margins-none', 'thumbnail-gallery'];
+
+  if ($a['circular_images']) {
+    $classes[] = 'circular-images';
+  }
+
+  if ($a['fitted_images']) {
+    $classes[] = 'fitted-images';
+  }
+
+  return remove_empty_p(do_shortcode(
+      container_fw(
+        container_fw_inner(
+          ($a['title'] ? '<h2>' . $a['title'] .'</h2>' : '')
+          . container_thumbnail_gallery_inner(
+              remove_p_around_shortcodes($content)
+            ),
+          $classes)
+      , ['no-background'])
+    )
+  );
+
+}
+
+/**
+ * A single thumbnail instance
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function thumbnail($atts, $content=null)
+{
+
+  $a = shortcode_atts(
+    array(
+      'media' => null,
+      'caption' => null,
+      'subcaption' => null,
+      'subsubcaption' => null
+    ), $atts
+  );
+
+  if (!is_null($a['media'])) {
+
+    $url = get_media_url_from_id_or_url($a['media']);
+
+    $figure_b = '<figure class="thumbnail">';
+    $figure_img_div = '<div class="thumbnail-image" style="background-image: url(' . $url . ')" />';
+    $figure_e = '</figure>';
+
+    $figure_figcaption = '';
+    if ($a['caption'] || $a['subcaption'] || $a['subsubcaption'])
+    {
+      $figure_figcaption_b = '<figcaption>';
+      $figure_figcaption_caption = $a['caption'] ? '<p>' . $a['caption'] . '</p>' : '';
+      $figure_figcaption_subcaption = $a['subcaption'] ? '<p><small>' . $a['subcaption'] . '</small></p>' : '';
+      $figure_figcaption_subsubcaption = $a['subsubcaption'] ? '<p><small>' . $a['subsubcaption'] . '</small></p>' : '';
+      $figure_figcaption_e = '</figcaption>';
+      $figure_figcaption = $figure_figcaption_b
+                           . $figure_figcaption_caption
+                           . $figure_figcaption_subcaption
+                           . $figure_figcaption_subsubcaption
+                           . $figure_figcaption_e;
+    }
+
+    return $figure_b . $figure_img_div . $figure_figcaption . $figure_e;
+
+  }
+
+}
+
 
 /**
  * Add the shortcodes.
@@ -1028,7 +1127,7 @@ add_shortcode('step', 'how_to_step');
 
 add_shortcode('content', 'text_in_column');
 add_shortcode('implement', 'text_in_column');
-add_shortcode('call_to_action', 'call_to_action_button'); // 'get_started_now_button');
+add_shortcode('call_to_action', 'call_to_action_button');
 
 add_shortcode('text', 'text_section');
 add_shortcode('code', 'code');
@@ -1039,38 +1138,13 @@ add_shortcode('feature_block_image', 'feature_block_image');
 add_shortcode('feature_block_tile_list', 'feature_block_tile_list');
 add_shortcode('feature_block_tile', 'feature_block_tile');
 
+add_shortcode('full_width_thumbnail_gallery', 'full_width_thumbnail_gallery');
+add_shortcode('thumbnail', 'thumbnail');
+
 add_shortcode('references', 'references');
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
-
-/**
- * Generator for call-to-action divs.
- *
- * Expected to be called by shortcode
-
- * @param string $button_label Label to produce on the button
- * @param string $url          Item to link to. Currently only an URL
- * @param string $text         A little blurb of text to show below the button
- *
- * @return string HTML div for the call-to-action area
- */
-function ©($button_label, $url, $text)
-{
-    $div_b = '<div class="call-to-action-area">';
-    $div_e = '</div>';
-    $a_b = '<a id="call-to-action-link" class="button" href="';
-    $a_m = '">';
-    $a_e = '</a>';
-    $label_b = '<label for="call-to-action-link" class="description">';
-    $label_e = '</label>';
-
-    $a = $a_b . $url . $a_m . $button_label . $a_e;
-    $label = $label_b . $text . $label_e;
-    $div = $div_b . $a . $label . $div_e;
-
-    return $div;
-}
 
 /**
  * Generator for a navigation breadcrumb for the current post.
@@ -1100,11 +1174,22 @@ function get_breadcrumb()
 }
 
 /**
- * Generator for a a generic get started now button.
+ * Generic media function, either accepts a WordPress Media Post ID or just an
+ * external url
  *
- * @return string HTML representation
+ * @return string The URL of the image, or FALSE if invalid
  */
-function get_started_now_button()
-{
-    return '<a class="button" href="#">Get Started Now</a>';
+function get_media_url_from_id_or_url($id_or_url) {
+
+  $url = false;
+  if (is_numeric($id_or_url)) {
+    $attachment = get_post($id_or_url);
+    if ($attachment) {
+      $url = $attachment->guid;
+    }
+  } else if (esc_url_raw($id_or_url) === $id_or_url) {
+    $url = $id_or_url;
+  }
+  return $url;
+
 }
