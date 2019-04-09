@@ -155,13 +155,18 @@ function prepend_image_and_call_to_action_to_article()
 {
     $imgurl = get_the_post_thumbnail_url();
     $postfields = get_post_custom();
+
     $call_to_action_link = isset($postfields['call_to_action_link']) ? $postfields['call_to_action_link'][0] : NULL;
     $call_to_action_link_label = isset($postfields['call_to_action_link_label']) ? $postfields['call_to_action_link_label'][0] : NULL;
     $call_to_action_link_description = isset($postfields['call_to_action_link_description']) ? $postfields['call_to_action_link_description'][0] : NULL;
 
+    $call_to_action_link_secondary = isset($postfields['call_to_action_link_secondary']) ? $postfields['call_to_action_link_secondary'][0] : NULL;
+    $call_to_action_link_label_secondary = isset($postfields['call_to_action_link_label_secondary']) ? $postfields['call_to_action_link_label_secondary'][0] : NULL;
+    $call_to_action_link_description_secondary = isset($postfields['call_to_action_link_description_secondary']) ? $postfields['call_to_action_link_description_secondary'][0] : NULL;
+
     $image_and_call_to_action = '';
 
-    if ($imgurl || $call_to_action_link_label)
+    if ($imgurl || $call_to_action_link_label || $call_to_action_link_label_secondary)
     {
 
       $image_and_call_to_action_b = '<aside class="image-and-call-to-action">';
@@ -175,49 +180,76 @@ function prepend_image_and_call_to_action_to_article()
                          $feature_image_e;
       }
 
-      $call_to_action_link_el = '';
       if ($call_to_action_link_label) {
-
-        $link_url = '';
-        $external_url = false;
-        if ($call_to_action_link && is_numeric($call_to_action_link)) {
-          $link_url = get_post($call_to_action_link)->guid;
-        } else {
-          $link_url = $call_to_action_link;
-          $external_url = true;
-        }
-
-        if ($link_url) {
-          $call_to_action_link_b = '<a id="call-to-action-link" class="button" ' . ($external_url ? ' target="_blank"' : '') . ' href="' . $link_url . '">';
-        } else {
-          $call_to_action_link_b = '<a id="call-to-action-link" class="button placeholder">';
-        }
-        $call_to_action_link_e = '</a>';
-        $call_to_action_link_el = $call_to_action_link_b .
-                               $call_to_action_link_label .
-                               $call_to_action_link_e;
+        $call_to_action_link_and_call_to_action_description_el = generate_call_to_action_link_and_description(
+                                                                    $call_to_action_link_label,
+                                                                    $call_to_action_link,
+                                                                    $call_to_action_link_description
+                                                                  );
       }
 
-      $call_to_action_link_description_el = '';
-      if ($call_to_action_link_description) {
-        $call_to_action_link_description_b = '<label for="call-to-action-link" class="description">';
-        $call_to_action_link_description_e = '</label>';
-        $call_to_action_link_description_el = $call_to_action_link_description_b .
-                                              $call_to_action_link_description .
-                                              $call_to_action_link_description_e;
-
+      if ($call_to_action_link_label_secondary) {
+        $call_to_action_link_secondary_and_call_to_action_description_secondary_el = generate_call_to_action_link_and_description(
+                                                                    $call_to_action_link_label_secondary,
+                                                                    $call_to_action_link_secondary,
+                                                                    $call_to_action_link_description_secondary,
+                                                                    ['secondary']
+                                                                  );
       }
 
       $image_and_call_to_action = $image_and_call_to_action_b .
                                   $feature_image_el .
-                                  $call_to_action_link_el .
-                                  $call_to_action_link_description_el .
+                                  $call_to_action_link_and_call_to_action_description_el .
+                                  $call_to_action_link_secondary_and_call_to_action_description_secondary_el .
                                   $image_and_call_to_action_e;
 
     }
 
     echo $image_and_call_to_action;
 
+}
+
+function generate_call_to_action_link_and_description($call_to_action_link_label, $call_to_action_link = '', $call_to_action_link_description = '', $classes = []) {
+
+  $call_to_action_link_el = '';
+  if ($call_to_action_link_label) {
+
+    $link_url = '';
+    $external_url = false;
+    if ($call_to_action_link && is_numeric($call_to_action_link)) {
+      $link_url = get_post($call_to_action_link)->guid;
+    } else {
+      $link_url = $call_to_action_link;
+      $external_url = true;
+    }
+
+    $classes_as_string = '';
+    if (!empty($classes)) {
+      $classes_as_string = ' ' . implode(' ', $classes);
+    }
+
+    if ($link_url) {
+      $call_to_action_link_b = '<a id="call-to-action-link" class="button' . $classes_as_string . '" ' . ($external_url ? ' target="_blank"' : '') . ' href="' . $link_url . '">';
+    } else {
+      $call_to_action_link_b = '<a id="call-to-action-link" class="button placeholder">';
+    }
+    $call_to_action_link_e = '</a>';
+    $call_to_action_link_el = $call_to_action_link_b .
+                           $call_to_action_link_label .
+                           $call_to_action_link_e;
+  }
+
+  $call_to_action_link_description_el = '';
+  if ($call_to_action_link_description) {
+    $call_to_action_link_description_b = '<label for="call-to-action-link" class="description">';
+    $call_to_action_link_description_e = '</label>';
+    $call_to_action_link_description_el = $call_to_action_link_description_b .
+                                          $call_to_action_link_description .
+                                          $call_to_action_link_description_e;
+
+  }
+
+  return $call_to_action_link_el . $call_to_action_link_description_el;
 }
 
 /**

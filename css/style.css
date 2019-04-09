@@ -600,6 +600,7 @@ input[type='button'].placeholder:hover,
 .content-area button.placeholder:hover,
 .content-area input[type='button'].placeholder:hover {
   color: #666666;
+  background: transparent;
 }
 
 .button:hover,
@@ -626,6 +627,15 @@ input[type='button'].secondary,
 .content-area button.secondary,
 .content-area input[type='button'].secondary {
   background-color: #EEA61A;
+}
+
+.button.secondary:hover,
+button.secondary:hover,
+input[type='button'].secondary:hover,
+.content-area .button.secondary:hover,
+.content-area button.secondary:hover,
+.content-area input[type='button'].secondary:hover {
+  background-color: #F2BB4B;
 }
 
 @media screen and (max-width: 576px) {
@@ -1504,7 +1514,7 @@ input[type='button'].secondary,
   top: 0;
   right: 0;
   width: calc(0.3 * 1080px + ((100% - 1080px) / 2));
-  height: 680px;
+  min-height: 680px;
   z-index: 1;
   min-height: 90px;
 }
