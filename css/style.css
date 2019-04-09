@@ -782,6 +782,8 @@ input[type='button'].secondary,
 
 .thumbnail-gallery.fitted-images .thumbnail .thumbnail-image {
   background-size: contain;
+  width: 150px;
+  height: 150px;
 }
 
 .thumbnail-gallery .thumbnail figcaption p {
