@@ -807,6 +807,11 @@ input[type='button'].secondary,
     height: 80px;
   }
 
+  .thumbnail-gallery.fitted-images .thumbnail .thumbnail-image {
+    width: 100px;
+    height: 100px;
+  }
+
   .thumbnail-gallery .thumbnail figcaption p:not(:first-child) {
     line-height: 1.0em;
   }
