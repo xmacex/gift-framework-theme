@@ -797,6 +797,10 @@ input[type='button'].secondary,
 
 @media screen and (max-width: 576px) {
 
+  .article-content .thumbnail-gallery > h2 {
+    margin-bottom: 40px;
+  }
+
   .thumbnail-gallery .thumbnail {
     width: 40%;
     margin: 0 2.5% 10% 2.5%;
