@@ -209,6 +209,21 @@ function prepend_image_and_call_to_action_to_article()
 
 }
 
+/**
+ * Generates a call to action link and description that appears at the
+ * top-right of the page.
+ *
+ * @param string $call_to_action_link_label The label that appears within the
+ * call to action link
+ * @param string $call_to_action_link A Page ID or URL that the call to action
+ * links to
+ * @param string $call_to_action_link_description A small description that
+ * appears under the call to action link
+ * @param string[] $classes Additional CSS classes to add to the call to action
+ * link button
+ *
+ * @return string HTML representation of the call to action link and description
+ */
 function generate_call_to_action_link_and_description($call_to_action_link_label, $call_to_action_link = '', $call_to_action_link_description = '', $classes = []) {
 
   $call_to_action_link_el = '';
