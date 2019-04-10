@@ -116,6 +116,22 @@ function remove_p_around_shortcodes($content)
 }
 
 /**
+ * Remove extra paragraphs that get wrapped around elements
+ */
+ function remove_p($content)
+ {
+   $content = remove_empty_p($content);
+
+   $content_to_replace = array(
+     '<p>' => '',
+     '</p>' => '',
+     '<br />' => ''
+   );
+
+   return strtr($content, $content_to_replace);
+ }
+
+/**
  * Wrapper function for getting the whole article in an article container
  *
  * @param string $content Content from the database
@@ -687,7 +703,8 @@ function feature($atts, $content=null)
 
     $container_classes = ["image-container"];
 
-    if ($a['media'] !== '') {
+    $feature_content = '';
+    if ($a['media'] !== '' || !empty($content)) {
       /**
        * Quick check if it's numeric so as to determine if it's a media ID
        * Should probably refactor for the check to be more specific so as to
@@ -714,13 +731,15 @@ function feature($atts, $content=null)
         $feature_content = container_fw_video($iframe);
         $container_classes[] = 'dark';
         $container_classes[] = 'edge-to-edge';
+      } else if (!empty($content)) {
+        $feature_content = remove_p($content);
       }
     }
 
-    return container_fw(
+    return remove_empty_p(container_fw(
         $feature_content,
         $container_classes
-    );
+    ));
 }
 
 /**
