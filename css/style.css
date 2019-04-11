@@ -859,7 +859,6 @@ input[type='button'].secondary:hover,
   padding: 0;
 }
 
-.full-width.image-container > *,
 .full-width.image-container iframe {
   margin: 0;
   padding: 0;
@@ -930,8 +929,9 @@ input[type='button'].secondary:hover,
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0;
 }
 
 .full-width .full-width-inner {
@@ -1022,6 +1022,10 @@ input[type='button'].secondary:hover,
 
   .full-width.image-container iframe {
     height: 400px !important;
+  }
+
+  .full-width .full-width-video-container > iframe {
+    height: 100% !important;
   }
 
   .full-width:not(.preserve-horizontal-col-layout-on-tablet) .full-width-inner .full-width-inner-col:not(:last-child) {
@@ -1889,7 +1893,7 @@ input[type='button'].secondary:hover,
     .article-content .full-width + .column-container,
     .article-content .column-container + .full-width,
     .article-content .button, .article-content button, .article-content input[type="button"] {
-      margin-top: 25px;
+      margin-top: 45px;
     }
 
     .article-content .how-to .step img {
@@ -1926,7 +1930,7 @@ input[type='button'].secondary:hover,
   .article-content .wp-caption,
   .article-content iframe,
   .article-content img[class*="wp-image"] {
-    margin: 15px 0;
+    margin: 0;
   }
 
   .article-content iframe {
@@ -1951,8 +1955,11 @@ input[type='button'].secondary:hover,
     margin-bottom: 15px;
   }
 
-  .article-content .column-container + .full-width, .article-content .full-width + .column-container {
-    margin-top: 35px;
+  .article-content > .column-container:first-of-type,
+  .article-content .full-width + .column-container,
+  .article-content .column-container + .full-width,
+  .article-content .button, .article-content button, .article-content input[type="button"] {
+    margin-top: 25px;
   }
 
   .full-width .full-width-inner {
