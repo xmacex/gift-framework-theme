@@ -1274,3 +1274,12 @@ function get_author_citation()
 
     return $author_citation;
 }
+
+/**
+ * Template tag for author(s), with their descriptions.
+ */
+function author_citation()
+{
+    $output = get_author_citation();
+    echo $output;
+}
