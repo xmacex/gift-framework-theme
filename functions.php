@@ -196,6 +196,7 @@ function prepend_image_and_call_to_action_to_article()
                          $feature_image_e;
       }
 
+      $call_to_action_link_and_call_to_action_description_el = NULL;
       if ($call_to_action_link_label) {
         $call_to_action_link_and_call_to_action_description_el = generate_call_to_action_link_and_description(
                                                                     $call_to_action_link_label,
@@ -204,6 +205,7 @@ function prepend_image_and_call_to_action_to_article()
                                                                   );
       }
 
+      $call_to_action_link_secondary_and_call_to_action_description_secondary_el = NULL;
       if ($call_to_action_link_label_secondary) {
         $call_to_action_link_secondary_and_call_to_action_description_secondary_el = generate_call_to_action_link_and_description(
                                                                     $call_to_action_link_label_secondary,
