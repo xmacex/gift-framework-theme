@@ -1259,22 +1259,17 @@ function get_media_url_from_id_or_url($id_or_url) {
  */
 function get_author_citation()
 {
-    $authors_b = '<div class="authors">';
+    $authors_b = '<div class="authors">by ';
     $authors_e = '</div>';
     if (function_exists('get_coauthors'))
     {
-        return coauthors_descriptions($between = '<div class="here">', $betweenLast = null, $before = $authors_b . 'by ', $after = $authors_e, $print=false);
+        return coauthors_descriptions($between = null, $betweenLast = null, $before = $authors_b, $after = $authors_e, $print=false);
     } else {
         $author_citation = $authors_b;
-        if (!empty(get_the_author_meta('user_firstname'))
-            && !empty(get_the_author_meta('user_lastname')))
-        {
-            $author_name = get_the_author_meta('user_firstname') . ' ' . get_the_author_meta('user_lastname');
-            $author_citation = $author_name ? '<p class="author">by <em>' . $author_name . '</em>' : '';
-            if (!empty(get_the_author_meta('description'))) {
-                $author_citation .= '<br /><span class="author-description">' . get_the_author_meta('description') . '</span>';
-            }
-            $author_citation .= $authors_e;
+        $author_citation .= '<span class="author"><em>' . get_the_author_meta('display_name') . '</em>';
+        if (!empty(get_the_author_meta('description'))) {
+            $author_citation .= '<br /><span class="author-description">' . get_the_author_meta('description') . '</span>';
+            $author_citation .= '</div>' . $authors_e;
         }
 
         return $author_citation;
