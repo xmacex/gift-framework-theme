@@ -1260,7 +1260,7 @@ function get_media_url_from_id_or_url($id_or_url) {
  */
 function get_author_citation()
 {
-    $author_citatation = '';
+    $author_citation = '';
     if (!empty(get_the_author_meta('user_firstname'))
         && !empty(get_the_author_meta('user_lastname')))
     {
