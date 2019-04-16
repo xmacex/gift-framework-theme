@@ -1266,7 +1266,7 @@ function get_author_citation()
         return coauthors_descriptions($between = null, $betweenLast = null, $before = $authors_b, $after = $authors_e, $print=false);
     } else {
         $author_citation = $authors_b;
-        $author_citation .= '<span class="author"><em>' . get_the_author_meta('display_name') . '</em>';
+        $author_citation .= '<span class="author"><em>' . get_the_author_meta('display_name') . '</em></span>';
         if (!empty(get_the_author_meta('description'))) {
             $author_citation .= '<br /><span class="author-description">' . get_the_author_meta('description') . '</span>';
             $author_citation .= '</div>' . $authors_e;
