@@ -596,18 +596,7 @@ function leading_content($atts, $content=null)
 
     $bc = get_breadcrumb();
 
-    $author_citation = '';
-    if (!empty(get_the_author_meta('user_firstname')) && !empty(get_the_author_meta('user_lastname'))) {
-      $author_name = get_the_author_meta('user_firstname') . ' ' . get_the_author_meta('user_lastname');
-      $author_citation = $author_name ? '<p class="author">by <em>' . $author_name . '</em>' : '';
-
-      if (!empty(get_the_author_meta('description'))) {
-        $author_citation .= '<br /><span class="author-description">' . get_the_author_meta('description') . '</span>';
-      }
-
-      $author_citation .= '</p>';
-
-    }
+    $author_citation = get_author_citation();
 
     $heading = '<h1>' . $a['byline'] . '</h1>';
     $blurb = '<p>' . $content . '</p>';
@@ -1260,4 +1249,28 @@ function get_media_url_from_id_or_url($id_or_url) {
   }
   return $url;
 
+}
+
+/**
+ * Author citation.
+ *
+ * Use within The Loop.
+ *
+ * @return string HTML representation.
+ */
+function get_author_citation()
+{
+    $author_citatation = '';
+    if (!empty(get_the_author_meta('user_firstname'))
+        && !empty(get_the_author_meta('user_lastname')))
+    {
+        $author_name = get_the_author_meta('user_firstname') . ' ' . get_the_author_meta('user_lastname');
+        $author_citation = $author_name ? '<p class="author">by <em>' . $author_name . '</em>' : '';
+        if (!empty(get_the_author_meta('description'))) {
+            $author_citation .= '<br /><span class="author-description">' . get_the_author_meta('description') . '</span>';
+        }
+        $author_citation .= '</p>';
+    }
+
+    return $author_citation;
 }
