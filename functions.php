@@ -1311,7 +1311,6 @@ function coauthors_descriptions($between = null, $betweenLast = null, $before = 
 function coauthors_description($author) {
     $author_b = '<span class="author">';
     $author_e = '</span>';
-    // $html = $author_b . esc_html(get_the_author()) . $author_e;
     $html = '<em>' . esc_html(get_the_author()) . '</em>';
 
     if (get_the_author_meta('description'))
