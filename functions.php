@@ -596,15 +596,13 @@ function leading_content($atts, $content=null)
 
     $bc = get_breadcrumb();
 
-    $author_citation = get_author_citation();
-
     $heading = '<h1>' . $a['byline'] . '</h1>';
     $blurb = '<p>' . $content . '</p>';
 
     return do_shortcode(
         container_column(
             container_column_inner(
-                $bc . $heading . $author_citation . $blurb
+                $bc . $heading . $blurb
             )
         )
     );
@@ -1254,25 +1252,33 @@ function get_media_url_from_id_or_url($id_or_url) {
 /**
  * Author citation.
  *
- * Use within The Loop.
+ * Use within The Loop. Uses Co-Authors Plus plugin if it is available,
+ * otherwise just takes the primary author of the post.
  *
  * @return string HTML representation.
  */
 function get_author_citation()
 {
-    $author_citation = '';
-    if (!empty(get_the_author_meta('user_firstname'))
-        && !empty(get_the_author_meta('user_lastname')))
+    $authors_b = '<div class="authors">';
+    $authors_e = '</div>';
+    if (function_exists('get_coauthors'))
     {
-        $author_name = get_the_author_meta('user_firstname') . ' ' . get_the_author_meta('user_lastname');
-        $author_citation = $author_name ? '<p class="author">by <em>' . $author_name . '</em>' : '';
-        if (!empty(get_the_author_meta('description'))) {
-            $author_citation .= '<br /><span class="author-description">' . get_the_author_meta('description') . '</span>';
+        return coauthors_descriptions($between = '<div class="here">', $betweenLast = null, $before = $authors_b . 'by ', $after = $authors_e, $print=false);
+    } else {
+        $author_citation = $authors_b;
+        if (!empty(get_the_author_meta('user_firstname'))
+            && !empty(get_the_author_meta('user_lastname')))
+        {
+            $author_name = get_the_author_meta('user_firstname') . ' ' . get_the_author_meta('user_lastname');
+            $author_citation = $author_name ? '<p class="author">by <em>' . $author_name . '</em>' : '';
+            if (!empty(get_the_author_meta('description'))) {
+                $author_citation .= '<br /><span class="author-description">' . get_the_author_meta('description') . '</span>';
+            }
+            $author_citation .= $authors_e;
         }
-        $author_citation .= '</p>';
-    }
 
-    return $author_citation;
+        return $author_citation;
+    }
 }
 
 /**
@@ -1282,4 +1288,38 @@ function author_citation()
 {
     $output = get_author_citation();
     echo $output;
+}
+
+/**
+ * Output the co-authors display names, and descriptions if they've provided them.
+ */
+function coauthors_descriptions($between = null, $betweenLast = null, $before = null, $after = null, $echo = true)
+{
+    $coauthors_descriptions = coauthors__echo('coauthors_description', 'callback', array(
+        'between' => $between,
+        'betweenLast' => $betweenLast,
+        'before' => $before,
+        'after' => $after,
+    ), null, $echo);
+
+    return $coauthors_descriptions;
+}
+
+/**
+ * Utility function for feeding coauthors_descriptions.
+ */
+function coauthors_description($author) {
+    $author_b = '<span class="author">';
+    $author_e = '</span>';
+    // $html = $author_b . esc_html(get_the_author()) . $author_e;
+    $html = '<em>' . esc_html(get_the_author()) . '</em>';
+
+    if (get_the_author_meta('description'))
+    {
+        $desc_b = '<span class="author-description">';
+        $desc_e = '</span>';
+
+        $html .=  $desc_b . ' ' . esc_html(get_the_author_meta('description')) . $desc_e;
+    }
+    return $author_b . $html . $author_e;
 }

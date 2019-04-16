@@ -5,6 +5,7 @@
   <?php prepend_image_and_call_to_action_to_article(); ?>
   <article class="article-content wrap-container content-area">
     <?php the_content(); ?>
+    <?php author_citation(); ?>
   </article>
 <?php endwhile; ?>
 <?php get_footer(); ?>
