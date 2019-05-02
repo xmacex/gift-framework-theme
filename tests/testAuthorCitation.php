@@ -1,18 +1,18 @@
 <?php
-ini_set('display_errors', 'On');
-error_reporting(E_ALL);
-
 class testAuthorCitation extends WP_UnitTestCase {
     function setUp()
     {
         $this->user = self::factory()->user->create_and_get([
             'first_name' => 'Firstname',
             'last_name' => 'Lastname',
-            'role' => 'editor'
+            'user_nicename' => 'firstname-lastname',
+            'role' => 'editor',
         ]);
 
         $this->post = self::factory()->post->create_and_get([
             'post_author' => $this->user->ID,
+            'post_type' => 'post',
+            'post_status' => 'publish'
         ]);
 
         $plugins = ['hello.php', 'co-authors-plus/co-authors.plus'];
@@ -94,28 +94,53 @@ class testAuthorCitation extends WP_UnitTestCase {
         $this->assertTrue(is_plugin_active($plugin));
     }
 
-    function test_coauthor_is_added_to_a_post()
+    function test_author_is_get_as_a_coauthor_too()
     {
-        $plugin = 'co_authors-plus/co-authors-plus.php';
         setup_postdata($this->post);
 
+        $plugin = 'co-authors-plus/co-authors-plus.php';
         activate_plugins($plugin);
+        $this->assertTrue(is_plugin_active($plugin));
+
         global $coauthors_plus;
         $this->_cap = $coauthors_plus;
-        // $this->_cap = new CoAuthors_Plus;
+
+        $coauthor = $this->_cap->get_coauthor_by('id', $this->user->ID);
+        $this->assertInstanceOf(WP_User::class, $coauthor);
+
+        $this->assertEquals($this->user->user_login, $coauthor->user_login);
+    }
+
+    function test_coauthor_is_added_to_a_post()
+    {
+        setup_postdata($this->post);
+
+        $plugin = 'co-authors-plus/co-authors-plus.php';
+        activate_plugins($plugin);
+        $this->assertTrue(is_plugin_active($plugin));
+
+        global $coauthors_plus;
+        $this->_cap = $coauthors_plus;
+        $this->_cap->action_init();
+        $this->_cap->action_init_late();
+        sleep(1);
+        // We are interested in the author taxonomy
+        $this->assertContains('author', get_taxonomies());
 
         $coauthor = self::factory()->user->create_and_get([
             'first_name' => 'Coau',
             'last_name' => 'Thor',
             'role' => 'editor',
-            'user_nicename' => 'coau-thor'
+            'user_login' => 'coau thor',
         ]);
- 
-        $this->_cap->add_coauthors($this->post->ID, [$coauthor->user_login], true);
-        print(var_dump(get_coauthors($this->post->ID)));
-        print(var_dump($this->post));
-        $this->assertEquals(
-            [$this->user, $coauthor],
-            get_coauthors($this->post->ID));
+
+        // $this->_cap->add_coauthors($this->post->ID, array($this->user->user_login, $coauthor->user_login), true);
+        // xdebug_start_trace('/tmp/testBreakPointTrace');
+        // $this->_cap->add_coauthors($this->post->ID, [$coauthor->user_login], true);
+        // print(var_dump($coauthor));
+        // $this->_cap->add_coauthors($this->post->ID, [$this->user->user_nicename], true);
+        $this->_cap->add_coauthors($this->post->ID, ['coau-thor'], true);
+        // xdebug_end_trace();
+        $this->assertEquals([$this->user, $coauthor], get_coauthors($this->post->ID));
     }
 }
