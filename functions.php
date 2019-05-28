@@ -67,6 +67,11 @@ add_action('wp_enqueue_scripts', 'enqueue_styles');
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
 
 /**
+ * Allow oEmbeds from Sketchfab. See https://help.sketchfab.com/hc/en-us/articles/203059088-Compatibility#Troubleshooting for WordPress users
+ */
+wp_oembed_add_provider('#https?://sketchfab\.com/.*#i', 'https://www.sketchfab.com/oembed', true);
+
+/**
  * Primary menu
  *
  * @return null
