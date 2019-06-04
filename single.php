@@ -7,7 +7,6 @@
 	<div class="column-container-inner">
 	    <h1><?php echo the_title(); ?></h1>
 	    <?php the_content(); ?>
-	    <?php author_citation(); ?>
 	</div>
     </div>
 </article>
