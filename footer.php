@@ -16,6 +16,8 @@
  ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
 </script>
 <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/vendor/smooth-scroll.polyfills.js"></script>
+
 <?php wp_footer(); ?>
 </body>
 </html>

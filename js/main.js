@@ -30,4 +30,12 @@ window.addEventListener('DOMContentLoaded', () => {
     menuContainer.classList.toggle('open');
   });
 
+  // initialise smooth scroll functionality
+  var scroll = new SmoothScroll('a[href*="#"]', {
+    speed: 1000,
+    speedAsDuration: true,
+    easing: 'easeInOutCubic',
+    offset: 100
+  });
+
 });
