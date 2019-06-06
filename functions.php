@@ -245,6 +245,7 @@ function prepend_image_and_call_to_action_to_article()
  * links to
  * @param string $call_to_action_link_description A small description that
  * appears under the call to action link
+ * @param boolean $call_to_action_link_new_tab Should the link open in a new tab
  * @param string[] $classes Additional CSS classes to add to the call to action
  * link button
  *
