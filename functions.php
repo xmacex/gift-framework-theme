@@ -95,10 +95,10 @@ add_image_size('cover-image', 1440, 500);
  */
 function remove_empty_p($content)
 {
-  $content = force_balance_tags($content);
-	$content = preg_replace('#<p>\s*+(<br\s*/*>)?\s*</p>#i', '', $content);
-	$content = preg_replace('~\s?<p>(\s|&nbsp;)+</p>\s?~', '', $content);
-	return $content;
+    $content = force_balance_tags($content);
+    $content = preg_replace('#<p>\s*+(<br\s*/*>)?\s*</p>#i', '', $content);
+    $content = preg_replace('~\s?<p>(\s|&nbsp;)+</p>\s?~', '', $content);
+    return $content;
 }
 
 /**
@@ -108,33 +108,33 @@ function remove_empty_p($content)
  */
 function remove_p_around_shortcodes($content)
 {
-  $content = remove_empty_p($content);
+    $content = remove_empty_p($content);
 
-  $content_to_replace = array(
-    '<p>[' => '[',
-    '<p>[/' => '[/',
-    ']</p>' => ']',
-    ']<br />' => ']'
-  );
+    $content_to_replace = array(
+	'<p>[' => '[',
+	'<p>[/' => '[/',
+	']</p>' => ']',
+	']<br />' => ']'
+    );
 
-  return strtr($content, $content_to_replace);
+    return strtr($content, $content_to_replace);
 }
 
 /**
  * Remove extra paragraphs that get wrapped around elements
  */
- function remove_p($content)
- {
-   $content = remove_empty_p($content);
+function remove_p($content)
+{
+    $content = remove_empty_p($content);
 
-   $content_to_replace = array(
-     '<p>' => '',
-     '</p>' => '',
-     '<br />' => ''
-   );
+    $content_to_replace = array(
+	'<p>' => '',
+	'</p>' => '',
+	'<br />' => ''
+    );
 
-   return strtr($content, $content_to_replace);
- }
+    return strtr($content, $content_to_replace);
+}
 
 /**
  * Wrapper function for getting the whole article in an article container
@@ -184,47 +184,50 @@ function prepend_image_and_call_to_action_to_article()
     $call_to_action_link_secondary = isset($postfields['call_to_action_link_secondary']) ? $postfields['call_to_action_link_secondary'][0] : NULL;
     $call_to_action_link_label_secondary = isset($postfields['call_to_action_link_label_secondary']) ? $postfields['call_to_action_link_label_secondary'][0] : NULL;
     $call_to_action_link_description_secondary = isset($postfields['call_to_action_link_description_secondary']) ? $postfields['call_to_action_link_description_secondary'][0] : NULL;
-
+    $call_to_action_link_new_tab = isset($postfields['call_to_action_link_new_tab']) ? (strtolower($postfields['call_to_action_link_new_tab'][0]) === 'true') : false;
+ 
     $image_and_call_to_action = '';
 
     if ($imgurl || $call_to_action_link_label || $call_to_action_link_label_secondary)
     {
 
-      $image_and_call_to_action_b = '<aside class="image-and-call-to-action">';
-      $image_and_call_to_action_e = '</aside>';
+	$image_and_call_to_action_b = '<aside class="image-and-call-to-action">';
+	$image_and_call_to_action_e = '</aside>';
 
-      $feature_image_el = '';
-      if ($imgurl) {
-        $feature_image_b = '<div class="featured-image" style="background-image: url(\'' . $imgurl . '\')">';
-        $feature_image_e = '</div>';
-        $feature_image_el = $feature_image_b .
-                         $feature_image_e;
-      }
+	$feature_image_el = '';
+	if ($imgurl) {
+            $feature_image_b = '<div class="featured-image" style="background-image: url(\'' . $imgurl . '\')">';
+            $feature_image_e = '</div>';
+            $feature_image_el = $feature_image_b .
+				$feature_image_e;
+	}
 
-      $call_to_action_link_and_call_to_action_description_el = NULL;
-      if ($call_to_action_link_label) {
-        $call_to_action_link_and_call_to_action_description_el = generate_call_to_action_link_and_description(
-                                                                    $call_to_action_link_label,
-                                                                    $call_to_action_link,
-                                                                    $call_to_action_link_description
-                                                                  );
-      }
+	$call_to_action_link_and_call_to_action_description_el = NULL;
+	if ($call_to_action_link_label) {
+            $call_to_action_link_and_call_to_action_description_el = generate_call_to_action_link_and_description(
+                $call_to_action_link_label,
+                $call_to_action_link,
+                $call_to_action_link_description,
+		$call_to_action_link_new_tab
+            );
+	}
 
-      $call_to_action_link_secondary_and_call_to_action_description_secondary_el = NULL;
-      if ($call_to_action_link_label_secondary) {
-        $call_to_action_link_secondary_and_call_to_action_description_secondary_el = generate_call_to_action_link_and_description(
-                                                                    $call_to_action_link_label_secondary,
-                                                                    $call_to_action_link_secondary,
-                                                                    $call_to_action_link_description_secondary,
-                                                                    ['secondary']
-                                                                  );
-      }
+	$call_to_action_link_secondary_and_call_to_action_description_secondary_el = NULL;
+	if ($call_to_action_link_label_secondary) {
+            $call_to_action_link_secondary_and_call_to_action_description_secondary_el = generate_call_to_action_link_and_description(
+                $call_to_action_link_label_secondary,
+                $call_to_action_link_secondary,
+                $call_to_action_link_description_secondary,
+		$call_to_action_link_new_tab
+                ['secondary']
+            );
+	}
 
-      $image_and_call_to_action = $image_and_call_to_action_b .
-                                  $feature_image_el .
-                                  $call_to_action_link_and_call_to_action_description_el .
-                                  $call_to_action_link_secondary_and_call_to_action_description_secondary_el .
-                                  $image_and_call_to_action_e;
+	$image_and_call_to_action = $image_and_call_to_action_b .
+                                    $feature_image_el .
+                                    $call_to_action_link_and_call_to_action_description_el .
+                                    $call_to_action_link_secondary_and_call_to_action_description_secondary_el .
+                                    $image_and_call_to_action_e;
 
     }
 
@@ -247,47 +250,49 @@ function prepend_image_and_call_to_action_to_article()
  *
  * @return string HTML representation of the call to action link and description
  */
-function generate_call_to_action_link_and_description($call_to_action_link_label, $call_to_action_link = '', $call_to_action_link_description = '', $classes = []) {
+function generate_call_to_action_link_and_description($call_to_action_link_label, $call_to_action_link = '', $call_to_action_link_description = '', $call_to_action_link_new_tab = false, $classes = []) {
 
-  $call_to_action_link_el = '';
-  if ($call_to_action_link_label) {
+    $call_to_action_link_el = '';
+    if ($call_to_action_link_label) {
 
-    $link_url = '';
-    $external_url = false;
-    if ($call_to_action_link && is_numeric($call_to_action_link)) {
-      $link_url = get_post($call_to_action_link)->guid;
-    } else {
-      $link_url = $call_to_action_link;
-      $external_url = true;
+	$link_url = '';
+	$external_url = false;
+	if ($call_to_action_link && is_numeric($call_to_action_link)) {
+	    $link_url = get_post($call_to_action_link)->guid;
+	} else {
+	    $link_url = $call_to_action_link;
+	    $external_url = true;
+	}
+
+	$external_url = $external_url || $call_to_action_link_new_tab;
+
+	$classes_as_string = '';
+	if (!empty($classes)) {
+	    $classes_as_string = ' ' . implode(' ', $classes);
+	}
+
+	if ($link_url) {
+	    $call_to_action_link_b = '<a id="call-to-action-link" class="button' . $classes_as_string . '" ' . ($external_url ? ' target="_blank"' : '') . ' href="' . $link_url . '">';
+	} else {
+	    $call_to_action_link_b = '<a id="call-to-action-link" class="button placeholder">';
+	}
+	$call_to_action_link_e = '</a>';
+	$call_to_action_link_el = $call_to_action_link_b .
+				  $call_to_action_link_label .
+				  $call_to_action_link_e;
     }
 
-    $classes_as_string = '';
-    if (!empty($classes)) {
-      $classes_as_string = ' ' . implode(' ', $classes);
+    $call_to_action_link_description_el = '';
+    if ($call_to_action_link_description) {
+	$call_to_action_link_description_b = '<label for="call-to-action-link" class="description">';
+	$call_to_action_link_description_e = '</label>';
+	$call_to_action_link_description_el = $call_to_action_link_description_b .
+                                              $call_to_action_link_description .
+                                              $call_to_action_link_description_e;
+
     }
 
-    if ($link_url) {
-      $call_to_action_link_b = '<a id="call-to-action-link" class="button' . $classes_as_string . '" ' . ($external_url ? ' target="_blank"' : '') . ' href="' . $link_url . '">';
-    } else {
-      $call_to_action_link_b = '<a id="call-to-action-link" class="button placeholder">';
-    }
-    $call_to_action_link_e = '</a>';
-    $call_to_action_link_el = $call_to_action_link_b .
-                           $call_to_action_link_label .
-                           $call_to_action_link_e;
-  }
-
-  $call_to_action_link_description_el = '';
-  if ($call_to_action_link_description) {
-    $call_to_action_link_description_b = '<label for="call-to-action-link" class="description">';
-    $call_to_action_link_description_e = '</label>';
-    $call_to_action_link_description_el = $call_to_action_link_description_b .
-                                          $call_to_action_link_description .
-                                          $call_to_action_link_description_e;
-
-  }
-
-  return $call_to_action_link_el . $call_to_action_link_description_el;
+    return $call_to_action_link_el . $call_to_action_link_description_el;
 }
 
 /**
@@ -424,8 +429,8 @@ function container_fw_video($content, $classes=[])
 {
     $classes[] = "full-width-video-container-wrap";
     return container(
-            container($content, ["full-width-video-container"]),
-            $classes
+        container($content, ["full-width-video-container"]),
+        $classes
     );
 }
 
@@ -528,7 +533,7 @@ function container_grid_tile($content, $classes=[], $background_image_url=null)
     $classes[] = "tile";
     $style_attribute = '';
     if (!empty($background_image_url)) {
-      $style_attribute = 'style="background-image: url(\'' . $background_image_url . '\')"';
+	$style_attribute = 'style="background-image: url(\'' . $background_image_url . '\')"';
     }
 
     return '<div class="' . implode(' ', $classes) . '" ' . $style_attribute . '>' . $content . '</div>';
@@ -651,16 +656,16 @@ function question($atts, $content=null)
     $text = '<p>' . $content . '</p>';
     $content = $heading . $text;
     if ($a['links']) {
-      $links_b = '<ul class="list-of-links">';
-      $links_e = '</ul>';
-      $links = "";
-      foreach (explode(",", $a['links']) as $pid) {
-          $post = get_post($pid);
-          $link = '<a href="' . $post->guid . '">'. $post->post_title . '</a>';
-          $listitem = '<li>' . $link . '</li>';
-          $links .= $listitem;
-      }
-      $content .= $links_b . $links . $links_e;
+	$links_b = '<ul class="list-of-links">';
+	$links_e = '</ul>';
+	$links = "";
+	foreach (explode(",", $a['links']) as $pid) {
+            $post = get_post($pid);
+            $link = '<a href="' . $post->guid . '">'. $post->post_title . '</a>';
+            $listitem = '<li>' . $link . '</li>';
+            $links .= $listitem;
+	}
+	$content .= $links_b . $links . $links_e;
     }
     return container_fw_inner_col($content);
 }
@@ -699,35 +704,35 @@ function feature($atts, $content=null)
 
     $feature_content = '';
     if ($a['media'] !== '' || !empty($content)) {
-      /**
-       * Quick check if it's numeric so as to determine if it's a media ID
-       * Should probably refactor for the check to be more specific so as to
-       * check for a positive integer instead.
-       */
-      if (is_numeric($a['media'])) {
-        $attachment = get_post($a['media']);
-        $img_b = '<img class="full-width-image" ';
-        $img_e = '/>';
-        $url = $attachment->guid;
-        $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
-        $img = $img_b . 'src="' . $url . '" alt="' . $alt . '"' . $img_e;
-        $feature_content = $img;
-      /**
-       * Checks for the presence of a Vimeo URL via regular expression and then
-       * generates an <iframe> of a Vimeo player based on that ID.
-       * @link https://stackoverflow.com/questions/10488943/easy-way-to-get-vimeo-id-from-a-vimeo-url#comment-35026186
-       */
-      } else if (preg_match('/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/', $a['media'], $match)) {
-        $vimeo_id = $match[5];
-        $iframe_b = '<iframe ';
-        $iframe_e = 'frameborder="0" allow="autoplay; fullscreen" allowfullscreen=""></iframe>';
-        $iframe = $iframe_b . 'src="https://player.vimeo.com/video/' . $vimeo_id . '" ' . $iframe_e;
-        $feature_content = container_fw_video($iframe);
-        $container_classes[] = 'dark';
-        $container_classes[] = 'edge-to-edge';
-      } else if (!empty($content)) {
-        $feature_content = remove_p($content);
-      }
+	/**
+	 * Quick check if it's numeric so as to determine if it's a media ID
+	 * Should probably refactor for the check to be more specific so as to
+	 * check for a positive integer instead.
+	 */
+	if (is_numeric($a['media'])) {
+            $attachment = get_post($a['media']);
+            $img_b = '<img class="full-width-image" ';
+            $img_e = '/>';
+            $url = $attachment->guid;
+            $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
+            $img = $img_b . 'src="' . $url . '" alt="' . $alt . '"' . $img_e;
+            $feature_content = $img;
+	    /**
+	     * Checks for the presence of a Vimeo URL via regular expression and then
+	     * generates an <iframe> of a Vimeo player based on that ID.
+	     * @link https://stackoverflow.com/questions/10488943/easy-way-to-get-vimeo-id-from-a-vimeo-url#comment-35026186
+	     */
+	} else if (preg_match('/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/', $a['media'], $match)) {
+            $vimeo_id = $match[5];
+            $iframe_b = '<iframe ';
+            $iframe_e = 'frameborder="0" allow="autoplay; fullscreen" allowfullscreen=""></iframe>';
+            $iframe = $iframe_b . 'src="https://player.vimeo.com/video/' . $vimeo_id . '" ' . $iframe_e;
+            $feature_content = container_fw_video($iframe);
+            $container_classes[] = 'dark';
+            $container_classes[] = 'edge-to-edge';
+	} else if (!empty($content)) {
+            $feature_content = remove_p($content);
+	}
     }
 
     return remove_empty_p(container_fw(
@@ -866,8 +871,8 @@ function text_in_column($atts, $content=null)
 function text_section($atts, $content=null)
 {
     return container_column(
-            container_text_section($content)
-           );
+        container_text_section($content)
+    );
 }
 
 /**
@@ -921,9 +926,9 @@ function call_to_action_button($atts, $content=null)
     }
 
     if ($url) {
-      return '<a class="button" href="' . $url . '"' . ($external_url ? ' target="_blank"' : '') . '>' . $a['label'] . '</a>';
+	return '<a class="button" href="' . $url . '"' . ($external_url ? ' target="_blank"' : '') . '>' . $a['label'] . '</a>';
     } else {
-      return '<a class="button placeholder" target="_blank">' . $a['label'] . '</a>';
+	return '<a class="button placeholder" target="_blank">' . $a['label'] . '</a>';
     }
 }
 
@@ -937,30 +942,30 @@ function call_to_action_button($atts, $content=null)
  */
 function feature_block($atts, $content=null)
 {
-  $a = shortcode_atts(
-    array(
-      'is_hero' => false,
-      'is_downshifted' => false,
-      'is_highlighted' => false), $atts
-  );
+    $a = shortcode_atts(
+	array(
+	    'is_hero' => false,
+	    'is_downshifted' => false,
+	    'is_highlighted' => false), $atts
+    );
 
-  $classes = array();
+    $classes = array();
 
-  if ($a['is_hero'] === 'true') {
-    $classes[] = 'hero';
-  }
+    if ($a['is_hero'] === 'true') {
+	$classes[] = 'hero';
+    }
 
-  if ($a['is_downshifted'] === 'true') {
-    $classes[] = 'downshifted';
-  }
+    if ($a['is_downshifted'] === 'true') {
+	$classes[] = 'downshifted';
+    }
 
-  if ($a['is_highlighted'] === 'true') {
-    $classes[] = 'highlighted';
-  }
+    if ($a['is_highlighted'] === 'true') {
+	$classes[] = 'highlighted';
+    }
 
-  return do_shortcode(
-      container_feature_block($content, $classes)
-  );
+    return do_shortcode(
+	container_feature_block($content, $classes)
+    );
 }
 
 /**
@@ -973,9 +978,9 @@ function feature_block($atts, $content=null)
  */
 function feature_block_caption($atts, $content=null) {
 
-  return do_shortcode(
-      container_feature_block_caption($content)
-  );
+    return do_shortcode(
+	container_feature_block_caption($content)
+    );
 
 }
 
@@ -989,25 +994,25 @@ function feature_block_caption($atts, $content=null) {
  */
 function feature_block_image($atts, $content=null) {
 
-  $a = shortcode_atts(
-    array(
-      'media' => null
-    ), $atts
-  );
-
-  if (!is_null($a['media'])) {
-
-    $url = get_media_url_from_id_or_url($a['media']);
-
-    $content = '';
-    $content .= '<img class="feature-block-image-image" src="' . $url . '" />';
-    $content .= '<div class="feature-block-image-displayable" style="background-image: url(\'' . $url . '\')">';
-    $content .= '</div>';
-
-    return do_shortcode(
-      container_feature_block_image($content)
+    $a = shortcode_atts(
+	array(
+	    'media' => null
+	), $atts
     );
-  }
+
+    if (!is_null($a['media'])) {
+
+	$url = get_media_url_from_id_or_url($a['media']);
+
+	$content = '';
+	$content .= '<img class="feature-block-image-image" src="' . $url . '" />';
+	$content .= '<div class="feature-block-image-displayable" style="background-image: url(\'' . $url . '\')">';
+	$content .= '</div>';
+
+	return do_shortcode(
+	    container_feature_block_image($content)
+	);
+    }
 
 }
 
@@ -1021,12 +1026,12 @@ function feature_block_image($atts, $content=null) {
  */
 function feature_block_tile_list($atts, $content=null) {
 
-  return remove_empty_p(do_shortcode(
-    container_feature_block_tile_list(
-      remove_p_around_shortcodes($content)
-      )
+    return remove_empty_p(do_shortcode(
+	container_feature_block_tile_list(
+	    remove_p_around_shortcodes($content)
+	)
     )
-  );
+    );
 
 }
 
@@ -1040,36 +1045,36 @@ function feature_block_tile_list($atts, $content=null) {
  */
 function feature_block_tile($atts, $content=null) {
 
-  $a = shortcode_atts(
-    array(
-      'icon' => null,
-      'link' => null
-    ), $atts
-  );
+    $a = shortcode_atts(
+	array(
+	    'icon' => null,
+	    'link' => null
+	), $atts
+    );
 
-  $img = '';
-  if (is_numeric($a['icon'])) {
-    $attachment = get_post($a['icon']);
-    $img_src = $attachment->guid;
-    $img_alt = $attachment->post_title;
-    $img = '<img src="' . $img_src . '" alt="' . $img_alt . '" />';
-  }
-
-  $url = '';
-  if (is_numeric($a['link'])) {
-    $attachment = get_post($a['link']);
-    if ($attachment) {
-      $url = $attachment->guid;
+    $img = '';
+    if (is_numeric($a['icon'])) {
+	$attachment = get_post($a['icon']);
+	$img_src = $attachment->guid;
+	$img_alt = $attachment->post_title;
+	$img = '<img src="' . $img_src . '" alt="' . $img_alt . '" />';
     }
-  } else if (esc_url_raw($a['link']) === $a['link']) {
-    $url = $a['link'];
-  }
 
-  $tile_b = '<a class="feature-block-tile"' . ($url ? ' href="' . $url . '"' : '') . '>';
-  $tile_c = '<p>' . $content . '</p>';
-  $tile_e = '</a>';
+    $url = '';
+    if (is_numeric($a['link'])) {
+	$attachment = get_post($a['link']);
+	if ($attachment) {
+	    $url = $attachment->guid;
+	}
+    } else if (esc_url_raw($a['link']) === $a['link']) {
+	$url = $a['link'];
+    }
 
-  return $tile_b . $img . $tile_c . $tile_e;
+    $tile_b = '<a class="feature-block-tile"' . ($url ? ' href="' . $url . '"' : '') . '>';
+    $tile_c = '<p>' . $content . '</p>';
+    $tile_e = '</a>';
+
+    return $tile_b . $img . $tile_c . $tile_e;
 
 }
 
@@ -1084,35 +1089,35 @@ function feature_block_tile($atts, $content=null) {
 function full_width_thumbnail_gallery($atts, $content=null)
 {
 
-  $a = shortcode_atts(
-    array(
-      'title' => null,
-      'circular_images' => false,
-      'fitted_images' => false
-    ), $atts
-  );
+    $a = shortcode_atts(
+	array(
+	    'title' => null,
+	    'circular_images' => false,
+	    'fitted_images' => false
+	), $atts
+    );
 
-  $classes = ['thumbnail-gallery'];
+    $classes = ['thumbnail-gallery'];
 
-  if ($a['circular_images']) {
-    $classes[] = 'circular-images';
-  }
+    if ($a['circular_images']) {
+	$classes[] = 'circular-images';
+    }
 
-  if ($a['fitted_images']) {
-    $classes[] = 'fitted-images';
-  }
+    if ($a['fitted_images']) {
+	$classes[] = 'fitted-images';
+    }
 
-  return remove_empty_p(do_shortcode(
-      container_fw(
-        container_fw_inner(
-          ($a['title'] ? '<h2>' . $a['title'] .'</h2>' : '')
-          . container_thumbnail_gallery_inner(
-              remove_p_around_shortcodes($content)
-            ),
-          $classes)
-      , ['no-background'])
+    return remove_empty_p(do_shortcode(
+	container_fw(
+            container_fw_inner(
+		($a['title'] ? '<h2>' . $a['title'] .'</h2>' : '')
+              . container_thumbnail_gallery_inner(
+		  remove_p_around_shortcodes($content)
+              ),
+		$classes)
+	  , ['no-background'])
     )
-  );
+    );
 
 }
 
@@ -1127,41 +1132,41 @@ function full_width_thumbnail_gallery($atts, $content=null)
 function thumbnail($atts, $content=null)
 {
 
-  $a = shortcode_atts(
-    array(
-      'media' => null,
-      'caption' => null,
-      'subcaption' => null,
-      'subsubcaption' => null
-    ), $atts
-  );
+    $a = shortcode_atts(
+	array(
+	    'media' => null,
+	    'caption' => null,
+	    'subcaption' => null,
+	    'subsubcaption' => null
+	), $atts
+    );
 
-  if (!is_null($a['media'])) {
+    if (!is_null($a['media'])) {
 
-    $url = get_media_url_from_id_or_url($a['media']);
+	$url = get_media_url_from_id_or_url($a['media']);
 
-    $figure_b = '<figure class="thumbnail">';
-    $figure_img_div = '<div class="thumbnail-image" style="background-image: url(' . $url . ')" />';
-    $figure_e = '</figure>';
+	$figure_b = '<figure class="thumbnail">';
+	$figure_img_div = '<div class="thumbnail-image" style="background-image: url(' . $url . ')" />';
+	$figure_e = '</figure>';
 
-    $figure_figcaption = '';
-    if ($a['caption'] || $a['subcaption'] || $a['subsubcaption'])
-    {
-      $figure_figcaption_b = '<figcaption>';
-      $figure_figcaption_caption = $a['caption'] ? '<p>' . $a['caption'] . '</p>' : '';
-      $figure_figcaption_subcaption = $a['subcaption'] ? '<p><small>' . $a['subcaption'] . '</small></p>' : '';
-      $figure_figcaption_subsubcaption = $a['subsubcaption'] ? '<p><small>' . $a['subsubcaption'] . '</small></p>' : '';
-      $figure_figcaption_e = '</figcaption>';
-      $figure_figcaption = $figure_figcaption_b
-                           . $figure_figcaption_caption
-                           . $figure_figcaption_subcaption
-                           . $figure_figcaption_subsubcaption
-                           . $figure_figcaption_e;
+	$figure_figcaption = '';
+	if ($a['caption'] || $a['subcaption'] || $a['subsubcaption'])
+	{
+	    $figure_figcaption_b = '<figcaption>';
+	    $figure_figcaption_caption = $a['caption'] ? '<p>' . $a['caption'] . '</p>' : '';
+	    $figure_figcaption_subcaption = $a['subcaption'] ? '<p><small>' . $a['subcaption'] . '</small></p>' : '';
+	    $figure_figcaption_subsubcaption = $a['subsubcaption'] ? '<p><small>' . $a['subsubcaption'] . '</small></p>' : '';
+	    $figure_figcaption_e = '</figcaption>';
+	    $figure_figcaption = $figure_figcaption_b
+                               . $figure_figcaption_caption
+                               . $figure_figcaption_subcaption
+                               . $figure_figcaption_subsubcaption
+                               . $figure_figcaption_e;
+	}
+
+	return $figure_b . $figure_img_div . $figure_figcaption . $figure_e;
+
     }
-
-    return $figure_b . $figure_img_div . $figure_figcaption . $figure_e;
-
-  }
 
 }
 
@@ -1241,15 +1246,15 @@ function get_breadcrumb()
  */
 function get_media_url_from_id_or_url($id_or_url) {
 
-  $url = false;
-  if (is_numeric($id_or_url)) {
-    $attachment = get_post($id_or_url);
-    if ($attachment) {
-      $url = $attachment->guid;
+    $url = false;
+    if (is_numeric($id_or_url)) {
+	$attachment = get_post($id_or_url);
+	if ($attachment) {
+	    $url = $attachment->guid;
+	}
+    } else if (esc_url_raw($id_or_url) === $id_or_url) {
+	$url = $id_or_url;
     }
-  } else if (esc_url_raw($id_or_url) === $id_or_url) {
-    $url = $id_or_url;
-  }
-  return $url;
+    return $url;
 
 }
