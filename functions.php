@@ -185,7 +185,7 @@ function prepend_image_and_call_to_action_to_article()
     $call_to_action_link_label_secondary = isset($postfields['call_to_action_link_label_secondary']) ? $postfields['call_to_action_link_label_secondary'][0] : NULL;
     $call_to_action_link_description_secondary = isset($postfields['call_to_action_link_description_secondary']) ? $postfields['call_to_action_link_description_secondary'][0] : NULL;
     $call_to_action_link_new_tab = isset($postfields['call_to_action_link_new_tab']) ? (strtolower($postfields['call_to_action_link_new_tab'][0]) === 'true') : false;
- 
+
     $image_and_call_to_action = '';
 
     if ($imgurl || $call_to_action_link_label || $call_to_action_link_label_secondary)
@@ -916,8 +916,13 @@ function call_to_action_button($atts, $content=null)
         array(
             'label' => null,
             'item' => null,
-	    'new_tab' => false), $atts
+	    'new_tab' => null), $atts
     );
+
+    if (isset($a['new_tab'])) {
+	// $a['new_tab'] = (bool)$a['new_tab'];
+	$a['new_tab'] = (strtolower($a['new_tab']) === "true");
+    }
 
     $external_url = false;
     if (is_numeric($a['item'])) {
@@ -930,7 +935,7 @@ function call_to_action_button($atts, $content=null)
     if ($url) {
 	return '<a class="button" href="' . $url . '"' . (($external_url || $a['new_tab']) ? ' target="_blank"' : '') . '>' . $a['label'] . '</a>';
     } else {
-	return '<a class="button placeholder" target="_blank">' . $a['label'] . '</a>';
+	return '<a class="button placeholder" ' . (($a['new_tab'] === false) ? '' : 'target="_blank"') . '>' . $a['label'] . '</a>';
     }
 }
 
