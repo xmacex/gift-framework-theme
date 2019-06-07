@@ -915,7 +915,8 @@ function call_to_action_button($atts, $content=null)
     $a = shortcode_atts(
         array(
             'label' => null,
-            'item' => null), $atts
+            'item' => null,
+	    'new_tab' => false), $atts
     );
 
     $external_url = false;
@@ -927,7 +928,7 @@ function call_to_action_button($atts, $content=null)
     }
 
     if ($url) {
-	return '<a class="button" href="' . $url . '"' . ($external_url ? ' target="_blank"' : '') . '>' . $a['label'] . '</a>';
+	return '<a class="button" href="' . $url . '"' . (($external_url || $a['new_tab']) ? ' target="_blank"' : '') . '>' . $a['label'] . '</a>';
     } else {
 	return '<a class="button placeholder" target="_blank">' . $a['label'] . '</a>';
     }
