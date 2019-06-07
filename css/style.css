@@ -2007,6 +2007,14 @@ input[type='button'].secondary:hover,
   font-size: 18px;
 }
 
+.footer-container-inner .credits {
+  margin-bottom: 20px;
+}
+
+.footer-container-inner .credits p {
+  margin-bottom: 3px;
+}
+
 .footer-container-inner .eu-flag-footer {
   width: 60px;
   margin: 5px 30px 20px 0;

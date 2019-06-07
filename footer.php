@@ -1,6 +1,14 @@
 <footer class="wrap-container">
     <div class="footer-container">
       <div class="footer-container-inner">
+        <?php if (metadata_exists('post', get_the_ID(), 'credits')) : ?>
+          <div class="credits">
+            <?php
+              $credits_meta = get_post_meta(get_the_ID(), 'credits');
+              echo $credits_meta[0];
+            ?>
+          </div>
+        <?php endif; ?>
         <p class="footer-header">Learn more about <a href="<?php echo get_permalink(357); ?>">The GIFT Project</a>.</p>
         <img class="eu-flag-footer" src="<?php echo get_stylesheet_directory_uri(); ?>/img/eu-flag-footer.png" alt="European Union Flag" />
         <p>

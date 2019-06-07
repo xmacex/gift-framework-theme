@@ -65,6 +65,8 @@ function enqueue_scripts()
 
 add_action('wp_enqueue_scripts', 'enqueue_styles');
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
+add_action('the_post', 'init_post_credits');
+
 
 /**
  * Allow oEmbeds from Sketchfab. See https://help.sketchfab.com/hc/en-us/articles/203059088-Compatibility#Troubleshooting for WordPress users
@@ -99,6 +101,18 @@ function remove_empty_p($content)
 	$content = preg_replace('#<p>\s*+(<br\s*/*>)?\s*</p>#i', '', $content);
 	$content = preg_replace('~\s?<p>(\s|&nbsp;)+</p>\s?~', '', $content);
 	return $content;
+}
+
+/**
+ * We use a shortcode to display the credits of the post. However, we would like
+ * to display these credits within the footer. We temporarily store information
+ * inside of the post meta to persist the credit information so it could be
+ * displayed within a template outside of the loop.
+ */
+function init_post_credits() {
+  if (metadata_exists('post', get_the_ID(), 'credits')) {
+    delete_post_meta(get_the_ID(), 'credits');
+  }
 }
 
 /**
@@ -884,6 +898,24 @@ function references($atts, $content=null)
 }
 
 /**
+ * A shortcode for displaying the credits that will appear within the footer
+ * section of the page. The shortcode does not return HTML, instead, the HTML
+ * will be rendered within footer.php
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ */
+
+function credits($atts, $content=null)
+{   if (!metadata_exists('post', get_the_ID(), 'credits')) {
+      add_post_meta(get_the_ID(), 'credits', $content);
+    } else {
+      update_post_meta(get_the_ID(), 'credits', $content);
+    }
+}
+
+/**
  * A full-width section for code example shortcode.
  *
  * @param array  $atts    Shortcode attributes
@@ -1202,6 +1234,7 @@ add_shortcode('full_width_thumbnail_gallery', 'full_width_thumbnail_gallery');
 add_shortcode('thumbnail', 'thumbnail');
 
 add_shortcode('references', 'references');
+add_shortcode('credits', 'credits');
 
 /* Some utility functions just to output re-used HTML. There are
  * better ways to do this stuff */
