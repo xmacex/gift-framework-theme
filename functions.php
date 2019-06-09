@@ -1210,6 +1210,24 @@ function thumbnail($atts, $content=null)
 }
 
 
+function captioned_image_gallery($atts, $content=null)
+{
+  $a = shortcode_atts(
+    array(
+      'headline' => ''), $atts
+  );
+
+  $rendered_content = $a['headline'] ? '<h2>' . $a['headline'] . '</h2>' : '';
+  $rendered_content .= '<div class="captioned-image-gallery-images">';
+  $rendered_content .= do_shortcode($content);
+  $rendered_content .= '</div>';
+
+  return remove_empty_p(container_column(
+    $rendered_content,
+    ['captioned-image-gallery']
+  ));
+}
+
 /**
  * Add the shortcodes.
  */
@@ -1244,6 +1262,7 @@ add_shortcode('feature_block_tile', 'feature_block_tile');
 
 add_shortcode('full_width_thumbnail_gallery', 'full_width_thumbnail_gallery');
 add_shortcode('thumbnail', 'thumbnail');
+add_shortcode('captioned_image_gallery', 'captioned_image_gallery');
 
 add_shortcode('references', 'references');
 add_shortcode('credits', 'credits');
