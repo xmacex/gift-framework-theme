@@ -18,12 +18,14 @@
     </div>
 </footer>
 
-<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141747450-1"></script>
 <script>
- window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
- ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-141747450-1');
 </script>
-<script src="https://www.google-analytics.com/analytics.js" async defer></script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/vendor/smooth-scroll.polyfills.js"></script>
 
 <?php wp_footer(); ?>
