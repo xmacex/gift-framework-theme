@@ -838,12 +838,26 @@ input[type='button'].secondary:hover,
   padding-top: 70px;
 }
 
+.article-content .captioned-image-gallery h3 {
+  margin: 0;
+  font-weight: normal;
+  color: #999999;
+}
+
 .article-content .captioned-image-gallery-images {
   display: flex;
   flex-direction: row;
 }
 
-.article-content .captioned-image-gallery-images > *:not(:last-child) {
+.article-content .captioned-image-gallery-images:not(:first-child) {
+  margin-top: 40px;
+}
+
+.article-content .captioned-image-gallery-images > figure {
+  width: 100%;
+}
+
+.article-content .captioned-image-gallery-images > figure:not(:last-of-type) {
   margin-right: 5% !important;
 }
 
@@ -853,25 +867,24 @@ input[type='button'].secondary:hover,
   object-fit: cover;
 }
 
-.article-content .captioned-image-gallery-images .wp-caption .wp-caption-text {
+.article-content .captioned-image-gallery-images figure figcaption {
   font-size: 17px;
   color: #777777;
-  margin-bottom: 40px !important;
   text-align: left;
+  margin-bottom: 20px;
 }
 
-.article-content .captioned-image-gallery-images .wp-caption .wp-caption-text,
-.article-content .captioned-image-gallery-images:last-child .wp-caption .wp-caption-text:last-child {
-  margin-bottom: 0;
-}
-
-.article-content .captioned-image-gallery-images .wp-caption img + .wp-caption-text {
+.article-content .captioned-image-gallery-images figure img + figcaption {
   margin-top: 20px;
 }
 
 @media screen and (max-width: 992px) {
 
-  .article-content .captioned-image-gallery-images .wp-caption .wp-caption-text {
+  .article-content .captioned-image-gallery {
+    padding-top: 45px !important;
+  }
+
+  .article-content .captioned-image-gallery-images figure figcaption {
     font-size: 16px;
     line-height: 1.5em;
   }
@@ -880,11 +893,23 @@ input[type='button'].secondary:hover,
 
 @media screen and (max-width: 680px) {
 
+  .article-content .captioned-image-gallery {
+    padding-top: 10px !important;
+  }
+
   .article-content .captioned-image-gallery-images {
     flex-direction: column;
   }
 
-  .article-content .captioned-image-gallery-images .wp-caption img {
+  .article-content .captioned-image-gallery-images:not(:first-child) {
+    margin-top: 30px;
+  }
+
+  .article-content .captioned-image-gallery h3 {
+    font-size: 14pt;
+  }
+
+  .article-content .captioned-image-gallery-images figure img {
     max-height: 320px;
   }
 

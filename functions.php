@@ -1209,15 +1209,25 @@ function thumbnail($atts, $content=null)
 
 }
 
-
+/**
+ * A gallery of captioned images
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
 function captioned_image_gallery($atts, $content=null)
 {
   $a = shortcode_atts(
     array(
-      'headline' => ''), $atts
+      'headline' => '',
+      'subheadline' => ''), $atts
   );
 
-  $rendered_content = $a['headline'] ? '<h2>' . $a['headline'] . '</h2>' : '';
+  $rendered_content = '';
+  $rendered_content .= $a['headline'] ? '<h2>' . $a['headline'] . '</h2>' : '';
+  $rendered_content .= $a['subheadline'] ? '<h3>' . $a['subheadline'] . '</h3>' : '';
   $rendered_content .= '<div class="captioned-image-gallery-images">';
   $rendered_content .= do_shortcode($content);
   $rendered_content .= '</div>';
@@ -1226,6 +1236,31 @@ function captioned_image_gallery($atts, $content=null)
     $rendered_content,
     ['captioned-image-gallery']
   ));
+}
+
+/**
+ * A single captioned image
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function captioned_image($atts, $content=null)
+{
+  $a = shortcode_atts(
+    array(
+      'image' => ''), $atts
+  );
+
+  $image_url = get_media_url_from_id_or_url($a['image']);
+
+  $figure_b = '<figure>';
+  $img = '<img src="' . $image_url . '" />';
+  $figcaption = '<figcaption>' . $content . '</figcaption>';
+  $figure_e = '</figure>';
+
+  return $figure_b . $img . $figcaption . $figure_e;
 }
 
 /**
@@ -1263,6 +1298,7 @@ add_shortcode('feature_block_tile', 'feature_block_tile');
 add_shortcode('full_width_thumbnail_gallery', 'full_width_thumbnail_gallery');
 add_shortcode('thumbnail', 'thumbnail');
 add_shortcode('captioned_image_gallery', 'captioned_image_gallery');
+add_shortcode('captioned', 'captioned_image');
 
 add_shortcode('references', 'references');
 add_shortcode('credits', 'credits');
