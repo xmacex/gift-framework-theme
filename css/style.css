@@ -1874,11 +1874,6 @@ input[type='button'].secondary:hover,
   margin-bottom: 0;
 }
 
-.article-content .full-width p, .article-content .full-width li, .article-content .full-width blockquote {
-  font-size: 18px;
-  line-height: 1.5em;
-}
-
 .article-content .full-width.code p  {
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
 }
