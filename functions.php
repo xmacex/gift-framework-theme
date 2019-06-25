@@ -193,17 +193,32 @@ function prepend_image_and_call_to_action_to_article()
 
     $call_to_action_link = isset($postfields['call_to_action_link']) ? $postfields['call_to_action_link'][0] : NULL;
     $call_to_action_link_label = isset($postfields['call_to_action_link_label']) ? $postfields['call_to_action_link_label'][0] : NULL;
-    $call_to_action_link_description = isset($postfields['call_to_action_link_description']) ? $postfields['call_to_action_link_description'][0] : NULL;
+
+    $call_to_action_link_description = NULL;
+    if ($postfields['call_to_action_link_description']) {
+      $call_to_action_link_description = $postfields['call_to_action_link_description'][0];
+    } else if ($postfields['featured_image_caption']) {
+      $call_to_action_link_description = $postfields['featured_image_caption'][0];
+    }
 
     $call_to_action_link_secondary = isset($postfields['call_to_action_link_secondary']) ? $postfields['call_to_action_link_secondary'][0] : NULL;
     $call_to_action_link_label_secondary = isset($postfields['call_to_action_link_label_secondary']) ? $postfields['call_to_action_link_label_secondary'][0] : NULL;
-    $call_to_action_link_description_secondary = isset($postfields['call_to_action_link_description_secondary']) ? $postfields['call_to_action_link_description_secondary'][0] : NULL;
+
+    $call_to_action_link_description_secondary = NULL;
+    if ($postfields['call_to_action_link_description_secondary']) {
+      $call_to_action_link_description_secondary = $postfields['call_to_action_link_description_secondary'][0];
+    }
+
     $call_to_action_link_new_tab = isset($postfields['call_to_action_link_new_tab']) ? (strtolower($postfields['call_to_action_link_new_tab'][0]) === 'true') : false;
 
     $image_and_call_to_action = '';
 
-    if ($imgurl || $call_to_action_link_label || $call_to_action_link_label_secondary)
-    {
+    if ($imgurl ||
+        $call_to_action_link_label ||
+        $call_to_action_link_label_secondary ||
+        $call_to_action_link_description ||
+        $call_to_action_link_description_secondary
+    ) {
 
 	      $image_and_call_to_action_b = '<aside class="image-and-call-to-action">';
 	      $image_and_call_to_action_e = '</aside>';
@@ -217,7 +232,9 @@ function prepend_image_and_call_to_action_to_article()
     	  }
 
     	  $call_to_action_link_and_call_to_action_description_el = NULL;
-    	  if ($call_to_action_link_label) {
+    	  if ($call_to_action_link_label ||
+            $call_to_action_link_description
+           ) {
             $call_to_action_link_and_call_to_action_description_el = generate_call_to_action_link_and_description(
                 $call_to_action_link_label,
                 $call_to_action_link,
@@ -227,13 +244,15 @@ function prepend_image_and_call_to_action_to_article()
   	    }
 
   	    $call_to_action_link_secondary_and_call_to_action_description_secondary_el = NULL;
-  	    if ($call_to_action_link_label_secondary) {
+  	    if ($call_to_action_link_label_secondary ||
+            $call_to_action_link_description_secondary
+           ) {
             $call_to_action_link_secondary_and_call_to_action_description_secondary_el = generate_call_to_action_link_and_description(
-              $call_to_action_link_label_secondary,
-              $call_to_action_link_secondary,
-              $call_to_action_link_description_secondary,
-              $call_to_action_link_new_tab
-              ['secondary']
+                $call_to_action_link_label_secondary,
+                $call_to_action_link_secondary,
+                $call_to_action_link_description_secondary,
+                $call_to_action_link_new_tab
+                ['secondary']
             );
   	    }
 

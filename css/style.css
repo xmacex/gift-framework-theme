@@ -1629,6 +1629,7 @@ input[type='button'].secondary:hover,
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  margin-bottom: 20px;
 }
 
 .image-and-call-to-action .button {
