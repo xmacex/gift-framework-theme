@@ -731,19 +731,22 @@ function feature($atts, $content=null)
 {
     $a = shortcode_atts(
         array(
-            'media' => ''), $atts
+            'media' => '',
+            'caption' => ''), $atts
     );
 
     $container_classes = ["image-container"];
 
     $feature_content = '';
+
     if ($a['media'] !== '' || !empty($content)) {
-	/**
-	 * Quick check if it's numeric so as to determine if it's a media ID
-	 * Should probably refactor for the check to be more specific so as to
-	 * check for a positive integer instead.
-	 */
-	if (is_numeric($a['media'])) {
+
+        /**
+      	 * Quick check if it's numeric so as to determine if it's a media ID
+      	 * Should probably refactor for the check to be more specific so as to
+      	 * check for a positive integer instead.
+      	 */
+      	if (is_numeric($a['media'])) {
             $attachment = get_post($a['media']);
             $img_b = '<img class="full-width-image" ';
             $img_e = '/>';
@@ -751,12 +754,13 @@ function feature($atts, $content=null)
             $alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
             $img = $img_b . 'src="' . $url . '" alt="' . $alt . '"' . $img_e;
             $feature_content = $img;
-	    /**
-	     * Checks for the presence of a Vimeo URL via regular expression and then
-	     * generates an <iframe> of a Vimeo player based on that ID.
-	     * @link https://stackoverflow.com/questions/10488943/easy-way-to-get-vimeo-id-from-a-vimeo-url#comment-35026186
-	     */
-	} else if (preg_match('/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/', $a['media'], $match)) {
+
+        /**
+         * Checks for the presence of a Vimeo URL via regular expression and then
+         * generates an <iframe> of a Vimeo player based on that ID.
+         * @link https://stackoverflow.com/questions/10488943/easy-way-to-get-vimeo-id-from-a-vimeo-url#comment-35026186
+         */
+      	} else if (preg_match('/(https?:\/\/)?(www\.)?(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/', $a['media'], $match)) {
             $vimeo_id = $match[5];
             $iframe_b = '<iframe ';
             $iframe_e = 'frameborder="0" allow="autoplay; fullscreen" allowfullscreen=""></iframe>';
@@ -764,15 +768,25 @@ function feature($atts, $content=null)
             $feature_content = container_fw_video($iframe);
             $container_classes[] = 'dark';
             $container_classes[] = 'edge-to-edge';
-	} else if (!empty($content)) {
+      	} else if (!empty($content)) {
             $feature_content = remove_p($content);
-	}
+      	}
     }
 
-    return remove_empty_p(container_fw(
+    $feature = container_fw(
         $feature_content,
         $container_classes
-    ));
+    );
+
+    if(!empty($a['caption'])) {
+      $feature .= container_column(
+                      '<figcaption>' . $a['caption'] . '</figcaption>',
+                      ['full-width-caption']
+                  );
+    }
+    
+
+    return remove_empty_p($feature);
 }
 
 /**

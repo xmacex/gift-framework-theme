@@ -1883,6 +1883,12 @@ input[type='button'].secondary:hover,
   margin-top: 70px;
 }
 
+.article-content .full-width + .column-container.full-width-caption {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
 .article-content .column-container + .full-width {
   margin-top: 70px;
 }
@@ -2014,7 +2020,7 @@ input[type='button'].secondary:hover,
   .article-content .wp-caption,
   .article-content iframe,
   .article-content img[class*="wp-image"] {
-    margin: 0;
+    margin: 15px 0;
   }
 
   .article-content iframe {
