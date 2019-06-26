@@ -732,7 +732,8 @@ function feature($atts, $content=null)
     $a = shortcode_atts(
         array(
             'media' => '',
-            'caption' => ''), $atts
+            'caption' => '',
+            'centre_caption' => FALSE), $atts
     );
 
     $container_classes = ["image-container"];
@@ -779,12 +780,16 @@ function feature($atts, $content=null)
     );
 
     if(!empty($a['caption'])) {
-      $feature .= container_column(
-                      '<figcaption>' . $a['caption'] . '</figcaption>',
-                      ['full-width-caption']
-                  );
+        $caption_container_classes = ['full-width-caption'];
+        if ($a['centre_caption']) {
+            $caption_container_classes[] = 'centered';
+        }
+        $feature .= container_column(
+                        '<figcaption>' . $a['caption'] . '</figcaption>',
+                        $caption_container_classes
+                    );
     }
-    
+
 
     return remove_empty_p($feature);
 }
