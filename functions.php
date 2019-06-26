@@ -1176,7 +1176,8 @@ function thumbnail($atts, $content=null)
 	    'media' => null,
 	    'caption' => null,
 	    'subcaption' => null,
-	    'subsubcaption' => null
+	    'subsubcaption' => null,
+	    'url' => null
 	), $atts
     );
 
@@ -1203,10 +1204,14 @@ function thumbnail($atts, $content=null)
                                . $figure_figcaption_e;
 	}
 
-	return $figure_b . $figure_img_div . $figure_figcaption . $figure_e;
+        $html = $figure_b . $figure_img_div . $figure_figcaption . $figure_e;
 
+        if (!is_null($a['url'])) {
+            $html = '<a href="' . $a['url'] . '" target="_blank">' . $html . '</a>';
+        }
+
+        return $html;
     }
-
 }
 
 /**
