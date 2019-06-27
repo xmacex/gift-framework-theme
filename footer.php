@@ -24,7 +24,14 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'UA-141747450-1');
+  gtag('config', 'UA-141747450-1', {
+    'custom_map': {'dimension1': 'wp_admin_logged_in'}
+  });
+  <?php
+    if (current_user_can('editor') || current_user_can('administrator')) {
+      echo "gtag('event', 'wp_admin_logged_in_dimension', {'wp_admin_logged_in': 'true'});";
+    }
+  ?>
 </script>
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/vendor/smooth-scroll.polyfills.js"></script>
 
