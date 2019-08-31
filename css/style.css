@@ -1,5 +1,22 @@
 /* Google Font Imports */
-@import url('https://fonts.googleapis.com/css?family=Inconsolata:regular,bold|Karla:regular,bold,italic,bolditalic|Merriweather|Source+Code+Pro');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:regular,bold|Nunito:regular,bold|Karla:regular,bold,italic,bolditalic|Merriweather|Source+Code+Pro');
+
+/* File Font Imports */
+@font-face {
+    font-family: 'LitSans';
+    src: url('../fonts/litsans-medium-webfont.woff2') format('woff2'),
+         url('../fonts/litsans-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lovelo';
+    src: url('../fonts/lovelo-black-webfont.woff2') format('woff2'),
+         url('../fonts/lovelo-black-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
 
 /* Grid Structure
  * 3-column grid structure is based on 30% content, 5% padding
