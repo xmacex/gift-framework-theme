@@ -11,7 +11,7 @@
 }
 
 @font-face {
-    font-family: 'Lovelo';
+    font-family: 'LoveloBlack';
     src: url('../fonts/lovelo-black-webfont.woff2') format('woff2'),
          url('../fonts/lovelo-black-webfont.woff') format('woff');
     font-weight: bold;
@@ -495,7 +495,7 @@ br + br, br:last-child {
 }
 
 .content-area h2 {
-  font-family: 'Lovelo', Helvetica, Arial, sans-serif;
+  font-family: 'LoveloBlack', Helvetica, Arial, sans-serif;
   color: #666666;
   font-size: 32px;
   line-height: 1.4em;
@@ -996,7 +996,7 @@ input[type='button'].secondary:hover,
 }
 
 .full-width .full-width-inner h3 {
-  font-family: 'Lovelo', Helvetica, Arial, san-serif;
+  font-family: 'LoveloBlack', Helvetica, Arial, san-serif;
   color: #444444;
   font-size: 22px;
   font-weight: bold;
