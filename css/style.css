@@ -44,7 +44,7 @@
 body, html {
   margin: 0;
   padding: 0;
-  font-family: 'Karla', Helvetica, Arial, san-serif;
+  font-family: 'Nunito', Helvetica, Arial, san-serif;
   color: #666666;
   font-size: 18px;
   line-height: 1.5em;
@@ -128,7 +128,7 @@ br + br, br:last-child {
 @media screen and (max-width: 576px) {
 
   .wrap-container:not(.menu-container) > *:not(.full-width), .full-width > * {
-    padding: 0 15px;
+    padding: 0 30px;
   }
 
 }
@@ -473,16 +473,16 @@ br + br, br:last-child {
 /* Generic Styling */
 
 .content-area h1, .content-area h2, .content-area h3 {
-  font-family: 'Karla', Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
 
 .content-area h1 {
   color: #444444;
-  font-size: 42px;
+  font-family: 'LitSans', Helvetica, Arial, sans-serif;
+  font-size: 38px;
   line-height: 1.4em;
   margin: 0 0 40px 0;
-  letter-spacing: -0.05em;
+  font-weight: normal;
 }
 
 .content-area h1 a {
@@ -495,6 +495,7 @@ br + br, br:last-child {
 }
 
 .content-area h2 {
+  font-family: 'Lovelo', Helvetica, Arial, sans-serif;
   color: #666666;
   font-size: 32px;
   line-height: 1.4em;
@@ -510,7 +511,6 @@ br + br, br:last-child {
 }
 
 .content-area p, .content-area li {
-  font-family: 'Karla', Helvetica, Arial, sans-serif;
   color: #666666;
   font-size: 18px;
   line-height: 1.75em;
@@ -582,16 +582,16 @@ input[type='button'].primary,
   border: none;
   border-radius: 0;
   width: 300px;
-  height: 60px;
-  line-height: 60px;
+  height: 90px;
+  line-height: 90px;
   text-transform: uppercase;
   background-color: #EE5E54;
   padding: 0 30px;
-  font-family: 'Karla', Helvetica, Arial, sans-serif;
+  font-family: 'Nunito', Helvetica, Arial, sans-serif;
   color: #FFFFFF;
   cursor: pointer;
   outline: none;
-  font-weight: normal;
+  font-weight: bold;
   box-sizing: border-box;
   text-decoration: none;
   transition: background-color 500ms;
@@ -938,7 +938,6 @@ input[type='button'].secondary:hover,
 .full-width {
   position: relative;
   background-color: #FBF8F3;
-  font-family: 'Karla', Helvetica, Arial, san-serif;
   color: #666666;
   font-size: 18px;
   line-height: 1.5em;
@@ -997,7 +996,7 @@ input[type='button'].secondary:hover,
 }
 
 .full-width .full-width-inner h3 {
-  font-family: 'Karla', Helvetica, Arial, san-serif;
+  font-family: 'Lovelo', Helvetica, Arial, san-serif;
   color: #444444;
   font-size: 22px;
   font-weight: bold;
@@ -1634,7 +1633,7 @@ input[type='button'].secondary:hover,
   position: absolute;
   top: 0;
   right: 0;
-  width: calc(0.3 * 1080px + ((100% - 1080px) / 2));
+  width: calc(0.4 * 1080px + ((100% - 1080px) / 2));
   min-height: 680px;
   z-index: 1;
   min-height: 90px;
@@ -1646,12 +1645,12 @@ input[type='button'].secondary:hover,
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  margin-bottom: 20px;
 }
 
-.image-and-call-to-action .button {
-  text-decoration: none;
-  margin: 20px 0 10px 0;
+.image-and-call-to-action .button,
+.image-and-call-to-action .description {
+  position: relative;
+  left: calc(0.1 * 1080px);
 }
 
 .image-and-call-to-action .button:first-child {
@@ -1663,20 +1662,36 @@ input[type='button'].secondary:hover,
   font-size: 16px;
   line-height: 1.5em;
   margin: 0;
+  margin-top: 20px;
 }
 
-.image-and-call-to-action .button, .image-and-call-to-action .description {
+.image-and-call-to-action .button,
+.image-and-call-to-action .description {
   width: calc(0.3 * 1080px);
 }
 
-.image-and-call-to-action .button + .description {
-  margin-top: 5px;
+.image-and-call-to-action .button {
+  text-decoration: none;
+  margin-top: -55px;
+  border: 10px solid #FFFFFF;
+  height: 110px;
+  width: calc(0.3 * 1080px + 20px);
+  left: calc(0.1 * 1080px - 10px);
 }
 
 @media screen and (min-width: 1440px) {
 
+  .image-and-call-to-action .button,
+  .image-and-call-to-action .description {
+    left: calc(0.1 * 1280px);
+  }
+
+  .image-and-call-to-action .button {
+    left: calc(0.1 * 1280px - 10px);
+  }
+
   .image-and-call-to-action {
-    width: calc(0.3 * 1280px + ((100% - 1280px) / 2));
+    width: calc(0.4 * 1280px + ((100% - 1280px) / 2));
   }
 
 }
@@ -1684,7 +1699,7 @@ input[type='button'].secondary:hover,
 @media screen and (max-width: 1260px) {
 
   .image-and-call-to-action {
-    width: calc(((100vw - 180px) * 0.3) + 90px);
+    width: calc(100vw - 650px);
     height: 670px;
   }
 
@@ -1696,8 +1711,9 @@ input[type='button'].secondary:hover,
     margin-top: 470px;
   }
 
-  .image-and-call-to-action .button, .image-and-call-to-action .description {
-    width: calc(((100vw - 180px) * 0.3));
+  .image-and-call-to-action .button,
+  .image-and-call-to-action .description {
+    width: 300px;
   }
 
 }
@@ -1712,8 +1728,18 @@ input[type='button'].secondary:hover,
     margin-top: 420px;
   }
 
-  .image-and-call-to-action .button, .image-and-call-to-action .description {
-    width: calc(((100vw - 180px) * 0.3) + 45px);
+  .image-and-call-to-action .button,
+  .image-and-call-to-action .description {
+    width: calc(100vw - 730px);
+    max-width: 300px;
+  }
+
+  .image-and-call-to-action .button {
+    left: 40px;
+  }
+
+  .image-and-call-to-action .description {
+    left: 50px;
   }
 
 }
@@ -1858,9 +1884,8 @@ input[type='button'].secondary:hover,
   min-height: 420px;
 }
 
-.article-content > .column-container:first-of-type p,
-.article-content > .column-container:first-of-type li {
-  font-size: 20px;
+.article-content > .column-container:first-of-type .content-wrap {
+  width: 52.5%;
 }
 
 .article-content .column-container:last-child p:last-child {
@@ -1961,7 +1986,7 @@ input[type='button'].secondary:hover,
 @media screen and (max-width: 1260px) {
 
   .article-content {
-    margin-top: 60px;
+    margin-top: 90px;
   }
 
   .article-content > .column-container:first-of-type {
@@ -1972,10 +1997,14 @@ input[type='button'].secondary:hover,
     width: 65%;
   }
 
+  .article-content > .column-container:first-of-type .content-wrap {
+    width: 500px;
+  }
+
   .article-content > .column-container:first-of-type p,
   .article-content > .column-container:first-of-type li {
     font-size: 18px;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
   }
 
   .article-content .full-width p,
@@ -2001,6 +2030,10 @@ input[type='button'].secondary:hover,
 
     .article-content > .column-container:first-of-type {
       min-height: 0;
+    }
+
+    .article-content > .column-container:first-of-type .content-wrap {
+      width: 100%;
     }
 
     .article-content > .column-container:first-of-type,
