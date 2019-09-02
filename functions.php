@@ -1275,9 +1275,13 @@ function captioned_image_gallery($atts, $content=null)
   $rendered_content .= do_shortcode($content);
   $rendered_content .= '</div>';
 
-  return remove_empty_p(container_column(
-    $rendered_content,
-    ['captioned-image-gallery']
+  return remove_empty_p(container_fw(
+    container_fw_inner(
+      container_column(
+        $rendered_content,
+        ['captioned-image-gallery']
+      )
+    ), ['dark', 'dark-blue']
   ));
 }
 

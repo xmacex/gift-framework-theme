@@ -851,14 +851,9 @@ input[type='button'].secondary:hover,
 
 /* Captioned Image Gallery */
 
-.article-content .captioned-image-gallery {
-  padding-top: 70px;
-}
-
 .article-content .captioned-image-gallery h3 {
   margin: 0;
   font-weight: normal;
-  color: #999999;
 }
 
 .article-content .captioned-image-gallery-images {
@@ -886,7 +881,6 @@ input[type='button'].secondary:hover,
 
 .article-content .captioned-image-gallery-images figure figcaption {
   font-size: 17px;
-  color: #777777;
   text-align: left;
   margin-bottom: 20px;
 }
@@ -947,6 +941,10 @@ input[type='button'].secondary:hover,
   background-color: #444444;
 }
 
+.full-width.dark.dark-blue {
+  background-color: #3B4753;
+}
+
 .full-width.no-background {
   background-color: transparent;
 }
@@ -986,10 +984,16 @@ input[type='button'].secondary:hover,
   max-width: none;
 }
 
-.full-width.dark, .full-width.dark h1, .full-width.dark h2, .full-width.dark p, .full-width.dark li, .full-width.dark a,
-.full-width.how-to, .full-width.how-to h1, .full-width.how-to h2, .full-width.how-to p, .full-width.how-to li, .full-width.how-to a {
+.full-width.dark, .full-width.dark h1, .full-width.dark h2, .full-width.dark h3, .full-width.dark p, .full-width.dark li, .full-width.dark a,
+.full-width.dark .full-width-inner, .full-width.dark .full-width-inner h1, .full-width.dark .full-width-inner h2, .full-width.dark .full-width-inner h3, .full-width.dark .full-width-inner p, .full-width.dark .full-width-inner li, .full-width.dark .full-width-inner a,
+.full-width.how-to, .full-width.how-to h1, .full-width.how-to h2, .full-width.dark h3, .full-width.how-to p, .full-width.how-to li, .full-width.how-to a {
   color: #FFFFFF;
 }
+
+.full-width.dark a, .full-width.dark .full-width-inner a, .full-width.how-to a {
+  text-decoration: underline;
+}
+
 
 .full-width h1:first-child, .full-width h2:first-child, .full-width h3:first-child {
   margin-top: 0;
@@ -1035,8 +1039,8 @@ input[type='button'].secondary:hover,
 }
 
 .full-width .full-width-inner {
-  padding-top: 70px;
-  padding-bottom: 70px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 .full-width .full-width-inner.margins-reduced {
@@ -1841,8 +1845,14 @@ input[type='button'].secondary:hover,
   margin-top: 20px;
 }
 
-.article-content blockquote::before, .article-content blockquote::after {
-  content: '"';
+.article-content blockquote::before {
+  content: '“';
+  display: block;
+  position: relative;
+  left: -20px;
+  top: 15px;
+  font-size: 96px;
+  color: #FE7064;
 }
 
 .article-content .quote-source {
@@ -1921,8 +1931,9 @@ input[type='button'].secondary:hover,
   font-family: 'Source Code Pro', 'Courier New', Courier, monospace;
 }
 
-.article-content .full-width + .column-container {
-  margin-top: 70px;
+.article-content .full-width + .column-container,
+.article-content .wp-block-media-text {
+  margin-top: 100px;
 }
 
 .article-content .full-width + .column-container.full-width-caption {
@@ -1938,8 +1949,18 @@ input[type='button'].secondary:hover,
   text-align: center;
 }
 
-.article-content .column-container + .full-width {
-  margin-top: 70px;
+.article-content .column-container + .full-width,
+.article-content .wp-block-media-text + .full-width {
+  margin-top: 100px;
+}
+
+.article-content .how-to .column-container .content-wrap {
+  width: 100%;
+  text-align: center;
+}
+
+.article-content .how-to .column-container + .has-column-layout {
+  margin-top: 50px;
 }
 
 .article-content .how-to .step {
@@ -1981,6 +2002,22 @@ input[type='button'].secondary:hover,
   font-size: 15px;
   line-height: 1.5em;
   margin: 0 0 20px 0;
+}
+
+.article-content .wp-block-media-text {
+  align-items: stretch;
+}
+
+.article-content .wp-block-media-text.has-media-on-the-right {
+  grid-template-columns: auto 40%;
+}
+
+.article-content .wp-block-media-text .wp-block-media-text__content {
+  padding-left: 0;
+}
+
+.article-content .wp-block-media-text .wp-block-media-text__media img {
+  margin: 0;
 }
 
 @media screen and (max-width: 1260px) {
@@ -2039,7 +2076,9 @@ input[type='button'].secondary:hover,
     .article-content > .column-container:first-of-type,
     .article-content .full-width + .column-container,
     .article-content .column-container + .full-width,
-    .article-content .button, .article-content button, .article-content input[type="button"] {
+    .article-content .button, .article-content button, .article-content input[type="button"],
+    .article-content .full-width + .wp-block-media-text,
+    .article-content .wp-block-media-text + .full-width {
       margin-top: 45px;
     }
 
@@ -2050,6 +2089,23 @@ input[type='button'].secondary:hover,
     .article-content .how-to .step figcaption {
       font-size: 16px;
     }
+
+}
+
+
+@media screen and (max-width: 768px) {
+
+  .article-content .wp-block-media-text.has-media-on-the-right {
+    grid-template-columns: auto;
+  }
+
+  .article-content .wp-block-media-text .wp-block-media-text__content {
+    padding-right: 0;
+  }
+
+  .article-content .wp-block-media-text .wp-block-media-text__media {
+    display: none;
+  }
 
 }
 
@@ -2105,7 +2161,9 @@ input[type='button'].secondary:hover,
   .article-content > .column-container:first-of-type,
   .article-content .full-width + .column-container,
   .article-content .column-container + .full-width,
-  .article-content .button, .article-content button, .article-content input[type="button"] {
+  .article-content .button, .article-content button, .article-content input[type="button"],
+  .article-content .full-width + .wp-block-media-text,
+  .article-content .wp-block-media-text + .full-width {
     margin-top: 25px;
   }
 
