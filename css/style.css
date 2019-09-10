@@ -731,11 +731,11 @@ input[type='button'].placeholder,
 .content-area .button.placeholder,
 .content-area button.placeholder,
 .content-area input[type='button'].placeholder {
-  background: transparent;
-  border: 2px solid #666666;
+  background: #EEEEEE;
   color: #666666;
-  line-height: 3em;
   cursor: default;
+  height: 90px;
+  line-height: 90px;
 }
 
 .button.placeholder:hover,
@@ -745,7 +745,7 @@ input[type='button'].placeholder:hover,
 .content-area button.placeholder:hover,
 .content-area input[type='button'].placeholder:hover {
   color: #666666;
-  background: transparent;
+  background: #EEEEEE;
 }
 
 .button:hover,
