@@ -3,9 +3,10 @@ window.addEventListener('DOMContentLoaded', () => {
   let menuContainer = document.querySelector('.menu-container');
 
   // click / toggle functionality for menu
+  /*
   let menuItems = document.querySelectorAll('.menu > .menu-item-has-children');
   menuItems.forEach(menuItem => {
-    menuItem.addEventListener('click', function(e) {
+    menuItem.addEventListener('mouseover', function(e) {
       if (!menuContainer.classList.contains('open')) {
         e.stopPropagation();
         menuItems.forEach(menuItemWithSubmenuToHide => {
@@ -17,6 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+  */
 
   // close menu if the user clicks outside of it
   let body = document.querySelector('body');

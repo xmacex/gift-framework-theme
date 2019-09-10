@@ -91,6 +91,24 @@ add_theme_support('post-thumbnails');
 add_image_size('cover-image', 1440, 500);
 
 /**
+ * Support for adding tags to pages
+ */
+
+// add tag support to pages
+function tags_support_all() {
+	register_taxonomy_for_object_type('post_tag', 'page');
+}
+
+// ensure all tags are included in queries
+function tags_support_query($wp_query) {
+	if ($wp_query->get('tag')) $wp_query->set('post_type', 'any');
+}
+
+// tag hooks
+add_action('init', 'tags_support_all');
+add_action('pre_get_posts', 'tags_support_query');
+
+/**
  * Remove empty paragraphs created by wpautop()
  * @author Ryan Hamilton
  * @link https://gist.github.com/Fantikerz/5557617
@@ -163,6 +181,24 @@ function decorate_article_with_container($content)
     $article_e = '</article>';
 
     return $article_b . $content . $article_e;
+}
+
+/**
+ * Column container wrapping, for use in page templates that don't automatically
+ * wrap content within .article-content and .column-container <div> sections.
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function column_container($atts, $content=null) {
+
+  $a = shortcode_atts(array(), $atts);
+
+  return decorate_article_with_container(
+    container_column(remove_empty_p(do_shortcode($content)))
+  );
 }
 
 /**
@@ -368,6 +404,20 @@ function container_fw($content, $classes=[])
 }
 
 /**
+ * An outermost wrap container
+ *
+ * @param string $content Content from the database
+ * @param string[] $classes A string to append to classes
+ *
+ * @return string HTML representation
+ */
+function container_wrap($content, $classes=[])
+{
+    $classes[] = "wrap-container";
+    return container($content, $classes);
+}
+
+/**
  * A column container, a row.
  *
  * @param string $content Content from the database
@@ -505,9 +555,9 @@ function container_feature_block_caption($content, $classes=[])
  *
  * @return string HTML representation
  */
-function container_feature_block_image($content, $classes=[])
+function container_feature_block_content($content, $classes=[])
 {
-    $classes[] = "feature-block-image";
+    $classes[] = "feature-block-content";
     return container($content, $classes);
 }
 
@@ -1021,27 +1071,58 @@ function feature_block($atts, $content=null)
 {
     $a = shortcode_atts(
 	array(
-	    'is_hero' => false,
+	    'is_full_screen' => false,
 	    'is_downshifted' => false,
-	    'is_highlighted' => false), $atts
+	    'is_highlighted' => false,
+      'is_title_card' => false,
+      'is_front_page' => false,
+      'has_dark_text' => false,
+      'is_non_leading' => false,
+      'is_category_page' => false,
+      'has_extra_large_content_and_title' => false),
+      $atts
     );
 
     $classes = array();
 
-    if ($a['is_hero'] === 'true') {
-	$classes[] = 'hero';
+    if ($a['is_full_screen'] === 'true') {
+	     $classes[] = 'full-screen';
+    }
+
+    if ($a['is_title_card'] === 'true') {
+	     $classes[] = 'title-card';
+    }
+
+    if ($a['is_front_page'] === 'true') {
+	     $classes[] = 'is-front-page';
     }
 
     if ($a['is_downshifted'] === 'true') {
-	$classes[] = 'downshifted';
+	     $classes[] = 'downshifted';
     }
 
     if ($a['is_highlighted'] === 'true') {
-	$classes[] = 'highlighted';
+	     $classes[] = 'highlighted';
+    }
+
+    if ($a['has_dark_text'] === 'true') {
+      $classes[] = 'dark-text';
+    }
+
+    if ($a['is_non_leading'] === 'true') {
+      $classes[] = 'non-leading';
+    }
+
+    if ($a['is_category_page'] === 'true') {
+      $classes[] = 'category-page';
+    }
+
+    if ($a['has_extra_large_content_and_title'] === 'true') {
+      $classes[] = 'extra-large-content-and-title';
     }
 
     return do_shortcode(
-	container_feature_block($content, $classes)
+	     container_feature_block($content, $classes)
     );
 }
 
@@ -1056,7 +1137,7 @@ function feature_block($atts, $content=null)
 function feature_block_caption($atts, $content=null) {
 
     return do_shortcode(
-	container_feature_block_caption($content)
+	     container_feature_block_caption($content)
     );
 
 }
@@ -1069,28 +1150,65 @@ function feature_block_caption($atts, $content=null) {
  *
  * @return string HTML representation
  */
-function feature_block_image($atts, $content=null) {
+function feature_block_content($atts, $content=null) {
 
     $a = shortcode_atts(
-	array(
-	    'media' => null
-	), $atts
+    	array(
+    	    'media' => null,
+          'background_color' => null
+    	), $atts
     );
 
-    if (!is_null($a['media'])) {
+    $styles = [];
 
-	$url = get_media_url_from_id_or_url($a['media']);
+    $image_url = !is_null($a['media']) ? get_media_url_from_id_or_url($a['media']) : '';
+    $background_color = !is_null($a['background_color']) ? $a['background_color'] : '';
 
-	$content = '';
-	$content .= '<img class="feature-block-image-image" src="' . $url . '" />';
-	$content .= '<div class="feature-block-image-displayable" style="background-image: url(\'' . $url . '\')">';
-	$content .= '</div>';
-
-	return do_shortcode(
-	    container_feature_block_image($content)
-	);
+    if ($image_url) {
+      $styles[] = 'background-image: url(\'' . $image_url . '\')';
     }
 
+    if ($background_color) {
+      $styles[] = 'background-color: ' . $background_color;
+    }
+
+  	$feature_block_image_content = '';
+    $feature_block_image_content .= $image_url ? '<img class="feature-block-content-image" src="' . $image_url . '" />' : '';
+    $feature_block_image_content .= '<div class="feature-block-background"' . (!empty($styles) ? 'style="' . implode($styles, '; ') . '"' : '') . '>';
+    $feature_block_image_content .= '<div class="wrap-container">';
+    $feature_block_image_content .= '<div class="column-container">';
+    $feature_block_image_content .= '<div class="content-wrap">' . remove_empty_p($content) . '</div>';
+    $feature_block_image_content .= '</div>';
+    $feature_block_image_content .= '</div>';
+  	$feature_block_image_content .= '</div>';
+
+  	return do_shortcode(
+  	    container_feature_block_content($feature_block_image_content)
+  	);
+}
+
+/**
+ * The inset that appears inside a feature block
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function feature_block_image_inset($atts, $content=null) {
+
+  $a = shortcode_atts(
+    array(
+        'media' => null,
+    ), $atts
+  );
+
+  $image_url = !is_null($a['media']) ? get_media_url_from_id_or_url($a['media']) : '';
+
+  $feature_block_image_inset_b = '<div class="feature-block-image-inset"' . ($image_url ? 'style="background-image: url(\'' . $image_url . '\')"' : '') . '>';
+  $feature_block_image_inset_e = '</div>';
+
+  return $feature_block_image_inset_b . $feature_block_image_inset_e;
 }
 
 /**
@@ -1223,7 +1341,7 @@ function thumbnail($atts, $content=null)
 
 	$url = get_media_url_from_id_or_url($a['media']);
 
-	$figure_b = '<figure class="thumbnail">';
+	$figure_b = '<figure>';
 	$figure_img_div = '<div class="thumbnail-image" style="background-image: url(' . $url . ')" />';
 	$figure_e = '</figure>';
 
@@ -1244,11 +1362,7 @@ function thumbnail($atts, $content=null)
 
         $html = $figure_b . $figure_img_div . $figure_figcaption . $figure_e;
 
-        if (!is_null($a['url'])) {
-            $html = '<a href="' . $a['url'] . '" target="_blank">' . $html . '</a>';
-        }
-
-        return $html;
+        return '<a class="thumbnail"' . (!is_null($a['url']) ? 'href="' . $a['url'] : '') . '" target="_blank">' . $html . '</a>';
     }
 }
 
@@ -1311,8 +1425,117 @@ function captioned_image($atts, $content=null)
 }
 
 /**
+ * Generic, flex-boxed based columns that collapses on a mobile viewport
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function columns($atts, $content=null) {
+
+  $a = shortcode_atts(array(), $atts);
+
+  $columns_b = '<div class="columns">';
+  $columns_e = '</div>';
+
+  return $columns_b . do_shortcode(remove_empty_p($content)) . $columns_e;
+}
+
+/**
+ * Generic, flex-boxed based column that collapses on a mobile viewport
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function column($atts, $content=null) {
+
+  $a = shortcode_atts(array(), $atts);
+
+  $column_b = '<div class="column">';
+  $column_e = '</div>';
+
+  return $column_b . do_shortcode(remove_empty_p($content)) . $column_e;
+}
+
+/**
+ * A category list that shows a series of articles as thumbnails
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function category_list($atts, $content=null) {
+
+  $a = shortcode_atts(array(), $atts);
+
+  return container_wrap(
+    container_column(
+      container(
+        do_shortcode(remove_empty_p($content)),
+        ['category-list']
+      )
+    )
+  );
+}
+
+/**
+ * A single category list item, a thumbnail
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function category_list_item($atts, $content=null) {
+
+  $a = shortcode_atts(array(
+    'page' => null,
+    'leading_title' => '',
+    'theme_color' => ''
+  ), $atts);
+
+  $page_id = is_numeric($a['page']) ? $a['page'] : get_page_by_title($a['page']);
+  $post_leading_title = $a['leading_title'] ? $a['leading_title'] : '';
+  $post_theme_color = $a['theme_color'] ? $a['theme_color'] : '';
+
+  if (!is_null($page_id) && $post = get_post($page_id)) {
+
+    $post_image =             '<img class="category-list-item-featured-image" src="' . get_the_post_thumbnail_url($post) . '" alt="' . get_the_title($post) . '">';
+    $post_image_displayable = '<div class="category-list-item-featured-image-displayable" style="background-image: url(\'' . get_the_post_thumbnail_url($post) . '\')"></div>';
+    $post_link_b =            '<a href="' . get_permalink($post) . '">';
+    $post_leading_title =     $post_leading_title ? '<h3' . ($post_theme_color ? ' style="color: ' . $post_theme_color . '"' : '') . '>' . $post_leading_title . '</h3>' : '';
+    $post_title  =            '<h2>' . get_the_title($post) . '</h2>';
+    $post_content =           $content ? '<p>' . remove_empty_p($content) . '</p>' : '';
+    $post_learn_more =        '<p class="learn-more">Learn More ...</p>';
+    $post_link_e =            '</a>';
+
+    $content = $post_link_b .
+               $post_image .
+               $post_image_displayable .
+               $post_leading_title .
+               $post_title .
+               $post_content .
+               $post_learn_more .
+               $post_link_e;
+
+    return container(
+      remove_empty_p($content),
+      ['category-list-item']
+    );
+
+  }
+}
+
+
+/**
  * Add the shortcodes.
  */
+add_shortcode('column_container', 'column_container');
+
 add_shortcode('leading_content', 'leading_content');
 
 add_shortcode('questions', 'questions');
@@ -1338,14 +1561,22 @@ add_shortcode('code', 'code');
 
 add_shortcode('feature_block', 'feature_block');
 add_shortcode('feature_block_caption', 'feature_block_caption');
-add_shortcode('feature_block_image', 'feature_block_image');
+add_shortcode('feature_block_content', 'feature_block_content');
+add_shortcode('feature_block_image_inset', 'feature_block_image_inset');
 add_shortcode('feature_block_tile_list', 'feature_block_tile_list');
 add_shortcode('feature_block_tile', 'feature_block_tile');
 
+add_shortcode('columns', 'columns');
+add_shortcode('column', 'column');
+
 add_shortcode('full_width_thumbnail_gallery', 'full_width_thumbnail_gallery');
 add_shortcode('thumbnail', 'thumbnail');
+
 add_shortcode('captioned_image_gallery', 'captioned_image_gallery');
 add_shortcode('captioned', 'captioned_image');
+
+add_shortcode('category_list', 'category_list');
+add_shortcode('category_list_item', 'category_list_item');
 
 add_shortcode('references', 'references');
 add_shortcode('credits', 'credits');

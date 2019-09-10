@@ -14,11 +14,11 @@
   <link rel="shortcut icon" type="image/png" href="<?php echo get_theme_file_uri('favicon.ico'); ?>">
   <link rel="apple-touch-icon" href="<?php echo get_theme_file_uri('icon.png') ; ?>">
 </head>
-<body>
+<body <?php body_class(); ?>>
     <!--[if lte IE 9]>
 	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
-    <header class="menu-container wrap-container <?php echo (has_post_thumbnail() && !is_front_page()) ? 'white-on-mobile' : '' ?>">
+    <header class="menu-container wrap-container<?php echo (has_post_thumbnail() || is_front_page()) ? ' white-on-mobile' : '' ?><?php echo (is_front_page()) ? ' overlaid on-image' : '' ?>">
       <a class="home-link" href="<?php echo get_home_url(); ?>">
         <figure class="gift-logo">
       	</figure>
@@ -29,3 +29,24 @@
     	    'theme_location' => 'primary-menu')); ?>
       <button class="menu-toggler"></button>
     </header>
+    <div class="floating menu-container wrap-container" style="display: none">
+      <nav class="navigation menu floating-navigation">
+        <ul id="menu-floating-menu" class="menu">
+          <li clas="menu-item">
+            <a href="#">Change: How & Why?</a>
+          </li>
+          <li clas="menu-item">
+            <a href="#">Systems & Content</a>
+          </li>
+          <li clas="menu-item">
+            <a href="#">Culture</a>
+          </li>
+          <li clas="menu-item">
+            <a href="#">People</a>
+          </li>
+          <li clas="menu-item">
+            <a href="#">Understanding</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
