@@ -1495,12 +1495,14 @@ function category_list_item($atts, $content=null) {
   $a = shortcode_atts(array(
     'page' => null,
     'leading_title' => '',
+    'title' => '',
     'theme_color' => ''
   ), $atts);
 
   $page_id = is_numeric($a['page']) ? $a['page'] : get_page_by_title($a['page']);
   $post_leading_title = $a['leading_title'] ? $a['leading_title'] : '';
   $post_theme_color = $a['theme_color'] ? $a['theme_color'] : '';
+  $displayed_title = $a['title'] ? $a['title'] : '';
 
   if (!is_null($page_id) && $post = get_post($page_id)) {
 
@@ -1508,7 +1510,7 @@ function category_list_item($atts, $content=null) {
     $post_image_displayable = '<div class="category-list-item-featured-image-displayable" style="background-image: url(\'' . get_the_post_thumbnail_url($post) . '\')"></div>';
     $post_link_b =            '<a href="' . get_permalink($post) . '">';
     $post_leading_title =     $post_leading_title ? '<h3' . ($post_theme_color ? ' style="color: ' . $post_theme_color . '"' : '') . '>' . $post_leading_title . '</h3>' : '';
-    $post_title  =            '<h2>' . get_the_title($post) . '</h2>';
+    $post_title  =            '<h2>' . ($displayed_title ? $displayed_title : get_the_title($post)) . '</h2>';
     $post_content =           $content ? '<p>' . remove_empty_p($content) . '</p>' : '';
     $post_learn_more =        '<p class="learn-more">Learn More ...</p>';
     $post_link_e =            '</a>';
