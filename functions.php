@@ -109,6 +109,84 @@ add_action('init', 'tags_support_all');
 add_action('pre_get_posts', 'tags_support_query');
 
 /**
+ * Support for custom WordPress options for editing the footer text of the
+ * theme
+ */
+function theme_settings_page() {
+?>
+  <div class="wrap">
+    <h1>Site Footer</h1>
+    <form method="post" action="options.php">
+      <?php
+        settings_fields("section");
+        do_settings_sections("theme-options");
+        submit_button();
+      ?>
+    </form>
+  </div>
+<?php
+}
+
+function add_theme_menu_item() {
+
+  add_menu_page(
+    'Footer',
+    'Footer',
+    'manage_options',
+    'theme-panel',
+    'theme_settings_page',
+    null,
+    99
+  );
+
+}
+
+function footer_header_element() {
+?>
+  <textarea name="footer_header" id="footer_header" style="width: 500px" rows="3"><?php echo htmlspecialchars(get_option('footer_header')); ?></textarea>
+<?php
+}
+
+function footer_text_element() {
+?>
+  <textarea name="footer_text" id="footer_text" style="width: 500px" rows="5"><?php echo htmlspecialchars(get_option('footer_text')); ?></textarea>
+<?php
+}
+
+function display_theme_panel_fields() {
+
+  add_settings_section(
+    'section',
+    'Edit Footer Text',
+    null,
+    'theme-options'
+  );
+
+  add_settings_field(
+    'footer_header',
+    'Footer Header',
+    'footer_header_element',
+    'theme-options',
+    'section'
+  );
+
+  add_settings_field(
+    'footer_text',
+    'Footer Text',
+    'footer_text_element',
+    'theme-options',
+    'section'
+  );
+
+  register_setting('section', 'footer_header');
+  register_setting('section', 'footer_text');
+
+}
+
+add_action("admin_init", "display_theme_panel_fields");
+add_action("admin_menu", "add_theme_menu_item");
+
+/**
  * Remove empty paragraphs created by wpautop()
  * @author Ryan Hamilton
  * @link https://gist.github.com/Fantikerz/5557617

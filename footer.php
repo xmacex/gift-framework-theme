@@ -9,11 +9,9 @@
             ?>
           </div>
         <?php endif; ?>
-        <p class="footer-header">Learn more about <a href="<?php echo get_permalink(357); ?>">The GIFT Project</a>.</p>
+        <p class="footer-header"><?php echo get_option('footer_header'); ?></p>
         <img class="eu-flag-footer" src="<?php echo get_stylesheet_directory_uri(); ?>/img/eu-flag-footer.png" alt="European Union Flag" />
-        <p>
-		      The GIFT Box is a result of The GIFT project – a research project that has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 727040. If you have questions, please contact us on <a href="mailto:gift@itu.dk">gift@itu.dk</a>.
-        </p>
+        <p class="footer-header"><?php echo get_option('footer_text'); ?></p>
     	</div>
     </div>
 </footer>
