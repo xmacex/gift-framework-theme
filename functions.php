@@ -287,7 +287,7 @@ function column_container($atts, $content=null) {
 
   $a = shortcode_atts(array(), $atts);
 
-  return decorate_article_with_container(
+  return container_wrap(
     container_column(remove_empty_p(do_shortcode($content)))
   );
 }
@@ -1563,13 +1563,9 @@ function category_list($atts, $content=null) {
 
   $a = shortcode_atts(array(), $atts);
 
-  return container_wrap(
-    container_column(
-      container(
-        do_shortcode(remove_empty_p($content)),
-        ['category-list']
-      )
-    )
+  return container(
+    do_shortcode(remove_empty_p($content)),
+    ['category-list']
   );
 }
 
