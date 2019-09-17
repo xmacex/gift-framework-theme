@@ -28,8 +28,8 @@
 
 @font-face {
     font-family: 'SofiaProBold';
-    src: url('sofia-pro-bold-webfont.woff2') format('woff2'),
-         url('sofia-pro-bold-webfont.woff') format('woff');
+    src: url('../fonts/sofia-pro-bold-webfont.woff2') format('woff2'),
+         url('../fonts/sofia-pro-bold-webfont.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 
