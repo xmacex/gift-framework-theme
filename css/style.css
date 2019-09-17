@@ -615,11 +615,11 @@ br + br, br:last-child {
 
 .content-area h1 {
   color: #444444;
-  font-family: 'LitSans', Helvetica, Arial, sans-serif;
+  font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
   font-size: 36px;
   line-height: 1.4em;
   margin: 0 0 40px 0;
-  font-weight: normal;
+  font-weight: bold;
 }
 
 .content-area h1 a {
@@ -632,12 +632,11 @@ br + br, br:last-child {
 }
 
 .content-area h2 {
-  font-family: 'LoveloBlack', Helvetica, Arial, sans-serif;
+  font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
   color: #666666;
   font-size: 32px;
   line-height: 1.4em;
   margin: 45px 0 21px 0;
-  letter-spacing: -0.02em;
 }
 
 .content-area h3 {
@@ -1147,7 +1146,7 @@ input[type='button'].secondary:hover,
 }
 
 .full-width .full-width-inner h3 {
-  font-family: 'LoveloBlack', Helvetica, Arial, san-serif;
+  font-family: 'SofiaProBold', Helvetica, Arial, san-serif;
   color: #444444;
   font-size: 22px;
   font-weight: bold;
@@ -2047,7 +2046,7 @@ input[type='button'].secondary:hover,
 }
 
 .category-list-item h2 {
-  font-family: 'LitSans', Helvetica, Arial, sans-serif;
+  font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
   font-size: 32px;
   color: #444444;
   margin-bottom: 20px;
