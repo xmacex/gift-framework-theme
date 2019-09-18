@@ -1865,6 +1865,7 @@ input[type='button'].secondary:hover,
   flex-direction: row;
   width: 100%;
   margin: 100px 0 0 0;
+  padding: 0;
 }
 
 .feature-section.caption-only .feature-section-title {
@@ -2184,7 +2185,6 @@ input[type='button'].secondary:hover,
   width: calc(33.33% - 40px);
   margin-bottom: 60px;
   margin-right: 60px;
-  min-height: 550px;
 }
 
 .category-list-item:nth-of-type(3n) {

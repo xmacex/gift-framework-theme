@@ -285,11 +285,19 @@ function decorate_article_with_container($content)
  */
 function column_container($atts, $content=null) {
 
-  $a = shortcode_atts(array(), $atts);
+  $a = shortcode_atts(array(
+    'wrap_only' => false
+  ), $atts);
 
-  return container_wrap(
-    container_column(remove_empty_p(do_shortcode($content)))
-  );
+  if ($a['wrap_only']) {
+    return container_wrap(
+      remove_empty_p(do_shortcode($content))
+    );
+  } else {
+    return container_wrap(
+      container_column(remove_empty_p(do_shortcode($content)))
+    );
+  }
 }
 
 /**
@@ -1365,6 +1373,77 @@ function feature_block_tile($atts, $content=null) {
 }
 
 /**
+ * A feature section
+ *
+ * @param array  $atts    Shortcode attributes
+ * @param string $content Content from the database
+ *
+ * @return string HTML representation
+ */
+function feature_section($atts, $content=null)
+{
+  $a = shortcode_atts(
+    array(
+      'title' => '',
+      'subtitle' => '',
+      'media' => '',
+      'quote' => '',
+      'is_category_overview' => '',
+      'highlight_color' => ''
+    ), $atts
+  );
+
+  $feature_section_classes = ['feature-section'];
+
+  $feature_section_title_el = '';
+  if ($a['title'] || $a['subtitle']) {
+    $feature_section_title_el_content = '';
+    $feature_section_title_el_content .= $a['subtitle'] ? '<p class="feature-section-subtitle">' . $a['subtitle'] . '</p>' : '';
+    $feature_section_title_el_content .= $a['title'] ? '<h2' . ($a['highlight_color'] ? ' style="color: ' . $a['highlight_color'] . '"' : '') . '>' . $a['title'] . '</h2>' : '';
+    $feature_section_title_el = container($feature_section_title_el_content, ['feature-section-title']);
+  }
+
+  $image_url = $a['media'] ? get_media_url_from_id_or_url($a['media']) : '';
+  $feature_section_content_el = '';
+  if ($image_url || $a['quote']) {
+
+    $feature_section_content_el_content = '';
+
+    if ($image_url) {
+      $feature_section_content_el_content .= '<div class="feature-section-image" style="background-image: url(\'' . $image_url . '\')">' . '</div>';
+    } else if ($a['quote']) {
+      $feature_section_content_el_content .= container(
+        '<blockquote>' . $a['quote'] . '</blockquote>',
+        ['feature-section-quote', 'article-content']
+      );
+    }
+
+    $feature_section_content_el = container($feature_section_content_el_content, ['feature-section-content']);
+
+  } else {
+    $feature_section_classes[] = 'caption-only';
+  }
+
+  if ($a['is_category_overview']) {
+    $feature_section_classes[] = 'category-overview';
+  }
+
+  return container_column(
+    container(
+      container(
+        $feature_section_title_el .
+        container(
+          remove_empty_p(
+            $content
+          ), ['feature-section-caption-content']
+        ), ['feature-section-caption']
+      ) . $feature_section_content_el
+      , $feature_section_classes
+    )
+  );
+}
+
+/**
  * A full width thumbnail gallery
  *
  * @param array  $atts    Shortcode attributes
@@ -1654,6 +1733,8 @@ add_shortcode('feature_block_content', 'feature_block_content');
 add_shortcode('feature_block_image_inset', 'feature_block_image_inset');
 add_shortcode('feature_block_tile_list', 'feature_block_tile_list');
 add_shortcode('feature_block_tile', 'feature_block_tile');
+
+add_shortcode('feature_section', 'feature_section');
 
 add_shortcode('columns', 'columns');
 add_shortcode('column', 'column');
