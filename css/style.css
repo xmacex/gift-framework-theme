@@ -2007,8 +2007,7 @@ input[type='button'].secondary:hover,
 @media screen and (max-width: 576px) {
 
   .feature-section {
-    margin-top: 45px;
-    margin-bottom: 45px;
+    margin: 0;
   }
 
   .feature-section-caption-content {
