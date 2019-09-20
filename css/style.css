@@ -917,7 +917,7 @@ input[type='button'].secondary:hover,
 }
 
 .thumbnail-gallery h2 {
-  font-family: 'LoveloBlack', Helvetica, Arial, sans-serif;
+  font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
   margin-bottom: 40px;
 }
 
@@ -1448,7 +1448,7 @@ input[type='button'].secondary:hover,
 }
 
 .feature-block.full-screen .content-wrap h1 {
-  font-family: 'LoveloBlack', Helvetica, Arial, san-serif;
+  font-family: 'SofiaProBold', Helvetica, Arial, san-serif;
   font-size: 38px;
   position: relative;
   font-weight: normal;
@@ -1456,12 +1456,13 @@ input[type='button'].secondary:hover,
 }
 
 .feature-block.full-screen.extra-large-content-and-title .content-wrap h1 {
-  font-family: 'LoveloLineLight', Helvetica, Arial, san-serif;
+  font-family: 'SofiaProBold', Helvetica, Arial, san-serif;
   font-size: 52px;
   opacity: 0.5;
 }
 
 .feature-block.full-screen.is-front-page .content-wrap h1 {
+  font-family: 'LoveloBlack', Helvetica, Arial, san-serif;
   display: inline-block;
   position: relative;
   background-color: #FFFFFF;
@@ -1487,7 +1488,7 @@ input[type='button'].secondary:hover,
 }
 
 .feature-block.full-screen.extra-large-content-and-title .content-wrap h3 {
-  font-family: 'LoveloBlack', Helvetica, Arial, san-serif;
+  font-family: 'SofiaProBold', Helvetica, Arial, san-serif;
 }
 
 .feature-block.full-screen.extra-large-content-and-title .content-wrap h3 a {
