@@ -1489,6 +1489,7 @@ input[type='button'].secondary:hover,
 
 .feature-block.full-screen.extra-large-content-and-title .content-wrap h3 {
   font-family: 'SofiaProBold', Helvetica, Arial, san-serif;
+  margin-top: 0;
 }
 
 .feature-block.full-screen.extra-large-content-and-title .content-wrap h3 a {
@@ -1719,7 +1720,6 @@ input[type='button'].secondary:hover,
 
   .feature-block.full-screen.extra-large-content-and-title .content-wrap h1 {
     font-size: 36px;
-    margin-bottom: 0;
   }
 
 }
@@ -1817,6 +1817,10 @@ input[type='button'].secondary:hover,
     font-size: 24px;
   }
 
+  .feature-block.full-screen.is-front-page .content-wrap h1.leading {
+    font-size: 38px;
+  }
+
   .feature-block.full-screen .column-container {
     margin-top: 0;
   }
@@ -1830,6 +1834,7 @@ input[type='button'].secondary:hover,
 
   .feature-block.full-screen .content-wrap h1 {
     font-size: 28px;
+    margin-bottom: 20px; 
   }
 
   .feature-block.full-screen.is-front-page .content-wrap h1 {
