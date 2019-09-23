@@ -1461,7 +1461,7 @@ input[type='button'].secondary:hover,
   opacity: 0.5;
 }
 
-.feature-block.full-screen.is-front-page .content-wrap h1 {
+.feature-block.full-screen.front-page .content-wrap h1 {
   font-family: 'LoveloBlack', Helvetica, Arial, san-serif;
   display: inline-block;
   position: relative;
@@ -1474,16 +1474,16 @@ input[type='button'].secondary:hover,
   line-height: 1.0em;
 }
 
-.feature-block.full-screen.is-front-page .content-wrap h1.leading {
+.feature-block.full-screen.front-page .content-wrap h1.leading {
   font-size: 56px;
   left: -20px;
 }
 
-.feature-block.full-screen.is-front-page .content-wrap h1:first-of-type {
+.feature-block.full-screen.front-page .content-wrap h1:first-of-type {
   padding-top: 25px;
 }
 
-.feature-block.full-screen.is-front-page .content-wrap h1:last-of-type {
+.feature-block.full-screen.front-page .content-wrap h1:last-of-type {
   padding-bottom: 25px;
 }
 
@@ -1752,8 +1752,8 @@ input[type='button'].secondary:hover,
     font-size: 26px;
   }
 
-  .feature-block.full-screen.is-front-page .content-wrap h1 {
-    font-size: 26px;
+  .feature-block.full-screen.front-page .content-wrap h1 {
+    font-size: 28px;
   }
 
   .feature-block.full-screen.extra-large-content-and-title .content-wrap {
@@ -1803,7 +1803,7 @@ input[type='button'].secondary:hover,
     padding: 0;
   }
 
-  .feature-block.full-screen:not(.is-front-page) .feature-block-background {
+  .feature-block.full-screen:not(.front-page) .feature-block-background {
     justify-content: flex-start;
     padding-bottom: 30px;
   }
@@ -1817,7 +1817,7 @@ input[type='button'].secondary:hover,
     font-size: 24px;
   }
 
-  .feature-block.full-screen.is-front-page .content-wrap h1.leading {
+  .feature-block.full-screen.front-page .content-wrap h1.leading {
     font-size: 38px;
   }
 
@@ -1834,19 +1834,25 @@ input[type='button'].secondary:hover,
 
   .feature-block.full-screen .content-wrap h1 {
     font-size: 28px;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
   }
 
-  .feature-block.full-screen.is-front-page .content-wrap h1 {
+  .feature-block.full-screen.front-page,
+  .feature-block.full-screen.front-page .feature-block-content,
+  .feature-block.full-screen.front-page .feature-block-background {
+    min-height: 70vh;
+  }
+
+  .feature-block.full-screen.front-page .content-wrap h1 {
     font-size: 4.25vw;
     padding: 10px;
   }
 
-  .feature-block.full-screen.is-front-page .content-wrap h1:first-of-type {
+  .feature-block.full-screen.front-page .content-wrap h1:first-of-type {
     padding-top: 10px;
   }
 
-  .feature-block.full-screen.is-front-page .content-wrap h1:last-of-type {
+  .feature-block.full-screen.front-page .content-wrap h1:last-of-type {
     padding-bottom: 10px;
   }
 

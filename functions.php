@@ -1193,7 +1193,7 @@ function feature_block($atts, $content=null)
     }
 
     if ($a['is_front_page'] === 'true') {
-	     $classes[] = 'is-front-page';
+	     $classes[] = 'front-page';
     }
 
     if ($a['is_downshifted'] === 'true') {
