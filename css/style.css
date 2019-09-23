@@ -1840,7 +1840,7 @@ input[type='button'].secondary:hover,
   .feature-block.full-screen.front-page,
   .feature-block.full-screen.front-page .feature-block-content,
   .feature-block.full-screen.front-page .feature-block-background {
-    min-height: 80vh;
+    min-height: 75vh;
   }
 
   .feature-block.full-screen.front-page .content-wrap h1 {
