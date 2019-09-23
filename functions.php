@@ -1428,6 +1428,10 @@ function feature_section($atts, $content=null)
     $feature_section_classes[] = 'category-overview';
   }
 
+  if ($a['quote']) {
+    $feature_section_classes[] = 'with-quote';
+  }
+
   return container_column(
     container(
       container(

@@ -1878,23 +1878,23 @@ input[type='button'].secondary:hover,
   filter: grayscale(1);
 }
 
-.feature-section-caption {
+.feature-section .feature-section-caption {
   padding-right: 90px;
   flex: 1;
 }
 
-.feature-section-caption-content {
+.feature-section .feature-section-caption-content {
   margin-top: 30px;
 }
 
-.feature-section-title {
+.feature-section .feature-section-title {
   height: 515px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 
-.feature-section-title h2 {
+.feature-section .feature-section-title h2 {
   font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
   color: #444444;
   font-size: 48px;
@@ -1902,20 +1902,21 @@ input[type='button'].secondary:hover,
   margin-top: 20px;
 }
 
-.feature-section-subtitle {
+.feature-section .feature-section-subtitle {
   font-family: 'Inconsolata', 'Courier New', Courier, monospace;
   font-weight: bold;
   color: #444444;
-  font-size: 16px;
+  font-size: 18px;
+  margin-bottom: 23px;
 }
 
-.feature-section-content {
+.feature-section .feature-section-content {
   min-height: 575px;
   width: 55%;
   position: relative;
 }
 
-.feature-section-image {
+.feature-section .feature-section-image {
   width: 100%;
   height: 575px;
   background-repeat: no-repeat;
@@ -1923,7 +1924,7 @@ input[type='button'].secondary:hover,
   background-size: cover;
 }
 
-.feature-section-quote {
+.feature-section .feature-section-quote {
   padding: 60px;
   height: 100%;
   box-sizing: border-box;
@@ -1933,13 +1934,13 @@ input[type='button'].secondary:hover,
   justify-content: center;
 }
 
-.feature-section-quote.article-content {
+.feature-section .feature-section-quote.article-content {
   margin-top: 0;
 }
 
 @media screen and (min-width: 1440px) {
 
-  .feature-section-title h2 {
+  .feature-section .feature-section-title h2 {
     font-size: 56px;
   }
 
@@ -1947,19 +1948,19 @@ input[type='button'].secondary:hover,
 
 @media screen and (max-width: 1260px) {
 
-  .feature-section-title {
+  .feature-section .feature-section-title {
     height: 415px;
   }
 
-  .feature-section-title h2 {
+  .feature-section .feature-section-title h2 {
     font-size: 42px;
   }
 
-  .feature-section-content {
+  .feature-section .feature-section-content {
     min-height: 475px;
   }
 
-  .feature-section-image {
+  .feature-section .feature-section-image {
     height: 475px;
   }
 
@@ -1968,8 +1969,8 @@ input[type='button'].secondary:hover,
 @media screen and (max-width: 1024px) {
 
   .feature-section {
-    margin-top: 60px;
-    margin-bottom: 60px;
+    margin-top: 45px;
+    margin-bottom: 45px;
     flex-direction: column-reverse;
   }
 
@@ -1977,30 +1978,34 @@ input[type='button'].secondary:hover,
     flex-direction: column;
   }
 
+  .feature-section.with-quote .feature-section-caption {
+    margin-bottom: 30px;
+  }
+
   .feature-section.category-overview .feature-section-content {
     display: none;
   }
 
-  .feature-section-caption {
+  .feature-section .feature-section-caption {
     width: 100%;
     padding: 0;
     margin-top: 30px;
   }
 
-  .feature-section-title {
+  .feature-section .feature-section-title {
     height: auto;
   }
 
-  .feature-section-title h2 {
+  .feature-section .feature-section-title h2 {
     margin: 0;
   }
 
-  .feature-section-content {
+  .feature-section .feature-section-content {
     min-height: 375px;
     width: 100%;
   }
 
-  .feature-section-image {
+  .feature-section .feature-section-image {
     height: 375px;
   }
 
@@ -2012,19 +2017,19 @@ input[type='button'].secondary:hover,
     margin: 0;
   }
 
-  .feature-section-caption-content {
+  .feature-section .feature-section-caption-content {
     margin-top: 15px;
   }
 
-  .feature-section-title h2 {
+  .feature-section .feature-section-title h2 {
     font-size: 28px;
   }
 
-  .feature-section-subtitle {
-    margin-bottom: 5px;
+  .feature-section .feature-section-subtitle {
+    margin-bottom: 15px;
   }
 
-  .feature-section-quote {
+  .feature-section .feature-section-quote {
     padding: 0;
     border: none;
   }
@@ -2271,7 +2276,7 @@ input[type='button'].secondary:hover,
 @media screen and (max-width: 576px) {
 
   .category-list {
-    margin: 30px 0;
+    margin: 30px 0 0 0;
   }
 
   .category-list-item {
