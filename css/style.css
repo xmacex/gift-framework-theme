@@ -421,6 +421,12 @@ br + br, br:last-child {
     margin-left: 90px;
   }
 
+  .menu-container.white-on-mobile {
+    background: -moz-linear-gradient(180deg, rgba(68,68,68,0.6) 0%, rgba(68,68,68,0) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(68,68,68,0.6) 0%, rgba(68,68,68,0) 100%);
+    background: linear-gradient(180deg, rgba(68,68,68,0.6) 0%, rgba(68,68,68,0) 100%);
+  }
+
   .menu-container.white-on-mobile .gift-logo {
     background-image: url('../img/gift-logo-white.png');
   }
