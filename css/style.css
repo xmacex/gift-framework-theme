@@ -2299,15 +2299,26 @@ input[type='button'].secondary:hover,
   font-family: 'Inconsolata', 'Courier New', Courier, monospace;
   color: #666666;
   font-weight: 800;
-  margin-bottom: 15px;
+  margin: 0 0 15px 0;
 }
 
 .category-list-item h2 {
   font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
   font-size: 24px;
   color: #444444;
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
   font-weight: normal;
+}
+
+.category-list-item p {
+  font-family: 'Nunito', Helvetica, Arial, san-serif;
+  color: #666666;
+  font-size: 18px;
+  line-height: 1.5em;
+}
+
+.category-list-item a:hover {
+  text-decoration: none;
 }
 
 .category-list-item .learn-more {
