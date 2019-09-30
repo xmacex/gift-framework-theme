@@ -622,8 +622,7 @@ br + br, br:last-child {
 .content-area h1 {
   color: #444444;
   font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
-  font-size: 36px;
-  line-height: 1.4em;
+  font-size: 46px;
   margin: 0 0 40px 0;
   font-weight: bold;
 }
@@ -678,6 +677,14 @@ br + br, br:last-child {
 
 .content-area em {
   font-style: oblique;
+}
+
+@media screen and (min-width: 1440px) {
+
+  .content-area h1 {
+    font-size: 52px;
+  }
+
 }
 
 @media screen and (max-width: 1260px) {
