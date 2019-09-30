@@ -1553,8 +1553,11 @@ function captioned_image_gallery($atts, $content=null)
   $a = shortcode_atts(
     array(
       'headline' => '',
-      'subheadline' => ''), $atts
+      'subheadline' => '',
+      'narrow_gutters' => false), $atts
   );
+
+  $classes = ['captioned-image-gallery'];
 
   $rendered_content = '';
   $rendered_content .= $a['headline'] ? '<h2>' . $a['headline'] . '</h2>' : '';
@@ -1563,13 +1566,17 @@ function captioned_image_gallery($atts, $content=null)
   $rendered_content .= do_shortcode($content);
   $rendered_content .= '</div>';
 
+  if ($a['narrow_gutters']) {
+    $classes[] = 'narrow-gutters';
+  }
+
   return remove_empty_p(container_fw(
     container_fw_inner(
       container_column(
         $rendered_content,
-        ['captioned-image-gallery']
+        $classes
       )
-    ), ['dark', 'dark-blue']
+    ), ['no-background']
   ));
 }
 
@@ -1585,12 +1592,25 @@ function captioned_image($atts, $content=null)
 {
   $a = shortcode_atts(
     array(
-      'image' => ''), $atts
+      'image' => '',
+      'hide_on_mobile' => false,
+      'is_screenshot' => false
+    ), $atts
   );
+
+  $figure_classes = [];
+
+  if ($a['hide_on_mobile']) {
+    $figure_classes[] = 'hide-on-mobile';
+  }
+
+  if ($a['is_screenshot']) {
+    $figure_classes[] = 'screenshot';
+  }
 
   $image_url = get_media_url_from_id_or_url($a['image']);
 
-  $figure_b = '<figure>';
+  $figure_b = '<figure class="' . implode(' ', $figure_classes) . '">';
   $img = '<img src="' . $image_url . '" />';
   $figcaption = '<figcaption>' . $content . '</figcaption>';
   $figure_e = '</figure>';
