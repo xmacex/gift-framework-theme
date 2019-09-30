@@ -85,7 +85,51 @@
 
 @-webkit-keyframes rise-gently {
   from {
-    top: 40px;
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rise-gently {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes slide-in-gently {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-gently {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes rise-gently-using-margin-offset {
+  from {
+    margin-top: 20px;
     opacity: 0;
   }
   to {
@@ -94,7 +138,7 @@
   }
 }
 
-@keyframes rise-gently {
+@keyframes rise-gently-using-margin-offset {
   from {
     margin-top: 20px;
     opacity: 0;
@@ -348,10 +392,10 @@ br + br, br:last-child {
 
 .menu > .menu-item > .sub-menu {
   display: none;
-  -webkit-animation-name: rise-gently;
+  -webkit-animation-name: rise-gently-using-margin-offset;
   -webkit-animation-duration: 0.25s;
   -webkit-animation-fill-mode: forwards;
-  animation-name: rise-gently;
+  animation-name: rise-gently-using-margin-offset;
   animation-duration: 0.25s;
   animation-fill-mode: forwards;
 }
@@ -1431,9 +1475,9 @@ input[type='button'].secondary:hover,
 
 .feature-block.full-screen .content-wrap {
   width: 800px;
-  -webkit-animation: rise-gently;
+  -webkit-animation-name: rise-gently-using-margin-offset;
   -webkit-animation-duration: 0.5s;
-  animation: rise-gently;
+  animation-name: rise-gently-using-margin-offset;
   animation-duration: 0.5s;
 }
 
@@ -2079,6 +2123,10 @@ input[type='button'].secondary:hover,
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  -webkit-animation-name: slide-in-gently;
+  -webkit-animation-duration: 0.5s;
+  animation-name: slide-in-gently;
+  animation-duration: 0.5s;
 }
 
 .image-and-call-to-action .button,
@@ -2190,6 +2238,11 @@ input[type='button'].secondary:hover,
   .image-and-call-to-action .button,
   .image-and-call-to-action .description {
     display: none;
+  }
+
+  .image-and-call-to-action .featured-image {
+    -webkit-animation: none;
+    animation: none;
   }
 
 }
@@ -2437,6 +2490,10 @@ input[type='button'].secondary:hover,
 
 .article-content > .column-container:first-of-type .content-wrap {
   width: 52.5%;
+  -webkit-animation-name: rise-gently;
+  -webkit-animation-duration: 0.5s;
+  animation-name: rise-gently;
+  animation-duration: 0.5s;
 }
 
 .article-content .column-container:last-child p:last-child {
@@ -2612,6 +2669,8 @@ input[type='button'].secondary:hover,
 
     .article-content > .column-container:first-of-type .content-wrap {
       width: 100%;
+      -webkit-animation: none;
+      animation: none;
     }
 
     .article-content > .column-container:first-of-type,
