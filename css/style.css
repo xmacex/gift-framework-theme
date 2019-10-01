@@ -2820,7 +2820,7 @@ input[type='button'].secondary:hover,
 .footer-container-inner {
   width: 65%;
   position: relative;
-  margin: 20px 0 100px 0;
+  margin: 20px 0 30px 0;
   padding: 50px 0 0 0;
   color: #999999;
   font-size: 16px;
@@ -2858,11 +2858,43 @@ input[type='button'].secondary:hover,
   float: left;
 }
 
-@media screen and (max-width: 992px) {
+.footer-project-partner-logos {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+}
+
+.footer-project-partner-logos .footer-project-partner-logo {
+  height: 200px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  opacity: 0.5;
+  filter: grayscale(1.0);
+}
+
+.footer-project-partner-logos .footer-project-partner-logo > img {
+  width: 80%;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
 
   .footer-container-inner {
     padding-top: 20px;
     width: 100%;
+  }
+
+  .footer-project-partner-logos {
+    flex-wrap: wrap;
+  }
+
+  .footer-project-partner-logos .footer-project-partner-logo {
+    flex-basis: 25%;
+    height: 150px;
+    flex-grow: 0;
   }
 
 }
@@ -2879,6 +2911,14 @@ input[type='button'].secondary:hover,
 
   .footer-container-inner .eu-flag-footer {
     float: none;
+  }
+
+}
+
+@media screen and (max-width: 576px) {
+
+  .footer-project-partner-logos .footer-project-partner-logo {
+    height: 90px;
   }
 
 }

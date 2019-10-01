@@ -14,6 +14,31 @@
         <p class="footer-header"><?php echo get_option('footer_text'); ?></p>
     	</div>
     </div>
+    <div class="column-container">
+      <div class="footer-project-partner-logos">
+        <figure class="footer-project-partner-logo">
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/project-partners/it-university-of-copenhagen.jpg" alt="IT University of Copenhagen" />
+        </figure>
+        <figure class="footer-project-partner-logo">
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/project-partners/the-university-of-nottingham.png" alt="The University of Nottingham" />
+        </figure>
+        <figure class="footer-project-partner-logo">
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/project-partners/uppsala-universitet.png" alt="Uppsala Universitet" />
+        </figure>
+        <figure class="footer-project-partner-logo">
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/project-partners/blast-theory.png" alt="Blast Theory" />
+        </figure>
+        <figure class="footer-project-partner-logo">
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/project-partners/nextgame.png" alt="NextGame" />
+        </figure>
+        <figure class="footer-project-partner-logo">
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/project-partners/europeana.png" alt="Europeana Foundation" />
+        </figure>
+        <figure class="footer-project-partner-logo">
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/project-partners/culture-24.png" alt="Culture 24" />
+        </figure>
+      </div>
+    </div>
 </footer>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
