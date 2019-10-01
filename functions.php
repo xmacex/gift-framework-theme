@@ -979,7 +979,7 @@ function testimonial($atts, $content=null)
     $quote = '<blockquote>' . $content . '</blockquote>';
     $address_b = '<address class="quote-source">';
     $address_e = '</address>';
-    $address = $address_b . $a['role'] . ', ' . $a['location'] . $address_e;
+    $address = $address_b . $a['role'] . ($a['role'] && $a['location'] ? ', ' : '') . $a['location'] . $address_e;
     $content = $quote . $address;
     return container_fw_inner_col($content);
 }
