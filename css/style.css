@@ -2838,9 +2838,13 @@ input[type='button'].secondary:hover,
 }
 
 .footer-container-inner .footer-header {
-  color: #777777;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+
+.footer-container-inner .footer-header,
+.footer-container-inner .footer-body {
+  color: #777777;
   font-size: 18px;
 }
 
@@ -2854,8 +2858,13 @@ input[type='button'].secondary:hover,
 
 .footer-container-inner .eu-flag-footer {
   width: 60px;
-  margin: 5px 30px 60px 0;
-  float: left;
+  margin: 0 30px 30px 0;
+}
+
+.footer-container-inner .eu-flag-and-footer-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 .footer-project-partner-logos {
@@ -2906,7 +2915,7 @@ input[type='button'].secondary:hover,
   }
 
   .footer-container-inner {
-    margin-bottom: 50px;
+    margin-bottom: 0;
   }
 
   .footer-container-inner .eu-flag-footer {
@@ -2918,7 +2927,11 @@ input[type='button'].secondary:hover,
 @media screen and (max-width: 576px) {
 
   .footer-project-partner-logos .footer-project-partner-logo {
-    height: 90px;
+    height: 75px;
+  }
+
+  .footer-container-inner .eu-flag-and-footer-header {
+    flex-direction: column;
   }
 
 }

@@ -10,8 +10,10 @@
           </div>
         <?php endif; ?>
         <p class="footer-header"><?php echo get_option('footer_header'); ?></p>
-        <img class="eu-flag-footer" src="<?php echo get_stylesheet_directory_uri(); ?>/img/eu-flag-footer.png" alt="European Union Flag" />
-        <p class="footer-header"><?php echo get_option('footer_text'); ?></p>
+        <div class="eu-flag-and-footer-header">
+          <img class="eu-flag-footer" src="<?php echo get_stylesheet_directory_uri(); ?>/img/eu-flag-footer.png" alt="European Union Flag" />
+          <p class="footer-body"><?php echo get_option('footer_text'); ?></p>
+        </div>
     	</div>
     </div>
     <div class="column-container">
