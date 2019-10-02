@@ -2566,6 +2566,10 @@ input[type='button'].secondary:hover,
   margin-top: 100px;
 }
 
+.article-content .wp-block-media-text:not(.has-media-on-the-right) figure {
+  margin-right: 60px;
+}
+
 .article-content .full-width + .column-container.full-width-caption {
   margin-top: 30px;
   margin-bottom: 30px;
@@ -2709,8 +2713,7 @@ input[type='button'].secondary:hover,
     .article-content .full-width + .column-container,
     .article-content .column-container + .full-width,
     .article-content .button, .article-content button, .article-content input[type="button"],
-    .article-content .full-width + .wp-block-media-text,
-    .article-content .wp-block-media-text + .full-width {
+    .article-content .wp-block-media-text {
       margin-top: 45px;
     }
 
@@ -2727,8 +2730,8 @@ input[type='button'].secondary:hover,
 
 @media screen and (max-width: 768px) {
 
-  .article-content .wp-block-media-text.has-media-on-the-right {
-    grid-template-columns: auto;
+  .article-content .wp-block-media-text {
+    grid-template-columns: auto !important;
   }
 
   .article-content .wp-block-media-text .wp-block-media-text__content {
@@ -2736,6 +2739,10 @@ input[type='button'].secondary:hover,
   }
 
   .article-content .wp-block-media-text .wp-block-media-text__media {
+    display: none;
+  }
+
+  .article-content .wp-block-media-text:not(.has-media-on-the-right) figure {
     display: none;
   }
 
