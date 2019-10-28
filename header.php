@@ -13,11 +13,22 @@
 
   <link rel="shortcut icon" type="image/png" href="<?php echo get_theme_file_uri('favicon.ico'); ?>">
   <link rel="apple-touch-icon" href="<?php echo get_theme_file_uri('icon.png') ; ?>">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WM6T7TQ');</script>
+<!-- End Google Tag Manager -->
 </head>
 <body <?php body_class(); ?>>
     <!--[if lte IE 9]>
 	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WM6T7TQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <header class="menu-container wrap-container<?php echo (has_post_thumbnail() || is_front_page()) ? ' white-on-mobile' : '' ?><?php echo (is_front_page()) ? ' overlaid on-image' : '' ?>">
       <a class="home-link" href="<?php echo get_home_url(); ?>">
         <figure class="gift-logo">
