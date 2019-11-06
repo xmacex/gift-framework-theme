@@ -64,7 +64,7 @@
   (function(){
     setTimeout(function(){
     var d = document, f = d.getElementsByTagName('script')[0], s = d.createElement('script'); s.type = 'text/javascript';
-    s.async = true; s.src = 'https://cl.qualaroo.com/ki.js/73952/hd3.js'; f.parentNode.insertBefore(s, f);
+    s.async = true; s.src = 'https://cl.qualaroo.com/ki.js/74027/hex.js'; f.parentNode.insertBefore(s, f);
     }, 1);
   })();
 </script>
