@@ -26,15 +26,6 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'SofiaProBold';
-    src: url('../fonts/sofia-pro-bold-webfont.woff2') format('woff2'),
-         url('../fonts/sofia-pro-bold-webfont.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-
-}
-
 /* Grid Structure
  * 3-column grid structure is based on 30% content, 5% padding
  * 30% - 5% - 30% - 5% - 30%
@@ -665,7 +656,7 @@ br + br, br:last-child {
 
 .content-area h1 {
   color: #444444;
-  font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 46px;
   margin: 0 0 40px 0;
   font-weight: bold;
@@ -681,7 +672,7 @@ br + br, br:last-child {
 }
 
 .content-area h2 {
-  font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   color: #666666;
   font-size: 32px;
   line-height: 1.4em;
@@ -974,7 +965,7 @@ input[type='button'].secondary:hover,
 }
 
 .thumbnail-gallery h2 {
-  font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   margin-bottom: 40px;
 }
 
@@ -1224,7 +1215,7 @@ input[type='button'].secondary:hover,
 }
 
 .full-width .full-width-inner h3 {
-  font-family: 'SofiaProBold', Helvetica, Arial, san-serif;
+  font-family: Helvetica, Arial, san-serif;
   color: #444444;
   font-size: 22px;
   font-weight: bold;
@@ -1526,7 +1517,7 @@ input[type='button'].secondary:hover,
 }
 
 .feature-block.full-screen .content-wrap h1 {
-  font-family: 'SofiaProBold', Helvetica, Arial, san-serif;
+  font-family: Helvetica, Arial, san-serif;
   font-size: 38px;
   position: relative;
   font-weight: normal;
@@ -1534,7 +1525,7 @@ input[type='button'].secondary:hover,
 }
 
 .feature-block.full-screen.extra-large-content-and-title .content-wrap h1 {
-  font-family: 'SofiaProBold', Helvetica, Arial, san-serif;
+  font-family: Helvetica, Arial, san-serif;
   font-size: 52px;
   opacity: 0.5;
 }
@@ -1566,7 +1557,7 @@ input[type='button'].secondary:hover,
 }
 
 .feature-block.full-screen.extra-large-content-and-title .content-wrap h3 {
-  font-family: 'SofiaProBold', Helvetica, Arial, san-serif;
+  font-family: Helvetica, Arial, san-serif;
   margin-top: 0;
 }
 
@@ -1984,7 +1975,7 @@ input[type='button'].secondary:hover,
 }
 
 .feature-section .feature-section-title h2 {
-  font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   color: #444444;
   font-size: 48px;
   line-height: 115%;
@@ -2324,7 +2315,7 @@ input[type='button'].secondary:hover,
 }
 
 .category-list-item h2 {
-  font-family: 'SofiaProBold', Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 24px;
   color: #444444;
   margin: 0 0 20px 0;
